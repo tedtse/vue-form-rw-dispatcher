@@ -1,0 +1,37 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:color";
+@use "./config.scss" as *;
+@use "../common/var.scss" as *;
+
+@mixin elComponentCss($component) {
+  $C: $namespace + "-el-" + $component;
+
+  .#{$C} {
+    @content;
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin setColorMixLevel($type, $number, $mode, $mix-color) {
+  $colors: map.deep-merge(
+    (
+      $type: (
+        "#{$mode}-#{$number}":
+          color.mix(
+            $mix-color,
+            map.get($colors, $type, "base"),
+            math.percentage(math.div($number, 10))
+          ),
+      ),
+    ),
+    $colors
+  ) !global;
+}

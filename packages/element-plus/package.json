@@ -1,0 +1,26 @@
+{
+  "name": "@vue-form-rw-dispatcher/element-plus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.21.0",
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@vue-form-rw-dispatcher/element-plus-theme": "workspace:*",
+    "@vue-form-rw-dispatcher/helper": "workspace:*",
+    "element-plus": "^2.13.0",
+    "vue": "^3.5.26"
+  },
+  "devDependencies": {
+    "@vue/runtime-dom": "^3.5.26",
+    "@vue/tsconfig": "^0.8.1",
+    "typescript": "^5.9.3"
+  }
+}

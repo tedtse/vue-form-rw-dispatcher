@@ -1,0 +1,4 @@
+{
+  "include": ["components/**/*", "composables/**/*", "themes/**/*", "index.ts"],
+  "extends": "@vue/tsconfig/tsconfig.dom.json"
+}

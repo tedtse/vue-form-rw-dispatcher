@@ -1,0 +1,40 @@
+{
+  "name": "@vue-form-rw-dispatcher/docs",
+  "version": "1.0.0",
+  "description": "A VitePress project for form rw dispatcher",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "keywords": [
+    "vitepress",
+    "form",
+    "dispatcher"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@iconify-json/ri": "^1.2.6",
+    "@types/node": "^18.0.0",
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
+    "@vueuse/core": "^14.1.0",
+    "jiti": "^2.6.1",
+    "markdown-it-container": "^3.0.0",
+    "sass": "^1.97.1",
+    "sass-embedded": "^1.97.0",
+    "typescript": "^5.9.3",
+    "unplugin-icons": "^22.5.0",
+    "unplugin-vue-components": "^30.0.0",
+    "vite": "^5.4.21",
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "@vue-form-rw-dispatcher/element-plus": "workspace:*",
+    "@vue-form-rw-dispatcher/helper": "workspace:*",
+    "element-plus": "^2.11.5",
+    "vue": "^3.0.0"
+  }
+}

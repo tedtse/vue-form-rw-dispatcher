@@ -1,0 +1,54 @@
+@use "sass:map";
+@use "sass:math";
+@use "sass:color";
+@use "../common/var.scss" as common;
+
+$text-color: () !default;
+$text-color: map.merge(
+  (
+    "primary": #303133,
+    "regular": #606266,
+    "secondary": #909399,
+    "placeholder": #a8abb2,
+    "disabled": #c0c4cc,
+  ),
+  $text-color
+);
+
+$colors: () !default;
+@each $type in common.$types {
+  $colors: map.deep-merge(
+    (
+      $type: (
+        "base": map.get(common.$colors, $type, "base"),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+@mixin setColorMixLevel($type, $number, $mode, $mix-color) {
+  $colors: map.deep-merge(
+    (
+      $type: (
+        "#{$mode}-#{$number}":
+          color.mix(
+            $mix-color,
+            map.get($colors, $type, "base"),
+            math.percentage(math.div($number, 10))
+          ),
+      ),
+    ),
+    $colors
+  ) !global;
+}
+
+@each $type in common.$types {
+  @for $i from 1 through 9 {
+    @include setColorMixLevel($type, $i, "light", common.$color-white);
+  }
+}
+
+@each $type in common.$types {
+  @include setColorMixLevel($type, 2, "dark", common.$color-black);
+}

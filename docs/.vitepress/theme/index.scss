@@ -1,0 +1,44 @@
+:root {
+  --vp-code-block-bg: var(--el-fill-color-light);
+  --vp-code-line-height: 1.6;
+}
+
+.m-0 {
+  margin: 0;
+}
+.m-16px {
+  margin: 16px;
+}
+.mt-16px {
+  margin-top: 16px;
+}
+.mb-16px {
+  margin-bottom: 16px;
+}
+
+.label {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.items-center {
+  align-items: center;
+}
+.gap-16px {
+  gap: 16px;
+}
+
+.demo-input-with-icon {
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
