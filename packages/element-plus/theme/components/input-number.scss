@@ -1,0 +1,34 @@
+@use "./var.scss" as *;
+@use "./mixins/mixin.scss" as *;
+@use "./mixins/function.scss" as *;
+
+@include elComponentCss("input-number") {
+  color: var(#{getCssVarName("text-color", "regular")});
+  font-size: var(#{getCssVarName("font-size", "base")});
+  line-height: var(#{getCssVarName("input-height")});
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include when(disabled) {
+    color: var(#{getCssVarName("text-color", "disabled")});
+  }
+
+  &--large {
+    font-size: var(#{getCssVarName("font-size", "base")});
+    line-height: var(#{getCssVarName("input-height", "large")});
+  }
+
+  &--small {
+    font-size: var(#{getCssVarName("font-size", "small")});
+    line-height: var(#{getCssVarName("input-height", "small")});
+  }
+
+  &__prefix,
+  &__suffix {
+    color: var(#{getCssVarName("text-color", "placeholder")});
+    display: flex;
+    align-items: center;
+  }
+}

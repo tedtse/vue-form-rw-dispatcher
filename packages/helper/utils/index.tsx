@@ -6,21 +6,22 @@ export const omitRWDispatcherState = <
 >(
   props: Props
 ) => {
+  const rwDispatcherState = "rwDispatcherState"
   return new Proxy(props, {
     get(target, prop, receiver) {
-      if (prop === "rwDispatcherState") {
+      if (prop === rwDispatcherState) {
         return undefined;
       }
       return Reflect.get(target, prop, receiver);
     },
     has(target, prop) {
-      if (prop === "rwDispatcherState") {
+      if (prop === rwDispatcherState) {
         return false;
       }
       return Reflect.has(target, prop);
     },
     deleteProperty(target, prop) {
-      if (prop === "rwDispatcherState") {
+      if (prop === rwDispatcherState) {
         return true;
       }
       return Reflect.deleteProperty(target, prop);

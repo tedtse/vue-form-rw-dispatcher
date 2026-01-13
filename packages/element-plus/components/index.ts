@@ -1,4 +1,5 @@
 import ElInputDispatcher from "./input";
+import ElInputNumberDispatcher from "./input-number";
 import ElSelectDispatcher from "./select";
 
-export { ElInputDispatcher, ElSelectDispatcher };
+export { ElInputDispatcher, ElInputNumberDispatcher, ElSelectDispatcher };

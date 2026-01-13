@@ -1,2 +1,2 @@
-export * from "./defineRWDispatcher";
-export * from "./defineRWDispatcherStrict";
+export * from "./define-rw-dispatcher";
+export * from "./define-rw-dispatcher-strict";

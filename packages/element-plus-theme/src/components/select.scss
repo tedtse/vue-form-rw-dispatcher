@@ -2,7 +2,7 @@
 @use "./mixins/mixin.scss" as *;
 @use "./mixins/function.scss" as *;
 
-@include elComponentCss("input") {
+@include elComponentCss("select") {
   color: var(#{getCssVarName("text-color", "regular")});
   font-size: var(#{getCssVarName("font-size", "base")});
   line-height: var(#{getCssVarName("input-height")});
@@ -15,39 +15,26 @@
     color: var(#{getCssVarName("text-color", "disabled")});
   }
 
+  &-selection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    .el-tag {
+      background-color: var(#{getCssVarName("color", "info", "light-9")});
+      border-color: var(#{getCssVarName("color", "info", "light-9")});
+      color: var(#{getCssVarName("color", "info")});
+    }
+  }
+
   &--large {
-    font-size: var(#{getCssVarName("font-size", "large")});
+    font-size: var(#{getCssVarName("font-size", "base")});
     line-height: var(#{getCssVarName("input-height", "large")});
   }
 
   &--small {
     font-size: var(#{getCssVarName("font-size", "small")});
     line-height: var(#{getCssVarName("input-height", "small")});
-  }
-
-  &__password,
-  &__prefix,
-  &__suffix,
-  &__prepend,
-  &__append {
-    color: var(#{getCssVarName("text-color", "placeholder")});
-    display: flex;
-    align-items: center;
-
-    button.el-button {
-      color: inherit;
-      background-color: transparent;
-    }
-    &:hover {
-      button.el-button {
-        color: inherit;
-        background-color: transparent;
-        border-color: inherit;
-      }
-    }
-  }
-
-  &__password {
-    cursor: pointer;
   }
 }

@@ -10,11 +10,11 @@
     ]"
   >
     <span v-if="$slots.prepend" :class="nsInput.e('prepend')">
-      <slot name="prepend" />
+      <slot name="prepend"></slot>
     </span>
 
     <span v-if="$slots.prefix" :class="nsInput.e('prefix')">
-      <slot name="prefix" />
+      <slot name="prefix"></slot>
     </span>
 
     <el-icon v-if="prefixIcon" :class="nsInput.e('prefix')">
@@ -28,11 +28,11 @@
     </el-icon>
 
     <span v-if="$slots.suffix" :class="nsInput.e('suffix')">
-      <slot name="suffix" />
+      <slot name="suffix"></slot>
     </span>
 
     <span v-if="$slots.append" :class="nsInput.e('append')">
-      <slot name="append" />
+      <slot name="append"></slot>
     </span>
 
     <el-icon

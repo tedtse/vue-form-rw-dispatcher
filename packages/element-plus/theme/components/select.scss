@@ -29,7 +29,7 @@
   }
 
   &--large {
-    font-size: var(#{getCssVarName("font-size", "large")});
+    font-size: var(#{getCssVarName("font-size", "base")});
     line-height: var(#{getCssVarName("input-height", "large")});
   }
 

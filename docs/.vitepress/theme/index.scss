@@ -3,6 +3,10 @@
   --vp-code-line-height: 1.6;
 }
 
+.VPContent.has-sidebar .VPDoc.has-aside .content-container {
+  max-width: 728px;
+}
+
 .m-0 {
   margin: 0;
 }

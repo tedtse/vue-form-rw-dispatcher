@@ -1,9 +1,11 @@
 import type { SetupContext, VNodeChild } from "vue";
 
 export type RWDispatcherState = "write" | "read";
+
 export type RWDispatcherProps = {
   rwDispatcherState?: RWDispatcherState;
 };
+
 export type DefineRWDispatcherArgs<Props> = {
   writerFn: (
     props: Omit<Props, "rwDispatcherState">,
