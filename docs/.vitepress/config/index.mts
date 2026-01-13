@@ -28,7 +28,11 @@ export default defineConfig({
         items: [
           { text: "Input", link: "/element-plus/input-dispatcher" },
           { text: "Select", link: "/element-plus/select-dispatcher" },
-          { text: "InputNumber", link: "/element-plus/input-number-dispatcher" },
+          {
+            text: "InputNumber",
+            link: "/element-plus/input-number-dispatcher",
+          },
+          { text: "DatePicker", link: "/element-plus/date-picker-dispatcher" },
         ],
       },
     ],

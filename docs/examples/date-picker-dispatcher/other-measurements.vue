@@ -1,0 +1,69 @@
+<template>
+  <div class="demo-date-picker">
+    <div class="container">
+      <div class="block">
+        <span class="demonstration">Week</span>
+        <el-date-picker-dispatcher
+          v-model="value1"
+          type="week"
+          placeholder="Pick a week"
+        />
+      </div>
+      <div class="block">
+        <span class="demonstration">Dates</span>
+        <el-date-picker-dispatcher
+          v-model="value2"
+          type="dates"
+          placeholder="Pick one or more dates"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="block">
+        <span class="demonstration">Year</span>
+        <el-date-picker-dispatcher
+          v-model="value3"
+          type="year"
+          placeholder="Pick a year"
+        />
+      </div>
+      <div class="block">
+        <span class="demonstration">Years</span>
+        <el-date-picker-dispatcher
+          v-model="value4"
+          type="years"
+          placeholder="Pick one or more years"
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="block">
+        <span class="demonstration">Month</span>
+        <el-date-picker-dispatcher
+          v-model="value5"
+          type="month"
+          placeholder="Pick a month"
+        />
+      </div>
+      <div class="block">
+        <span class="demonstration">Months</span>
+        <el-date-picker-dispatcher
+          v-model="value6"
+          type="months"
+          placeholder="Pick one or more months"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { ref } from "vue";
+
+const value1 = ref("");
+const value2 = ref("");
+const value3 = ref("");
+const value4 = ref("");
+const value5 = ref("");
+const value6 = ref("");
+</script>
