@@ -2,6 +2,7 @@
 @use "sass:math";
 @use "sass:color";
 @use "./config.scss" as *;
+@use "./function.scss" as *;
 @use "../common/var.scss" as *;
 
 @mixin elComponentCss($component) {
@@ -34,4 +35,14 @@
     ),
     $colors
   ) !global;
+}
+
+@mixin commonComponentStyle() {
+  color: var(#{getCssVarName("text-color", "regular")});
+  font-size: var(#{getCssVarName("font-size", "base")});
+  line-height: var(#{getCssVarName("input-height")});
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }

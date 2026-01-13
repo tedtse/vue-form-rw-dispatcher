@@ -3,13 +3,7 @@
 @use "./mixins/function.scss" as *;
 
 @include elComponentCss("input-number") {
-  color: var(#{getCssVarName("text-color", "regular")});
-  font-size: var(#{getCssVarName("font-size", "base")});
-  line-height: var(#{getCssVarName("input-height")});
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  @include commonComponentStyle();
 
   @include when(disabled) {
     color: var(#{getCssVarName("text-color", "disabled")});
