@@ -1,5 +1,7 @@
 import type { SetupContext, VNodeChild } from "vue";
 
+export type Namespace = 'string'
+
 export type RWDispatcherState = "write" | "read";
 
 export type RWDispatcherProps = {
