@@ -2,7 +2,7 @@
 @use "../mixins/mixin.scss" as *;
 @use "../mixins/function.scss" as *;
 
-@include elComponentCss("date-picker") {
+@include elComponentCss("time-select") {
   @include commonComponentStyle();
 
   @include when(disabled) {
@@ -17,11 +17,5 @@
   &--small {
     font-size: var(#{getCssVarName("font-size", "small")});
     line-height: var(#{getCssVarName("input-height", "small")});
-  }
-
-  &__prefix {
-    color: var(#{getCssVarName("text-color", "placeholder")});
-    display: flex;
-    align-items: center;
   }
 }

@@ -31,7 +31,7 @@ export const omitRWDispatcherState = <
 
 export const extendComponent = <Props extends Record<string, unknown>>(
   widget: Component,
-  props: Partial<Props>,
+  props: Props,
   { attrs, slots }: SetupContext
 ) => {
   return <widget {...attrs} {...props} v-slots={slots} />;

@@ -29,3 +29,15 @@ date-picker-dispatcher/other-measurements
 date-picker-dispatcher/date-range
 
 :::
+
+## 设置自定义前缀的内容​
+
+前缀内容可以被自定义。
+
+当你从其他vue组件或由渲染函数生成的组件中导入组件时, 你可以设置 `prefix-icon` 属性来定制前缀内容
+
+:::demo
+
+date-picker-dispatcher/custom-prefix-icon
+
+:::

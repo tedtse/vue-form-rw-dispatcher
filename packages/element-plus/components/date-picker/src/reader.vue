@@ -9,6 +9,10 @@
       },
     ]"
   >
+    <span v-if="props.prefixIcon" :class="nsDatePicker.e('prefix')">
+      <props.prefixIcon />
+    </span>
+
     <template v-if="isRange">
       <range-render />
     </template>
@@ -21,7 +25,7 @@
 <script setup lang="ts">
 import { computed, h, Fragment } from "vue";
 import { dayjs, type DatePickerProps } from "element-plus";
-import { DEFAULT_FORMATS_DATEPICKER } from "./constants";
+import { DEFAULT_FORMATS_DATEPICKER } from "../../../constants";
 import { useNamespace } from "../../../composables/use-namespace";
 
 const props = defineProps<DatePickerProps>();

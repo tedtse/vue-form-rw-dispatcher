@@ -2,9 +2,9 @@
 @use "./components/input-number.scss";
 @use "./components/select.scss";
 @use "./components/date-picker.scss";
+@use "./components/time-select.scss";
 
 @use "./mixins/mixin.scss" as *;
-@use "./mixins/function.scss" as *;
 
 @include elComponentCss("range") {
   &-separator {

@@ -2,8 +2,14 @@
 @use "../mixins/mixin.scss" as *;
 @use "../mixins/function.scss" as *;
 
-@include elComponentCss("date-picker") {
-  @include commonComponentStyle();
+@include elComponentCss("text") {
+  color: var(#{getCssVarName("text-color", "regular")});
+  font-size: var(#{getCssVarName("font-size", "base")});
+  line-height: var(#{getCssVarName("input-height")});
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 
   @include when(disabled) {
     color: var(#{getCssVarName("text-color", "disabled")});
@@ -19,7 +25,10 @@
     line-height: var(#{getCssVarName("input-height", "small")});
   }
 
-  &__prefix {
+  &__prefix,
+  &__suffix,
+  &__prepend,
+  &__append {
     color: var(#{getCssVarName("text-color", "placeholder")});
     display: flex;
     align-items: center;

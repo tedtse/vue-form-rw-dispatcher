@@ -18,4 +18,10 @@
     font-size: var(#{getCssVarName("font-size", "small")});
     line-height: var(#{getCssVarName("input-height", "small")});
   }
+
+  &__prefix {
+    color: var(#{getCssVarName("text-color", "placeholder")});
+    display: flex;
+    align-items: center;
+  }
 }

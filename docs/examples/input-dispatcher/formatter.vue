@@ -3,8 +3,8 @@
     v-model="input"
     style="width: 240px"
     placeholder="Please input"
-    :formatter="(value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
-    :parser="(value) => value.replace(/\$\s?|(,*)/g, '')"
+    :formatter="(value: string) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
+    :parser="(value: string) => value.replace(/\$\s?|(,*)/g, '')"
   />
 </template>
 
