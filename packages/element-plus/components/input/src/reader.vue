@@ -1,37 +1,42 @@
 <template>
   <div
     :class="[
+      nsText.b(),
       nsInput.b(),
       {
-        [nsInput.is('disabled')]: props.disabled,
-        [nsInput.m('large')]: props.size === 'large',
-        [nsInput.m('small')]: props.size === 'small',
+        [nsText.is('disabled')]: props.disabled,
+        [nsText.m('large')]: props.size === 'large',
+        [nsText.m('small')]: props.size === 'small',
       },
     ]"
   >
-    <span v-if="$slots.prepend" :class="nsInput.e('prepend')">
+    <span v-if="$slots.prepend" :class="nsText.e('prepend')">
       <slot name="prepend"></slot>
     </span>
 
-    <span v-if="$slots.prefix" :class="nsInput.e('prefix')">
+    <span v-if="$slots.prefix" :class="nsText.e('prefix')">
       <slot name="prefix"></slot>
     </span>
 
-    <el-icon v-if="prefixIcon" :class="nsInput.e('prefix')">
-      <component :is="prefixIcon" />
-    </el-icon>
+    <span v-if="prefixIcon" :class="nsText.e('prefix')">
+      <el-icon>
+        <component :is="prefixIcon" />
+      </el-icon>
+    </span>
 
     <span>{{ value }}</span>
 
-    <el-icon v-if="suffixIcon" :class="nsInput.e('suffix')">
-      <component :is="suffixIcon" />
-    </el-icon>
+    <span v-if="suffixIcon" :class="nsText.e('suffix')">
+      <el-icon>
+        <component :is="suffixIcon" />
+      </el-icon>
+    </span>
 
-    <span v-if="$slots.suffix" :class="nsInput.e('suffix')">
+    <span v-if="$slots.suffix" :class="nsText.e('suffix')">
       <slot name="suffix"></slot>
     </span>
 
-    <span v-if="$slots.append" :class="nsInput.e('append')">
+    <span v-if="$slots.append" :class="nsText.e('append')">
       <slot name="append"></slot>
     </span>
 
@@ -56,6 +61,7 @@ defineOptions({
 });
 
 const { prefixIcon, suffixIcon } = props;
+const nsText = useNamespace("text");
 const nsInput = useNamespace("input");
 const passwordVisible = ref(false);
 

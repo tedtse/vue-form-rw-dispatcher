@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { src, dest, parallel, series } from "gulp";
 import gulpSass from "gulp-sass";
@@ -9,6 +10,7 @@ import chalk from "chalk";
 import postcss from "postcss";
 import cssnano from "cssnano";
 import consola from "consola";
+import { rimrafSync } from "rimraf";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -64,6 +66,8 @@ const copySource = () => {
 };
 
 const copyBundle = () => {
+  rimrafSync(destBundele);
+  fs.mkdirSync(destBundele);
   return src(path.resolve(__dirname, "dist/**")).pipe(dest(destBundele));
 };
 

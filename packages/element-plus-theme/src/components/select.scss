@@ -1,14 +1,6 @@
-@use '../var.scss' as *;
 @use "../mixins/mixin.scss" as *;
-@use "../mixins/function.scss" as *;
 
 @include elComponentCss("select") {
-  @include commonComponentStyle();
-
-  @include when(disabled) {
-    color: var(#{getCssVarName("text-color", "disabled")});
-  }
-
   &-selection {
     display: flex;
     flex-wrap: wrap;
@@ -20,15 +12,5 @@
       border-color: var(#{getCssVarName("color", "info", "light-9")});
       color: var(#{getCssVarName("color", "info")});
     }
-  }
-
-  &--large {
-    font-size: var(#{getCssVarName("font-size", "base")});
-    line-height: var(#{getCssVarName("input-height", "large")});
-  }
-
-  &--small {
-    font-size: var(#{getCssVarName("font-size", "small")});
-    line-height: var(#{getCssVarName("input-height", "small")});
   }
 }

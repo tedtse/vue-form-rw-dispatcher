@@ -1,8 +1,7 @@
-@use "./var.scss" as *;
-@use "./mixins/mixin.scss" as *;
-@use "./mixins/function.scss" as *;
+@use "../mixins/mixin.scss" as *;
+@use "../mixins/function.scss" as *;
 
-@include elComponentCss("input") {
+@include elComponentCss("text") {
   color: var(#{getCssVarName("text-color", "regular")});
   font-size: var(#{getCssVarName("font-size", "base")});
   line-height: var(#{getCssVarName("input-height")});
@@ -16,7 +15,7 @@
   }
 
   &--large {
-    font-size: var(#{getCssVarName("font-size", "large")});
+    font-size: var(#{getCssVarName("font-size", "base")});
     line-height: var(#{getCssVarName("input-height", "large")});
   }
 
@@ -25,7 +24,6 @@
     line-height: var(#{getCssVarName("input-height", "small")});
   }
 
-  &__password,
   &__prefix,
   &__suffix,
   &__prepend,
@@ -33,21 +31,5 @@
     color: var(#{getCssVarName("text-color", "placeholder")});
     display: flex;
     align-items: center;
-
-    button.el-button {
-      color: inherit;
-      background-color: transparent;
-    }
-    &:hover {
-      button.el-button {
-        color: inherit;
-        background-color: transparent;
-        border-color: inherit;
-      }
-    }
-  }
-
-  &__password {
-    cursor: pointer;
   }
 }

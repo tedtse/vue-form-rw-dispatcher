@@ -1,9 +1,8 @@
+@use "./components/text.scss";
 @use "./components/input.scss";
-@use "./components/input-number.scss";
 @use "./components/select.scss";
-@use "./components/date-picker.scss";
-@use "./components/time-select.scss";
 
+@use "./var.scss" as *;
 @use "./mixins/mixin.scss" as *;
 
 @include elComponentCss("range") {
