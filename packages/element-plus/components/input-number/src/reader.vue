@@ -1,21 +1,21 @@
 <template>
   <div
     :class="[
-      nsInputNumber.b(),
+      nsText.b(),
       {
-        [nsInputNumber.is('disabled')]: props.disabled,
-        [nsInputNumber.m('large')]: props.size === 'large',
-        [nsInputNumber.m('small')]: props.size === 'small',
+        [nsText.is('disabled')]: props.disabled,
+        [nsText.m('large')]: props.size === 'large',
+        [nsText.m('small')]: props.size === 'small',
       },
     ]"
   >
-    <span v-if="$slots.prefix" :class="nsInputNumber.e('prefix')">
+    <span v-if="$slots.prefix" :class="nsText.e('prefix')">
       <slot name="prefix"></slot>
     </span>
 
     <span>{{ value }}</span>
 
-    <span v-if="$slots.suffix" :class="nsInputNumber.e('suffix')">
+    <span v-if="$slots.suffix" :class="nsText.e('suffix')">
       <slot name="suffix"></slot>
     </span>
   </div>
@@ -31,7 +31,7 @@ defineOptions({
   name: "InputReader",
 });
 
-const nsInputNumber = useNamespace("input-number");
+const nsText = useNamespace("el-text");
 
 const value = computed(() => {
   const { modelValue, precision } = props;

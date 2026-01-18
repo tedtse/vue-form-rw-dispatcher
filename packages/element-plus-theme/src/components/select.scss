@@ -1,4 +1,5 @@
 @use "../mixins/mixin.scss" as *;
+@use "../mixins/function.scss" as *;
 
 @include elComponentCss("select") {
   &-selection {

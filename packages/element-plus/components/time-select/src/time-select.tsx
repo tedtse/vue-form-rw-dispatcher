@@ -1,20 +1,30 @@
-import { ElTimeSelect, timeSelectProps, type TimeSelectProps } from "element-plus";
+import {
+  ElTimeSelect,
+  timeSelectProps,
+  type TimeSelectProps,
+} from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-  type RWDispatcherProps,
+  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import TimeSelectReader from "./reader.vue";
 
-export const ElTimeSelectDispatcher = defineRWDispatcher<
-  TimeSelectProps & RWDispatcherProps
->({
+export const ElTimeSelectDispatcher = defineRWDispatcher({
   name: "ElTimeSelectDispatcher",
-  props: timeSelectProps,
+  props: { ...timeSelectProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
-    extendComponent<TimeSelectProps>(ElTimeSelect, props, context),
+    extendComponent<TimeSelectProps>(
+      ElTimeSelect,
+      props as TimeSelectProps,
+      context,
+    ),
   readerFn: (props, { attrs, slots }) => (
-    <TimeSelectReader {...attrs} {...props} v-slots={slots} />
+    <TimeSelectReader
+      {...attrs}
+      {...(props as TimeSelectProps)}
+      v-slots={slots}
+    />
   ),
   options: {
     inheritAttrs: false,

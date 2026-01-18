@@ -1,15 +1,15 @@
 <template>
   <div
     :class="[
-      nsDatePicker.b(),
+      nsText.b(),
       {
-        [nsDatePicker.is('disabled')]: props.disabled,
-        [nsDatePicker.m('large')]: props.size === 'large',
-        [nsDatePicker.m('small')]: props.size === 'small',
+        [nsText.is('disabled')]: props.disabled,
+        [nsText.m('large')]: props.size === 'large',
+        [nsText.m('small')]: props.size === 'small',
       },
     ]"
   >
-    <span v-if="props.prefixIcon" :class="nsDatePicker.e('prefix')">
+    <span v-if="props.prefixIcon" :class="nsText.e('prefix')">
       <props.prefixIcon />
     </span>
 
@@ -33,8 +33,8 @@ defineOptions({
   name: "DatePickerReader",
 });
 
-const nsDatePicker = useNamespace("date-picker");
-const nsRange = useNamespace("range");
+const nsText = useNamespace("el-text");
+const nsRange = useNamespace("el-range");
 
 const value = computed(() => {
   const { modelValue, format, type } = props;
@@ -58,7 +58,7 @@ const isRange = computed(() => {
   return (
     Array.isArray(modelValue) &&
     modelValue.filter(Boolean).length &&
-    ['datetimerange', 'daterange', 'monthrange', 'yearrange'].includes(type)
+    ["datetimerange", "daterange", "monthrange", "yearrange"].includes(type)
   );
 });
 
@@ -66,13 +66,19 @@ const RangeRender = () => {
   if (!isRange.value) return null;
   const { modelValue, rangeSeparator, format, type } = props;
   const source = (modelValue as string[] | number[] | Date[]).filter(Boolean);
-  const nodes = source.flatMap((date, i) => {
-    const txt = dayjs(date).format(format ?? DEFAULT_FORMATS_DATEPICKER[type]);
-    return [
-      h("span", txt),
-      i < source.length - 1 ? h("span", { class: nsRange.b("separator") }, rangeSeparator) : null,
-    ];
-  }).filter(Boolean);
+  const nodes = source
+    .flatMap((date, i) => {
+      const txt = dayjs(date).format(
+        format ?? DEFAULT_FORMATS_DATEPICKER[type],
+      );
+      return [
+        h("span", txt),
+        i < source.length - 1
+          ? h("span", { class: nsRange.b("separator") }, rangeSeparator)
+          : null,
+      ];
+    })
+    .filter(Boolean);
   return h(Fragment, null, nodes);
 };
 </script>

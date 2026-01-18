@@ -61,8 +61,8 @@ defineOptions({
 });
 
 const { prefixIcon, suffixIcon } = props;
-const nsText = useNamespace("text");
-const nsInput = useNamespace("input");
+const nsText = useNamespace("el-text");
+const nsInput = useNamespace("el-input");
 const passwordVisible = ref(false);
 
 const PasswordIcon = computed(() => (passwordVisible.value ? View : Hide));

@@ -1,23 +1,24 @@
-import type { SetupContext, VNodeChild } from "vue";
-
-export type Namespace = 'string'
+import { Config } from "./config";
+import type { SetupContext, VNodeChild, ComponentPropsOptions } from "vue";
 
 export type RWDispatcherState = "write" | "read";
 
+// 定义必须以'State'结尾的键名类型
+export type StateKey = `${Exclude<string, "">}State`;
+
 export type RWDispatcherProps = {
-  rwDispatcherState?: RWDispatcherState;
+  [K: StateKey]: RWDispatcherState;
 };
 
-export type DefineRWDispatcherArgs<Props> = {
-  writerFn: (
-    props: Omit<Props, "rwDispatcherState">,
-    context: SetupContext
-  ) => VNodeChild;
-  readerFn: (
-    props: Omit<Props, "rwDispatcherState">,
-    context: SetupContext
-  ) => VNodeChild;
+const stateKey = `${Config.namespace}State`;
+export type DefineRWDispatcherArgs<
+  Props extends Record<string, unknown> & RWDispatcherProps = {
+    [stateKey]: "write";
+  },
+> = {
+  writerFn: (props: Omit<Props, StateKey>, context: SetupContext) => VNodeChild;
+  readerFn: (props: Omit<Props, StateKey>, context: SetupContext) => VNodeChild;
+  props: ComponentPropsOptions<Record<string, unknown> & RWDispatcherProps>;
   name?: string;
-  props?: Record<string, unknown>;
   options?: Record<string, unknown>;
 };

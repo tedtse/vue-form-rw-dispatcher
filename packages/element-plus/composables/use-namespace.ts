@@ -1,7 +1,7 @@
 import { computed, getCurrentInstance, inject, ref, unref } from "vue";
 import type { InjectionKey, Ref } from "vue";
 
-export const defaultNamespace = "rw-dispatcher-el";
+export const defaultNamespace = "rw-dispatcher";
 const statePrefix = "is-";
 
 const _bem = (

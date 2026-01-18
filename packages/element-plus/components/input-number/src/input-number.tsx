@@ -6,19 +6,25 @@ import {
 import {
   defineRWDispatcher,
   extendComponent,
-  type RWDispatcherProps,
+  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import InputNumberReader from "./reader.vue";
 
-export const ElInputNumberDispatcher = defineRWDispatcher<
-  InputNumberProps & RWDispatcherProps
->({
+export const ElInputNumberDispatcher = defineRWDispatcher({
   name: "ElInputNumberDispatcher",
-  props: inputNumberProps,
+  props: { ...inputNumberProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
-    extendComponent<InputNumberProps>(ElInputNumber, props, context),
+    extendComponent<InputNumberProps>(
+      ElInputNumber,
+      props as InputNumberProps,
+      context,
+    ),
   readerFn: (props, { attrs, slots }) => (
-    <InputNumberReader {...attrs} {...props} v-slots={slots} />
+    <InputNumberReader
+      {...attrs}
+      {...(props as InputNumberProps)}
+      v-slots={slots}
+    />
   ),
   options: {
     inheritAttrs: false,

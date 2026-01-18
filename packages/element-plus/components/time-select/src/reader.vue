@@ -1,11 +1,11 @@
 <template>
   <div
     :class="[
-      nsTimeSelect.b(),
+      nsText.b(),
       {
-        [nsTimeSelect.is('disabled')]: props.disabled,
-        [nsTimeSelect.m('large')]: props.size === 'large',
-        [nsTimeSelect.m('small')]: props.size === 'small',
+        [nsText.is('disabled')]: props.disabled,
+        [nsText.m('large')]: props.size === 'large',
+        [nsText.m('small')]: props.size === 'small',
       },
     ]"
   >
@@ -18,5 +18,5 @@ import { type TimeSelectProps } from "element-plus";
 import { useNamespace } from "../../../composables/use-namespace";
 
 const props = defineProps<TimeSelectProps>();
-const nsTimeSelect = useNamespace("time-select");
+const nsText = useNamespace("el-text");
 </script>

@@ -1,12 +1,13 @@
 <template>
-  <div :class="nsSelect.b('container')">
+  <div :class="nsText.b('container')">
     <div
       :class="[
         nsSelect.b(),
+        nsText.b(),
         {
-          [nsSelect.is('disabled')]: props.disabled,
-          [nsSelect.m('large')]: props.size === 'large',
-          [nsSelect.m('small')]: props.size === 'small',
+          [nsText.is('disabled')]: props.disabled,
+          [nsText.m('large')]: props.size === 'large',
+          [nsText.m('small')]: props.size === 'small',
         },
       ]"
     >
@@ -70,8 +71,9 @@ defineOptions({
   components: { ShadowSelect: ElSelect },
 });
 
-const nsSelect = useNamespace("select");
-const nsTag = useNamespace("tag");
+const nsText = useNamespace("el-text");
+const nsSelect = useNamespace("el-select");
+const nsTag = useNamespace("el-tag");
 const shadowSelectRef = ref<InstanceType<typeof ElSelect>>();
 const options = ref<OptionType[]>([]);
 

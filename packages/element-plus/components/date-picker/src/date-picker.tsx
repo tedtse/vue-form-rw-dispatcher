@@ -6,19 +6,25 @@ import {
 import {
   defineRWDispatcher,
   extendComponent,
-  type RWDispatcherProps,
+  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import DatePickerReader from "./reader.vue";
 
-export const ElDatePickerDispatcher = defineRWDispatcher<
-  DatePickerProps & RWDispatcherProps
->({
+export const ElDatePickerDispatcher = defineRWDispatcher({
   name: "ElDatePickerDispatcher",
-  props: datePickerProps,
+  props: { ...datePickerProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
-    extendComponent<DatePickerProps>(ElDatePicker, props, context),
+    extendComponent<DatePickerProps>(
+      ElDatePicker,
+      props as DatePickerProps,
+      context,
+    ),
   readerFn: (props, { attrs, slots }) => (
-    <DatePickerReader {...attrs} {...props} v-slots={slots} />
+    <DatePickerReader
+      {...attrs}
+      {...(props as DatePickerProps)}
+      v-slots={slots}
+    />
   ),
   options: {
     inheritAttrs: false,
