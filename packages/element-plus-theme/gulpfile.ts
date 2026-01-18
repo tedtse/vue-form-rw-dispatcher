@@ -52,8 +52,8 @@ const compressWithCssnano = () => {
         file.contents = Buffer.from(result.css);
         consola.success(
           `${chalk.cyan(name)}: ${chalk.yellow(
-            cssString.length / 1000
-          )} KB -> ${chalk.green(result.css.length / 1000)} KB`
+            cssString.length / 1000,
+          )} KB -> ${chalk.green(result.css.length / 1000)} KB`,
         );
         callback(null, file);
       });
@@ -80,6 +80,6 @@ const buildBundle = () => {
     .pipe(dest(path.resolve(__dirname, "dist")));
 };
 
-export const build = parallel(series(buildBundle, copyBundle), copySource);
+export const build = parallel(buildBundle);
 
 export default build;
