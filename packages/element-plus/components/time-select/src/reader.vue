@@ -9,6 +9,12 @@
       },
     ]"
   >
+    <span v-if="prefixIcon" :class="nsText.e('prefix')">
+      <el-icon>
+        <component :is="prefixIcon" />
+      </el-icon>
+    </span>
+
     <span>{{ props.modelValue }}</span>
   </div>
 </template>
@@ -19,4 +25,5 @@ import { useNamespace } from "../../../composables/use-namespace";
 
 const props = defineProps<TimeSelectProps>();
 const nsText = useNamespace("el-text");
+const { prefixIcon } = props;
 </script>

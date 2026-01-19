@@ -9,8 +9,10 @@
       },
     ]"
   >
-    <span v-if="props.prefixIcon" :class="nsText.e('prefix')">
-      <props.prefixIcon />
+    <span v-if="prefixIcon" :class="nsText.e('prefix')">
+      <el-icon>
+        <prefixIcon />
+      </el-icon>
     </span>
 
     <template v-if="isRange">
@@ -23,8 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, Fragment } from "vue";
-import { dayjs, type DatePickerProps } from "element-plus";
+import { computed, h, Fragment, shallowRef } from "vue";
+import { dayjs, ElIcon, type DatePickerProps } from "element-plus";
+import { Clock, Calendar } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_DATEPICKER } from "../../../constants";
 import { useNamespace } from "../../../composables/use-namespace";
 
@@ -51,6 +54,16 @@ const value = computed(() => {
     return dayjs(modelValue).format(format ?? DEFAULT_FORMATS_DATEPICKER[type]);
   }
   return modelValue;
+});
+
+const prefixIcon = computed(() => {
+  if (props.prefixIcon) {
+    return props.prefixIcon;
+  }
+  if (["datetime", "datetimerange"].includes(props.type)) {
+    return Clock;
+  }
+  return Calendar;
 });
 
 const isRange = computed(() => {

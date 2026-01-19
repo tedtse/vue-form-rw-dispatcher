@@ -1,4 +1,4 @@
-import { Config } from "./config";
+import { DEFAULT_NAMESPACE } from "./config";
 import type { SetupContext, VNodeChild, ComponentPropsOptions } from "vue";
 
 export type RWDispatcherState = "write" | "read";
@@ -10,10 +10,10 @@ export type RWDispatcherProps = {
   [K: StateKey]: RWDispatcherState;
 };
 
-const stateKey = `${Config.namespace}State`;
+const nsStateKey = `${DEFAULT_NAMESPACE}State`;
 export type DefineRWDispatcherArgs<
   Props extends Record<string, unknown> & RWDispatcherProps = {
-    [stateKey]: "write";
+    [nsStateKey]: "write";
   },
 > = {
   writerFn: (props: Omit<Props, StateKey>, context: SetupContext) => VNodeChild;

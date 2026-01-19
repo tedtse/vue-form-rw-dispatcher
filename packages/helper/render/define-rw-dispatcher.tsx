@@ -7,6 +7,7 @@ import {
   type ComputedRef,
   type SetupContext,
   type ExtractPropTypes,
+  type ComponentObjectPropsOptions,
 } from "vue";
 import { omitRWDispatcherState } from "../utils";
 import { Config } from "../config";
@@ -14,14 +15,8 @@ import type {
   StateKey,
   RWDispatcherState,
   DefineRWDispatcherArgs,
+  RWDispatcherProps
 } from "../types";
-
-// export function defineRWDispatcher<
-//   Props extends Record<string, unknown> & RWDispatcherProps,
-// >(args: DefineRWDispatcherArgs<Props>): DefineSetupFnComponent<Props>;
-
-// eslint-disable-next-line
-// export function defineRWDispatcher(args: any): DefineSetupFnComponent<any>;
 
 export function defineRWDispatcher({
   writerFn,
@@ -30,11 +25,20 @@ export function defineRWDispatcher({
   props,
   options,
 }: DefineRWDispatcherArgs) {
+  let _props: ComponentObjectPropsOptions<Record<string, unknown> & RWDispatcherProps> = {};
+  if (Array.isArray(props)) {
+    props.forEach((name) => {
+      _props[name] = { type: String, required: true };
+    });
+  } else {
+    _props = props
+  }
+
   type Props = ExtractPropTypes<typeof props>;
 
-  return defineComponent({
+  return /*#__PURE__*/ defineComponent({
     setup(props: Props, context: SetupContext) {
-      const nsStateKey = `${Config.namespace}State` as StateKey;
+      const nsStateKey: StateKey = `${Config.namespace}State`;
       const injectState:
         | ComputedRef<RWDispatcherState>
         | Ref<RWDispatcherState> = inject(nsStateKey, ref("write"));
