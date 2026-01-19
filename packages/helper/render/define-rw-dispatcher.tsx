@@ -15,7 +15,7 @@ import type {
   StateKey,
   RWDispatcherState,
   DefineRWDispatcherArgs,
-  RWDispatcherProps
+  RWDispatcherProps,
 } from "../types";
 
 export function defineRWDispatcher({
@@ -25,13 +25,15 @@ export function defineRWDispatcher({
   props,
   options,
 }: DefineRWDispatcherArgs) {
-  let _props: ComponentObjectPropsOptions<Record<string, unknown> & RWDispatcherProps> = {};
+  let _props: ComponentObjectPropsOptions<
+    Record<string, unknown> & RWDispatcherProps
+  > = {};
   if (Array.isArray(props)) {
     props.forEach((name) => {
       _props[name] = { type: String, required: true };
     });
   } else {
-    _props = props
+    _props = props;
   }
 
   type Props = ExtractPropTypes<typeof props>;
@@ -55,13 +57,13 @@ export function defineRWDispatcher({
           );
         }
         if (state.value === "read") {
-          return slots.reader
-            ? slots.reader()
+          return slots[`${Config.namespace}Reader`]
+            ? slots[`${Config.namespace}Reader`]?.()
             : readerFn(otherProps as Omit<Props, StateKey>, context);
         }
         if (state.value === "write") {
-          return slots.writer
-            ? slots.writer()
+          return slots[`${Config.namespace}Writer`]
+            ? slots[`${Config.namespace}Writer`]?.()
             : writerFn(otherProps as Omit<Props, StateKey>, context);
         }
       };
