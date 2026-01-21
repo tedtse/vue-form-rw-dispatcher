@@ -1,7 +1,10 @@
-export const DEFAULT_NAMESPACE = "rwDispatcher";
+import { DEFAULT_NAMESPACE } from "@vue-form-rw-dispatcher/helper";
 
 export type ConfigType = {
   namespace: string;
+  activeText?: string;
+  inactiveText?: string;
+  locale?: string;
 };
 
 export const Config: ConfigType = {

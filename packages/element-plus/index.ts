@@ -1,7 +1,10 @@
 import { type App } from "vue";
-import { DEFAULT_NAMESPACE, setConfig } from "@vue-form-rw-dispatcher/helper";
+import { DEFAULT_NAMESPACE } from "@vue-form-rw-dispatcher/helper";
+import { setConfig } from './config'
 import * as components from "./components";
+
 export * from "./components";
+export { Config } from './config'
 
 export const DispatcherPlugin = (
   app: App,

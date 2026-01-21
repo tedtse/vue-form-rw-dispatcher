@@ -7,7 +7,7 @@ import {
 import SwitchReader from "./reader.vue";
 
 export const ElSwitchDispatcher = defineRWDispatcher({
-  name: "ElTimeSelectDispatcher",
+  name: "ElSwitchDispatcher",
   props: { ...switchProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
     extendComponent<SwitchProps>(ElSwitch, props as SwitchProps, context),
