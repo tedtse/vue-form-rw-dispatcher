@@ -1,6 +1,5 @@
 import { type App } from "vue";
-import { DEFAULT_NAMESPACE } from "@vue-form-rw-dispatcher/helper";
-import { setConfig } from './config'
+import { setConfig, DEFAULT_NAMESPACE } from './config'
 import * as components from "./components";
 
 export * from "./components";

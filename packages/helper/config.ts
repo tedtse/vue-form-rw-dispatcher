@@ -1,5 +1,7 @@
 export const DEFAULT_NAMESPACE = "rwDispatcher";
 
+export const configKeys: string[] = ['namespace']
+
 export type ConfigType = {
   namespace: string;
 };

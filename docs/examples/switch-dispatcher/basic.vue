@@ -1,5 +1,5 @@
 <template>
-  <el-switch-dispatcher v-model="value" active-text="On" inactive-text="Off" />
+  <el-switch-dispatcher v-model="value" />
 </template>
 
 <script lang="ts" setup>
