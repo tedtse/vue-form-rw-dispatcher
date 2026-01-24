@@ -1,4 +1,4 @@
-import { Config, type ConfigType } from "../config";
+import { Config } from "../config";
 import type { Component, SetupContext, ComponentPropsOptions } from "vue";
 import type { RWDispatcherProps } from "../types";
 
@@ -36,10 +36,6 @@ export const extendComponent = <Props extends Record<string, unknown>>(
   { attrs, slots }: SetupContext,
 ) => {
   return <widget {...attrs} {...props} v-slots={slots} />;
-};
-
-export const setConfig = (conf: Partial<ConfigType>) => {
-  Object.assign(Config, conf);
 };
 
 export const rwDispatcherProps: ComponentPropsOptions = {
