@@ -6,7 +6,7 @@
   font-size: var(#{getCssVarName("font-size", "base")});
   line-height: var(#{getCssVarName("input-height")});
   padding: 0 10px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
 

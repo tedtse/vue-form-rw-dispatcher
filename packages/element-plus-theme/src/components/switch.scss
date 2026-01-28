@@ -1,0 +1,6 @@
+@use "../mixins/mixin.scss" as *;
+
+@include elComponentCss("switch") {
+  --el-switch-on-color: var(--el-color-primary);
+  --el-switch-off-color: var(--el-border-color);
+}
