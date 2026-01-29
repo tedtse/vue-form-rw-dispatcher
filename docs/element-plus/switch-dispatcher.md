@@ -10,13 +10,49 @@ switch-dispatcher/basic
 
 :::
 
-## 文本与图标
-
-可通过 `active-text` / `inactive-text` 控制读状态展示文本，`active-icon` / `inactive-icon` 可用于展示图标。
+## 尺寸
 
 :::demo
 
-switch-dispatcher/basic
+switch-dispatcher/sizes
+
+:::
+
+## 文字描述
+
+使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。 使用 `inline-prompt` 属性来控制文本是否显示在点内。
+
+使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。
+
+:::demo
+
+switch-dispatcher/text-description
+
+:::
+
+## 显示自定义图标
+
+使用 `inactive-icon` 和 `active-icon` 属性来添加图标。 使用 `inline-prompt` 属性来控制图标显示在点内。
+
+:::demo
+
+switch-dispatcher/custom-icons
+
+:::
+
+## 扩展的 value 类型
+
+:::demo
+
+switch-dispatcher/extended-value-types
+
+:::
+
+## 禁用状态
+
+:::demo
+
+switch-dispatcher/disabled
 
 :::
 

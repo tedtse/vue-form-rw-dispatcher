@@ -25,7 +25,7 @@ export function markdownTransform(): Plugin {
       return combineMarkdown(
         code,
         [combineScriptSetup(append.scriptSetups), ...append.headers],
-        append.footers
+        append.footers,
       );
     },
   };
@@ -40,7 +40,7 @@ ${codes.join("\n")}
 const combineMarkdown = (
   code: string,
   headers: string[],
-  footers: string[]
+  footers: string[],
 ) => {
   const frontmatterEnds = code.indexOf("---\n\n");
   const firstHeader = code.search(/\n#{1,6}\s.+/);
@@ -71,7 +71,7 @@ const getExampleImports = (componentId: string) => {
     const file = item.replace(/\.vue$/, "");
     const name = camelize(`Ep-${componentId}-${file}`);
     imports.push(
-      `import ${name} from "../examples/${componentId}/${file}.vue"`
+      `import ${name} from "../examples/${componentId}/${file}.vue"`,
     );
   }
 

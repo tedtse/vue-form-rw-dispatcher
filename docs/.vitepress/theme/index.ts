@@ -1,3 +1,4 @@
+import { App } from "Vue";
 import DefaultTheme from "vitepress/theme";
 import "element-plus/dist/index.css";
 // if you just want to import css
@@ -9,7 +10,7 @@ import "./index.scss";
 
 export default {
   ...DefaultTheme,
-  enhanceApp({ app }) {
+  enhanceApp({ app }: { app: App }) {
     app.use(ElementPlus);
     app.use(DispatcherPlugin);
   },
