@@ -10,8 +10,13 @@
   align-items: center;
   gap: 8px;
 
+  &-container {
+    display: inline-flex;
+  }
+
   @include when(disabled) {
     color: var(#{getCssVarName("text-color", "disabled")});
+    cursor: not-allowed;
   }
 
   &--large {
