@@ -60,6 +60,10 @@ import { computed, ref, watchEffect, type VNode } from "vue";
 import { ElSelect, ElTag, type SelectProps } from "element-plus";
 import { useNamespace } from "../../../composables/use-namespace";
 
+type RawSlots = {
+  [name: string]: unknown;
+  $stable?: boolean;
+};
 type OptionType = {
   label: string;
   value: string | number;
@@ -84,7 +88,7 @@ const value = computed(() => {
     option = options.value.find(
       (opt) =>
         opt[valueKey as string] ===
-        (modelValue as Record<string, unknown>)[valueKey as string]
+        (modelValue as Record<string, unknown>)[valueKey as string],
     );
     return (modelValue as OptionType).label;
   }
@@ -96,24 +100,23 @@ const selectedOptions = computed(() => {
   const { modelValue, valueKey } = props;
   if (Array.isArray(modelValue)) {
     return options.value.filter((opt) =>
-      modelValue.includes(opt[valueKey] as string | number)
+      modelValue.includes(opt[valueKey] as string | number),
     );
   } else {
     return options.value.filter((opt) => opt[valueKey] === modelValue);
   }
-  return [];
 });
 
 watchEffect(() => {
   if (shadowSelectRef.value?.$slots.default) {
     const slotDefault = shadowSelectRef.value?.$slots.default?.() || [];
     const elOptions: VNode[] = [];
-    const traverse = (nodes: VNode[] | any[]) => {
+    const traverse = (nodes: VNode[]) => {
       nodes.flatMap((node) => {
         if (node.type && (node.type as any).name === "ElOption") {
           elOptions.push(node);
-        } else if (node.children?.default) {
-          traverse(node.children.default() as VNode[]);
+        } else if ((node.children as RawSlots).default) {
+          traverse((node.children as { default(): VNode[] }).default());
         } else {
           traverse((node.children as VNode[]) || []);
         }
