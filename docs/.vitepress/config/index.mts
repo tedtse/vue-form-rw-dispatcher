@@ -29,6 +29,7 @@ export default defineConfig({
           { text: "Input", link: "/element-plus/input-dispatcher" },
           { text: "Select", link: "/element-plus/select-dispatcher" },
           { text: "Radio", link: "/element-plus/radio-dispatcher" },
+          { text: "Checkbox", link: "/element-plus/checkbox-dispatcher" },
           {
             text: "InputNumber",
             link: "/element-plus/input-number-dispatcher",

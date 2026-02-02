@@ -41,7 +41,6 @@ const shadowRadioGroupRef = ref<InstanceType<typeof ElRadioGroup>>();
 
 const targetRadio = computed(() => {
   const { modelValue, props: properties } = props;
-  console.log(properties);
   return elRadios.value.find(
     (r) => r.props?.[properties?.value ?? "value"] === modelValue,
   );
@@ -54,7 +53,16 @@ const targetRadioSlot = computed(() => {
 });
 
 const label = computed(() => {
-  const { modelValue, props: properties } = props;
+  const { modelValue, options, props: properties } = props;
+  if (options && options.length) {
+    const option = options.find(
+      (opt) => opt[properties?.value ?? "value"] === modelValue,
+    );
+    if (option) {
+      return option[properties?.label ?? "label"] ?? modelValue ?? null;
+    }
+  }
+
   if (!targetRadio.value) return modelValue ?? null;
 
   // prefer explicit label prop
@@ -73,7 +81,11 @@ watchEffect(() => {
   const slotDefault = shadowRadioGroupRef.value?.$slots?.default?.(props) || [];
   const traverse = (nodes: VNode[]) => {
     nodes.flatMap((node) => {
-      if (node.type && (node.type as any).name === "ElRadio") {
+      if (
+        ["ElRadio", "ElRadioButton"].includes(
+          node.type && (node.type as any).name,
+        )
+      ) {
         elRadios.value.push(node);
       } else if ((node.children as RawSlots).default) {
         traverse((node.children as { default(): VNode[] }).default());

@@ -25,3 +25,11 @@ radio-dispatcher/disabled
 radio-dispatcher/options
 
 :::
+
+## 单选按钮
+
+:::demo
+
+radio-dispatcher/button-fill-textcolor
+
+:::
