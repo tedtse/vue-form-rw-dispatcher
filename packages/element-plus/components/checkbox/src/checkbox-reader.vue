@@ -8,6 +8,7 @@
 
         <span v-else>{{ label }}</span>
       </template>
+      <span v-else></span>
     </div>
   </div>
 </template>
@@ -20,23 +21,18 @@ import { useNamespace } from "../../../composables/use-namespace";
 const props = defineProps<CheckboxProps>();
 
 const nsText = useNamespace("el-text");
+const instance = getCurrentInstance();
 
 const checkboxSlot = computed(() => {
-  const instance = getCurrentInstance();
   return instance?.slots.default;
 });
 
 const isTrue = computed(() => {
   const { modelValue, trueValue } = props;
   if (typeof trueValue === "undefined") {
-    return modelValue === trueValue;
+    return modelValue === true;
   }
-  return modelValue;
-});
-
-const values = computed(() => {
-  const { modelValue } = props;
-  return Array.isArray(modelValue) ? modelValue : [modelValue];
+  return modelValue === trueValue;
 });
 
 const label = computed(() => {

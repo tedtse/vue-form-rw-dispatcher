@@ -18,9 +18,9 @@ import { useNamespace } from "../../../composables/use-namespace";
 const props = defineProps<RadioProps>();
 
 const nsText = useNamespace("el-text");
+const instance = getCurrentInstance();
 
 const radioSlot = computed(() => {
-  const instance = getCurrentInstance();
   return instance?.slots.default;
 });
 </script>

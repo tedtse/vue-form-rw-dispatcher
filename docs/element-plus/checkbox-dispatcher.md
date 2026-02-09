@@ -18,18 +18,10 @@ checkbox-dispatcher/disabled
 
 :::
 
-## Options 属性
+## 多选框组
 
 :::demo
 
-checkbox-dispatcher/options
-
-:::
-
-## 复选按钮样式
-
-:::demo
-
-checkbox-dispatcher/button
+checkbox-dispatcher/grouping
 
 :::
