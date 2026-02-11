@@ -25,3 +25,13 @@ checkbox-dispatcher/disabled
 checkbox-dispatcher/grouping
 
 :::
+
+## Options 属性
+
+基础用法 `el-checkbox-group` 的快捷示例。 您可以通过 `props` 属性自定义 `options` 的别名。
+
+:::demo
+
+checkbox-dispatcher/options
+
+:::

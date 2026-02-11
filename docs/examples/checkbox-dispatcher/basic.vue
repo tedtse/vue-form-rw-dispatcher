@@ -1,6 +1,11 @@
 <template>
   <div>
-    <el-checkbox-dispatcher v-model="checked1" label="Option 1" size="large" />
+    <el-checkbox-dispatcher
+      v-model="checked1"
+      label="Option 1"
+      size="large"
+      disabled
+    />
     <el-checkbox-dispatcher v-model="checked2" label="Option 2" size="large" />
   </div>
   <div class="my-2">

@@ -14,9 +14,24 @@
     display: inline-flex;
   }
 
+  &-item {
+    display: inline-flex;
+    @include elComponentCss("text") {
+      padding: 0;
+    }
+
+    & + & {
+      padding-left: 10px;
+    }
+  }
+
   @include when(disabled) {
     color: var(#{getCssVarName("text-color", "disabled")});
     cursor: not-allowed;
+  }
+
+  @include when(null) {
+    padding: 0;
   }
 
   &--large {

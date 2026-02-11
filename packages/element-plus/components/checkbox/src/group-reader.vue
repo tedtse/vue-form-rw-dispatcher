@@ -1,12 +1,28 @@
 <template>
   <div :class="nsText.b('container')">
     <div :class="[{ [nsText.is('disabled')]: props.disabled }]">
-      <checkbox-reader
-        v-for="(item, index) in targetCheckboxs"
-        :key="index"
-        v-model="targetModelValues[index]"
-        v-bind="item.props as CheckboxProps"
-      />
+      <template v-if="targetCheckboxs.length">
+        <checkbox-reader
+          v-for="(item, index) in targetCheckboxs"
+          :key="index"
+          v-model="targetModelValues[index]"
+          v-bind="{
+            ...(item.props as CheckboxProps),
+            [`${Config.namespace}Type`]: 'item',
+          }"
+        />
+      </template>
+      <template v-if="targetOptions?.length">
+        <checkbox-reader
+          v-for="(option, index) in targetOptions"
+          :key="index"
+          v-model="targetModelValues[index]"
+          v-bind="{
+            ...option,
+            [`${Config.namespace}Type`]: 'item',
+          }"
+        />
+      </template>
     </div>
 
     <shadow-checkbox-group
@@ -22,13 +38,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watchEffect, type VNode } from "vue";
+import { computed, ref, watchEffect, provide, type VNode } from "vue";
 import {
   ElCheckboxGroup,
   type CheckboxGroupProps,
   type CheckboxProps,
 } from "element-plus";
 import checkboxReader from "./checkbox-reader.vue";
+import { Config } from "@vue-form-rw-dispatcher/helper";
+import { CHECKBOX_GROUP_KEY } from "./use-reader";
 import { useNamespace } from "../../../composables/use-namespace";
 
 type RawSlots = {
@@ -45,6 +63,10 @@ const nsText = useNamespace("el-text");
 const elCheckboxes = ref<VNode[]>([]);
 const shadowCheckboxGroupRef = ref<InstanceType<typeof ElCheckboxGroup>>();
 
+provide(CHECKBOX_GROUP_KEY, {
+  instance: shadowCheckboxGroupRef,
+});
+
 const targetCheckboxs = computed(() => {
   const { modelValue, props: properties } = props;
   return elCheckboxes.value.filter((c) =>
@@ -52,58 +74,36 @@ const targetCheckboxs = computed(() => {
   );
 });
 
+const targetOptions = computed(() => {
+  const { modelValue, props: properties } = props;
+  return props.options?.filter((option) =>
+    modelValue.includes(option[properties?.value ?? "value"]),
+  );
+});
+
 const targetModelValues = computed(() => {
   const values: (string | number | boolean)[] = [];
   const { modelValue, props: properties } = props;
-  targetCheckboxs.value.forEach((checkbox, index) => {
-    const item = targetCheckboxs.value.find(
-      (c) => c.props?.[properties?.value ?? "value"] === modelValue[index],
-    );
-    const value = item?.props?.[properties?.value ?? "value"];
-    if (value !== undefined) {
-      values.push(item?.props?.trueValue ?? true);
-    }
-  });
+  if (targetCheckboxs.value.length) {
+    targetCheckboxs.value.forEach((checkbox, index) => {
+      const item = targetCheckboxs.value.find(
+        (c) => c.props?.[properties?.value ?? "value"] === modelValue[index],
+      );
+      const value = item?.props?.[properties?.value ?? "value"];
+      if (value !== undefined) {
+        values.push(item?.props?.trueValue ?? true);
+      }
+    });
+  }
+  if (props.options?.length) {
+    props.options.forEach((option, index) => {
+      if (modelValue.includes(option[properties?.value ?? "value"])) {
+        values.push(option[properties?.value ?? "value"]);
+      }
+    });
+  }
   return values;
 });
-
-// const targetCheckboxSlots = computed(() => {
-//   const checkboxs = targetCheckboxs.value;
-//   if (!checkboxs.length) return null;
-//   return (checkbox.children as RawSlots)?.default;
-// });
-
-// const NodeRender = (node: VNode) => {
-//   const hasSlot = (node.children as RawSlots)?.default;
-//   if (hasSlot) {
-//     return (node.children as { default(): VNode[] }).default();
-//   }
-//   return node.props?.label;
-// };
-
-// const label = computed(() => {
-//   const { modelValue, options, props: properties } = props;
-//   if (options && options.length) {
-//     if (Array.isArray(modelValue)) {
-//       const option = options.find((opt) =>
-//         modelValue.includes(opt[properties?.value ?? "value"]),
-//       );
-//       if (option) return option[properties?.label ?? "label"] ?? modelValue;
-//     }
-//   }
-
-//   if (!targetCheckbox.value) return modelValue ?? null;
-
-//   if (targetCheckbox.value.props?.[properties?.label ?? "label"] != null) {
-//     return targetCheckbox.value.props?.[properties?.label ?? "label"];
-//   }
-
-//   return (
-//     targetCheckbox.value.props?.[properties?.value ?? "value"] ??
-//     modelValue ??
-//     null
-//   );
-// });
 
 watchEffect(() => {
   const slotDefault =

@@ -35,6 +35,7 @@ export default defineConfig({
             link: "/element-plus/input-number-dispatcher",
           },
           { text: "DatePicker", link: "/element-plus/date-picker-dispatcher" },
+          { text: "TimePicker", link: "/element-plus/time-picker-dispatcher" },
           { text: "TimeSelect", link: "/element-plus/time-select-dispatcher" },
           { text: "Switch", link: "/element-plus/switch-dispatcher" },
         ],

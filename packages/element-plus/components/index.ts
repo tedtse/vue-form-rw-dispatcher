@@ -6,6 +6,7 @@ import ElTimeSelectDispatcher from "./time-select";
 import ElSwitchDispatcher from "./switch";
 import { ElRadioGroupDispatcher, ElRadioDispatcher } from "./radio";
 import { ElCheckboxGroupDispatcher, ElCheckboxDispatcher } from "./checkbox";
+import { ElTimePickerDispatcher } from "./time-picker";
 
 export {
   ElInputDispatcher,
@@ -18,4 +19,5 @@ export {
   ElRadioDispatcher,
   ElCheckboxGroupDispatcher,
   ElCheckboxDispatcher,
+  ElTimePickerDispatcher,
 };

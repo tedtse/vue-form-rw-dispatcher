@@ -1,45 +1,118 @@
 <template>
-  <div :class="nsText.b('container')">
-    <div :class="[nsText.b(), { [nsText.is('disabled')]: props.disabled }]">
+  <div
+    :class="[
+      { [nsText.b('container')]: nsType === 'container' },
+      { [nsText.b('item')]: nsType === 'item' },
+    ]"
+  >
+    <div :class="[nsText.b(), { [nsText.is('disabled')]: isDisabled }]">
       <template v-if="isTrue">
         <template v-if="checkboxSlot">
           <component :is="checkboxSlot" />
         </template>
 
-        <span v-else>{{ label }}</span>
+        <span v-else>{{ text }}</span>
       </template>
       <span v-else></span>
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { computed, getCurrentInstance } from "vue";
-import { type CheckboxProps } from "element-plus";
+<script lang="ts">
+import {
+  defineComponent,
+  computed,
+  inject,
+  onMounted,
+  ref,
+  watchEffect,
+  useAttrs,
+} from "vue";
+import { checkboxProps, type CheckboxProps } from "element-plus";
+import { Config } from "@vue-form-rw-dispatcher/helper";
+import { CHECKBOX_GROUP_KEY, type CheckboxGroupType } from "./use-reader";
 import { useNamespace } from "../../../composables/use-namespace";
 
-const props = defineProps<CheckboxProps>();
+const Namespace = Config.namespace;
 
-const nsText = useNamespace("el-text");
-const instance = getCurrentInstance();
+export default defineComponent({
+  name: "CheckboxReader",
+  props: {
+    ...checkboxProps,
+    [`${Namespace}State`]: {},
+    [`${Namespace}Type`]: {
+      type: String as () => "item" | "container",
+      default: "container",
+    },
+  },
+  setup(props, { slots }) {
+    const parentCheckboxGroup = ref<CheckboxGroupType | null>(null);
+    const isTrue = ref(false);
+    const text = ref<
+      string | number | boolean | Record<string, any> | undefined
+    >("");
 
-const checkboxSlot = computed(() => {
-  return instance?.slots.default;
-});
+    const attrs = useAttrs();
+    const nsText = useNamespace("el-text");
 
-const isTrue = computed(() => {
-  const { modelValue, trueValue } = props;
-  if (typeof trueValue === "undefined") {
-    return modelValue === true;
-  }
-  return modelValue === trueValue;
-});
+    onMounted(() => {
+      // Inject parent checkbox group instance
+      parentCheckboxGroup.value = inject<CheckboxGroupType | null>(
+        CHECKBOX_GROUP_KEY,
+        null,
+      );
+    });
 
-const label = computed(() => {
-  const { modelValue, label } = props;
-  if (isTrue.value) {
-    return label;
-  }
-  return label || modelValue;
+    const checkboxSlot = computed(() => slots.default);
+
+    const isDisabled = computed(() => {
+      const propDisabled =
+        parentCheckboxGroup.value?.instance?.$props?.props?.disabled ??
+        "disabled";
+      if (Reflect.has(props, propDisabled)) {
+        return Reflect.get(props, propDisabled) as boolean;
+      }
+      if (Reflect.has(attrs, propDisabled)) {
+        return Reflect.get(attrs, propDisabled) as boolean;
+      }
+      return false;
+    });
+
+    watchEffect(() => {
+      const properties =
+        parentCheckboxGroup.value?.instance?.$props?.props || {};
+      const { modelValue, trueValue } = props as CheckboxProps;
+      const _text =
+        props[(properties?.value ?? "value") as keyof CheckboxProps];
+      text.value =
+        _text ?? props[(properties?.label ?? "label") as keyof CheckboxProps];
+
+      if (typeof trueValue !== "undefined") {
+        isTrue.value = modelValue === trueValue || modelValue === true;
+        return;
+      }
+
+      if (typeof _text !== "undefined") {
+        isTrue.value = modelValue === _text || modelValue === true;
+        return;
+      }
+      isTrue.value = modelValue === true;
+    });
+
+    const nsType = computed(
+      () => (props as Record<string, unknown>)[`${Namespace}Type`],
+    );
+
+    return {
+      props,
+      nsText,
+      Namespace,
+      checkboxSlot,
+      isTrue,
+      isDisabled,
+      text,
+      nsType,
+    };
+  },
 });
 </script>
