@@ -1,6 +1,7 @@
 import ElInputDispatcher from "./input";
 import ElInputNumberDispatcher from "./input-number";
 import ElSelectDispatcher from "./select";
+import ElSelectV2Dispatcher from "./select-v2";
 import ElDatePickerDispatcher from "./date-picker";
 import ElTimeSelectDispatcher from "./time-select";
 import ElSwitchDispatcher from "./switch";
@@ -12,6 +13,7 @@ export {
   ElInputDispatcher,
   ElInputNumberDispatcher,
   ElSelectDispatcher,
+  ElSelectV2Dispatcher,
   ElDatePickerDispatcher,
   ElTimeSelectDispatcher,
   ElSwitchDispatcher,
