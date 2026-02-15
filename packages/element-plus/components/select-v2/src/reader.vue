@@ -37,56 +37,58 @@
           :class="nsTag.b('bg-color')"
           :key="index"
         >
-          {{ opt.label }}
+          {{ opt[labelKey] }}
         </el-tag>
       </div>
-      <span v-else>{{ value }}</span>
+      <span v-else>{{ label }}</span>
     </div>
-
   </div>
 </template>
 
 <script lang="ts" setup>
 import { computed } from "vue";
-import { ElTag, type SelectProps } from "element-plus";
+import { ElTag } from "element-plus";
+import type { SelectV2Props } from "element-plus/es/components/select-v2/src/defaults";
 import { useNamespace } from "../../../composables/use-namespace";
 
-type OptionType = {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-} & Record<string, unknown>;
-
-const props = defineProps<SelectProps>();
+const props = defineProps<Partial<SelectV2Props>>();
 
 const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const nsTag = useNamespace("el-tag");
 
-const value = computed(() => {
-  const { modelValue, valueKey } = props;
-  let option;
-  if (Object.prototype.toString.call(modelValue) === "[object Object]") {
-    option = props.options?.find(
-      (opt) =>
-        opt[valueKey as string] ===
-        (modelValue as Record<string, unknown>)[valueKey as string],
+const valueKey = computed(
+  () => props.props?.value || props.valueKey || "value",
+);
+const labelKey = computed(() => props.props?.label || "label");
+
+const label = computed(() => {
+  const { modelValue, options, allowCreate } = props;
+  if (allowCreate) {
+    return (
+      options?.find((opt) => opt[valueKey.value] === modelValue)?.[
+        labelKey.value
+      ] || modelValue
     );
-    return (modelValue as OptionType).label;
   }
-  option = props.options?.find((opt) => opt[valueKey] === modelValue);
-  return option?.label || modelValue;
+  const option = options?.find((opt) => opt[valueKey.value] === modelValue);
+  return option?.[labelKey.value];
 });
 
 const selectedOptions = computed(() => {
-  const { modelValue, valueKey } = props;
-  if (Array.isArray(modelValue)) {
-    return props.options?.filter((opt) =>
-      modelValue.includes(opt[valueKey] as string | number),
-    );
-  } else {
-    return props.options?.filter((opt) => opt[valueKey] === modelValue);
+  const { modelValue, options, allowCreate } = props;
+  if (allowCreate) {
+    const result: Record<string, unknown>[] = [];
+    modelValue.forEach((val: string) => {
+      const option = options?.find((opt) => opt[valueKey.value] === val);
+      if (option) {
+        result.push(option);
+      } else {
+        result.push({ [valueKey.value]: val, [labelKey.value]: val });
+      }
+    });
+    return result;
   }
+  return options?.filter((opt) => modelValue.includes(opt[valueKey.value]));
 });
-
 </script>

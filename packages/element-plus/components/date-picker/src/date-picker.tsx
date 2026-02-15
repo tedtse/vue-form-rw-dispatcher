@@ -1,18 +1,12 @@
-import {
-  ElDatePicker,
-  datePickerProps,
-  type DatePickerProps,
-} from "element-plus";
+import { ElDatePicker, type DatePickerProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import DatePickerReader from "./reader.vue";
 
-export const ElDatePickerDispatcher = defineRWDispatcher({
+export const ElDatePickerDispatcher = defineRWDispatcher<DatePickerProps>({
   name: "ElDatePickerDispatcher",
-  props: { ...datePickerProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
     extendComponent<DatePickerProps>(
       ElDatePicker,

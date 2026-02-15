@@ -1,14 +1,12 @@
-import { ElCheckbox, checkboxProps, type CheckboxProps } from "element-plus";
+import { ElCheckbox, type CheckboxProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import CheckboxReader from "./checkbox-reader.vue";
 
-export const ElCheckboxDispatcher = defineRWDispatcher({
+export const ElCheckboxDispatcher = defineRWDispatcher<CheckboxProps>({
   name: "ElCheckboxDispatcher",
-  props: { ...checkboxProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
     extendComponent<CheckboxProps>(ElCheckbox, props as CheckboxProps, context),
   readerFn: (props, { attrs, slots }) => (

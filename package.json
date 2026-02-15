@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "docs:dev": "cd docs && npm run docs:dev",
     "test": "vitest"
   },
   "dependencies": {

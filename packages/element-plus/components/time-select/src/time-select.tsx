@@ -1,18 +1,12 @@
-import {
-  ElTimeSelect,
-  timeSelectProps,
-  type TimeSelectProps,
-} from "element-plus";
+import { ElTimeSelect, type TimeSelectProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import TimeSelectReader from "./reader.vue";
 
-export const ElTimeSelectDispatcher = defineRWDispatcher({
+export const ElTimeSelectDispatcher = defineRWDispatcher<TimeSelectProps>({
   name: "ElTimeSelectDispatcher",
-  props: { ...timeSelectProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
     extendComponent<TimeSelectProps>(
       ElTimeSelect,

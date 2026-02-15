@@ -18,7 +18,7 @@ export type DefineRWDispatcherArgs<
 > = {
   writerFn: (props: Omit<Props, StateKey>, context: SetupContext) => VNodeChild;
   readerFn: (props: Omit<Props, StateKey>, context: SetupContext) => VNodeChild;
-  props: ComponentPropsOptions<Record<string, unknown> & RWDispatcherProps>;
+  props?: ComponentPropsOptions<Record<string, unknown> & RWDispatcherProps>;
   name?: string;
   options?: Record<string, unknown>;
 };

@@ -18,7 +18,7 @@ import type {
   RWDispatcherProps,
 } from "../types";
 
-export function defineRWDispatcher({
+export function defineRWDispatcherPropType({
   writerFn,
   readerFn,
   name = "",

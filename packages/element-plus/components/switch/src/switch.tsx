@@ -1,14 +1,12 @@
-import { ElSwitch, switchProps, type SwitchProps } from "element-plus";
+import { ElSwitch, type SwitchProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-  rwDispatcherProps,
 } from "@vue-form-rw-dispatcher/helper";
 import SwitchReader from "./reader.vue";
 
-export const ElSwitchDispatcher = defineRWDispatcher({
+export const ElSwitchDispatcher = defineRWDispatcher<SwitchProps>({
   name: "ElSwitchDispatcher",
-  props: { ...switchProps, ...rwDispatcherProps },
   writerFn: (props, context) =>
     extendComponent<SwitchProps>(ElSwitch, props as SwitchProps, context),
   readerFn: (props, { attrs, slots }) => (
