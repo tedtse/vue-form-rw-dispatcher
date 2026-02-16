@@ -1,8 +1,8 @@
-```vue
 <template>
   <div class="flex flex-wrap gap-16px items-center">
-    <el-select-dispatcher
+    <el-select-v2-dispatcher
       v-model="value1"
+      :options="options"
       placeholder="Select"
       style="width: 240px"
       clearable
@@ -11,16 +11,11 @@
         <span>{{ label }}: </span>
         <span style="font-weight: bold">{{ value }}</span>
       </template>
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select-dispatcher>
+    </el-select-v2-dispatcher>
 
-    <el-select-dispatcher
+    <el-select-v2-dispatcher
       v-model="value2"
+      :options="options"
       placeholder="Select"
       style="width: 240px"
       clearable
@@ -30,45 +25,20 @@
         <span>{{ label }}: </span>
         <span style="font-weight: bold">{{ value }}</span>
       </template>
-      <el-option
-        v-for="item in options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value"
-      />
-    </el-select-dispatcher>
+    </el-select-v2-dispatcher>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref } from 'vue'
 
-const value1 = ref<string>("Option1");
-const value2 = ref<string[]>(["Option1"]);
-const options = [
-  {
-    value: "Option1",
-    label: "Label1",
-  },
-  {
-    value: "Option2",
-    label: "Label2",
-  },
-  {
-    value: "Option3",
-    label: "Label3",
-  },
-  {
-    value: "Option4",
-    label: "Label4",
-  },
-  {
-    value: "Option5",
-    label: "Label5",
-  },
-];
+const initials = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+const value1 = ref<string>('Option 1')
+const value2 = ref<string[]>(['Option 1'])
+const options = Array.from({ length: 1000 }).map((_, idx) => ({
+  value: `Option ${idx + 1}`,
+  label: `${initials[idx % 10]}${idx}`,
+}))
 </script>
 
 <style scoped></style>
-
-```

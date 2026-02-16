@@ -59,3 +59,52 @@ select-v2-dispatcher/customized-option
 select-v2-dispatcher/allow-create
 
 :::
+
+## 使用 value-key 键属性
+
+:::demo
+
+select-v2-dispatcher/value-key
+
+:::
+
+## 自定义选项
+
+当您的 `options` 格式不同于默认格式 您可以通过 `props` 属性自定义 `options`
+
+:::demo
+
+select-v2-dispatcher/customized-option
+
+:::
+
+## 自定义标签
+
+
+将自定义的标签插入 `el-select` 的 `slot` 中即可。 `collapse-tags`, `collapse-tags-tooltip`, `max-collapse-tags` 在此模式下不生效.
+
+:::demo
+
+select-v2-dispatcher/custom-tag
+
+:::
+
+## 空值配置
+​
+若想配置如空字符串为有效值而不是空值，可以配置 `empty-values` 为 [null, undefined].
+
+如果您想要将清空值更改为 null, 请设置 value-on-clear 为 null
+
+:::demo
+
+select-v2-dispatcher/null
+
+:::
+
+## 自定义标签
+
+:::demo
+
+select-v2-dispatcher/custom-label
+
+:::

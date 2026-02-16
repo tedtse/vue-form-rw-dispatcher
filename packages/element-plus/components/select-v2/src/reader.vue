@@ -51,6 +51,12 @@ import { ElTag } from "element-plus";
 import type { SelectV2Props } from "element-plus/es/components/select-v2/src/defaults";
 import { useNamespace } from "../../../composables/use-namespace";
 
+type OptionType = {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
+} & Record<string, unknown>;
+
 const props = defineProps<Partial<SelectV2Props>>();
 
 const nsText = useNamespace("el-text");
@@ -71,7 +77,17 @@ const label = computed(() => {
       ] || modelValue
     );
   }
-  const option = options?.find((opt) => opt[valueKey.value] === modelValue);
+  let option;
+  if (Object.prototype.toString.call(modelValue) === "[object Object]") {
+    option = options?.find(
+      (opt) =>
+        Object.keys(modelValue).every(
+          (key) => opt.value[key] === (modelValue as Record<string, unknown>)[key],
+        ),
+    );
+    return (option as OptionType)[labelKey.value];
+  }
+  option = options?.find((opt) => opt[valueKey.value] === modelValue);
   return option?.[labelKey.value];
 });
 
@@ -88,6 +104,15 @@ const selectedOptions = computed(() => {
       }
     });
     return result;
+  }
+  if (Object.prototype.toString.call(modelValue) === "[object Object]") {
+    const option = options?.find(
+      (opt) =>
+        Object.keys(modelValue).every(
+          (key) => opt.value[key] === (modelValue as Record<string, unknown>)[key],
+        ),
+    );
+    return (option as OptionType)[labelKey.value];
   }
   return options?.filter((opt) => modelValue.includes(opt[valueKey.value]));
 });
