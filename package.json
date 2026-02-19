@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "docs:dev": "cd docs && npm run docs:dev",
+    "scss:build": "cd packages/element-plus-theme && npm run build",
     "test": "vitest"
   },
   "dependencies": {
-    "@vue-form-rw-dispatcher/element-plus-theme": "workspace:*",
     "@vue-form-rw-dispatcher/element-plus": "workspace:*",
+    "@vue-form-rw-dispatcher/element-plus-theme": "workspace:*",
     "@vue-form-rw-dispatcher/helper": "workspace:*"
   },
   "keywords": [

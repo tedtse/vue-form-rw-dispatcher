@@ -33,10 +33,10 @@ export function defineRWDispatcherPropType({
       _props[name] = { type: String, required: true };
     });
   } else {
-    _props = props;
+    _props = props!;
   }
 
-  type Props = ExtractPropTypes<typeof props>;
+  type Props = ExtractPropTypes<typeof _props>;
 
   return /*#__PURE__*/ defineComponent({
     setup(props: Props, context: SetupContext) {
@@ -47,7 +47,7 @@ export function defineRWDispatcherPropType({
       const state = computed(() => {
         return Reflect.get(props, nsStateKey) || injectState?.value;
       });
-      const otherProps = omitRWDispatcherState(props);
+      const otherProps = omitRWDispatcherState(props as Record<string, unknown> & RWDispatcherProps);
       const { slots } = context;
 
       return () => {
