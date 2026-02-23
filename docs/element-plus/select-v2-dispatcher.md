@@ -80,7 +80,6 @@ select-v2-dispatcher/customized-option
 
 ## 自定义标签
 
-
 将自定义的标签插入 `el-select` 的 `slot` 中即可。 `collapse-tags`, `collapse-tags-tooltip`, `max-collapse-tags` 在此模式下不生效.
 
 :::demo
@@ -90,6 +89,7 @@ select-v2-dispatcher/custom-tag
 :::
 
 ## 空值配置
+
 ​
 若想配置如空字符串为有效值而不是空值，可以配置 `empty-values` 为 [null, undefined].
 
@@ -106,5 +106,15 @@ select-v2-dispatcher/null
 :::demo
 
 select-v2-dispatcher/custom-label
+
+:::
+
+## Slots
+
+使用 `slots` 中的 `${Config.namespace}Reader`, `${Config.namespace}Writer` 覆盖读写状态渲染函数。
+
+:::demo
+
+select-v2-dispatcher/slots
 
 :::

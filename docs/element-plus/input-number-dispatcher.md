@@ -41,6 +41,7 @@ input-number-dispatcher/size
 :::
 
 ## 带前缀和后缀
+
 ​
 使用前缀和标名后缀。
 
@@ -52,18 +53,10 @@ input-number-dispatcher/with-prefix-suffix
 
 ## Slots
 
-使用 `slots` 中的 `reader`, `writer` 覆盖读写状态渲染函数
+使用 `slots` 中的 `${Config.namespace}Reader`, `${Config.namespace}Writer` 覆盖读写状态渲染函数
 
 :::demo
 
 input-number-dispatcher/slots
-
-:::
-
-:::warning 注意
-
-建议在 slots 中加上 key, 避免切换读写状态出现渲染切换不过来的情况
-
-如示例中 #reader 加上了 key="reader", #writer 加上了 key="writer"
 
 :::

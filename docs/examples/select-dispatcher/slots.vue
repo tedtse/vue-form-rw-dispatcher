@@ -4,10 +4,10 @@
     style="width: 240px"
     placeholder="Please input"
   >
-    <template #reader>
+    <template #[`${Config.namespace}Reader`]>
       <span style="color: green" key="reader">reader: {{ select }}</span>
     </template>
-    <template #writer>
+    <template #[`${Config.namespace}Writer`]>
       <span style="color: red" key="writer">writer: {{ select }}</span>
     </template>
     <el-option
@@ -21,8 +21,9 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { Config } from "@vue-form-rw-dispatcher/element-plus";
 
-let index = 0
+let index = 0;
 const options = [
   {
     value: "Option1",
@@ -49,12 +50,12 @@ const options = [
 const select = ref<string>(options[index].value);
 
 const toggleValue = () => {
-  const length = options.length
+  const length = options.length;
   setTimeout(() => {
-    index = (index + 1) % length
-    select.value = options[index].value
-    toggleValue()
-  }, 2000)
-}
-toggleValue()
+    index = (index + 1) % length;
+    select.value = options[index].value;
+    toggleValue();
+  }, 2000);
+};
+toggleValue();
 </script>

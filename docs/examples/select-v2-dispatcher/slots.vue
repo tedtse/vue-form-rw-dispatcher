@@ -1,14 +1,13 @@
-```vue
 <template>
   <el-select-dispatcher
     v-model="select"
     style="width: 240px"
     placeholder="Please input"
   >
-    <template #reader>
+    <template #[`${Config.namespace}Reader`]>
       <span style="color: green" key="reader">reader: {{ select }}</span>
     </template>
-    <template #writer>
+    <template #[`${Config.namespace}Writer`]>
       <span style="color: red" key="writer">writer: {{ select }}</span>
     </template>
     <el-option
@@ -22,30 +21,14 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import { Config } from "@vue-form-rw-dispatcher/element-plus";
 
 let index = 0;
-const options = [
-  {
-    value: "Option1",
-    label: "Option1",
-  },
-  {
-    value: "Option2",
-    label: "Option2",
-  },
-  {
-    value: "Option3",
-    label: "Option3",
-  },
-  {
-    value: "Option4",
-    label: "Option4",
-  },
-  {
-    value: "Option5",
-    label: "Option5",
-  },
-];
+const initials = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
+const options = Array.from({ length: 1000 }).map((_, idx) => ({
+  value: `Option ${idx + 1}`,
+  label: `${initials[idx % 10]}${idx}`,
+}));
 
 const select = ref<string>(options[index].value);
 
@@ -59,5 +42,3 @@ const toggleValue = () => {
 };
 toggleValue();
 </script>
-
-```

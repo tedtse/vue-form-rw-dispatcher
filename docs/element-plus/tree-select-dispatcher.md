@@ -71,3 +71,13 @@ tree-select-dispatcher/custom-content
 tree-select-dispatcher/node-key
 
 :::
+
+## Slots
+
+使用 `slots` 中的 `${Config.namespace}Reader`, `${Config.namespace}Writer` 覆盖读写状态渲染函数。
+
+:::demo
+
+tree-select-dispatcher/slots
+
+:::

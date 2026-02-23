@@ -35,3 +35,13 @@ checkbox-dispatcher/grouping
 checkbox-dispatcher/options
 
 :::
+
+## Slots
+
+使用 `slots` 中的 `${Config.namespace}Reader`, `${Config.namespace}Writer` 覆盖读写状态渲染函数。
+
+:::demo
+
+checkbox-dispatcher/slots
+
+:::
