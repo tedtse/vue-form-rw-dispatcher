@@ -30,6 +30,7 @@ export default defineConfig({
           { text: "Select", link: "/element-plus/select-dispatcher" },
           { text: "Select V2", link: "/element-plus/select-v2-dispatcher" },
           { text: "Cascader", link: "/element-plus/cascader-dispatcher" },
+          { text: "TreeSelect", link: "/element-plus/tree-select-dispatcher" },
           { text: "Radio", link: "/element-plus/radio-dispatcher" },
           { text: "Checkbox", link: "/element-plus/checkbox-dispatcher" },
           {
