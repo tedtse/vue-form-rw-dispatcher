@@ -1,9 +1,9 @@
 import { ref, provide } from "vue";
-import type { RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import { Config, type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
 
 export const useRWDispatcher = () => {
   const rwDispatcherState = ref<RWDispatcherState>("write");
-  provide("rwDispatcherState", rwDispatcherState);
+  provide(`${Config.namespace}State`, rwDispatcherState);
 
   const toggleRWDispatcherState = () => {
     if (rwDispatcherState.value === "write") {
