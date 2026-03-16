@@ -1,4 +1,4 @@
-import { DEFAULT_NAMESPACE } from "./config";
+import { DEFAULT_NAMESPACE, Config } from "./config";
 import type { SetupContext, VNodeChild, ComponentPropsOptions } from "vue";
 
 export type RWDispatcherState = "write" | "read";
@@ -21,4 +21,10 @@ export type DefineRWDispatcherArgs<
   props?: ComponentPropsOptions<Record<string, unknown> & RWDispatcherProps>;
   name?: string;
   options?: Record<string, unknown>;
+};
+
+export const rwDispatcherProps: ComponentPropsOptions = {
+  [`${Config.namespace}State`]: {
+    type: String,
+  },
 };

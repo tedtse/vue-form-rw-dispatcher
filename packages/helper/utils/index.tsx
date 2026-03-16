@@ -1,5 +1,4 @@
 import { Config } from "../config";
-import type { Component, SetupContext, ComponentPropsOptions } from "vue";
 import type { RWDispatcherProps } from "../types";
 
 export const omitRWDispatcherState = <
@@ -28,18 +27,4 @@ export const omitRWDispatcherState = <
       return Reflect.deleteProperty(target, prop);
     },
   });
-};
-
-export const extendComponent = <Props extends Record<string, unknown>>(
-  widget: Component,
-  props: Props,
-  { attrs, slots }: SetupContext,
-) => {
-  return <widget {...attrs} {...props} v-slots={slots} />;
-};
-
-export const rwDispatcherProps: ComponentPropsOptions = {
-  [`${Config.namespace}State`]: {
-    type: String,
-  },
 };
