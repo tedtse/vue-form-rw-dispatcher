@@ -90,7 +90,7 @@ importers:
         version: 5.4.21(@types/node@18.19.130)(sass-embedded@1.97.1)(sass@1.97.1)
       vitepress:
         specifier: ^1.6.4
-        version: 1.6.4(@algolia/client-search@5.46.1)(@types/node@18.19.130)(async-validator@4.2.5)(postcss@8.5.6)(sass-embedded@1.97.1)(sass@1.97.1)(search-insights@2.17.3)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.46.1)(@types/node@18.19.130)(async-validator@4.2.5)(change-case@5.4.4)(postcss@8.5.6)(sass-embedded@1.97.1)(sass@1.97.1)(search-insights@2.17.3)(typescript@5.9.3)
 
   packages/element-plus:
     dependencies:
@@ -170,6 +170,9 @@ importers:
 
   packages/helper:
     dependencies:
+      change-case:
+        specifier: ^5.4.4
+        version: 5.4.4
       vue:
         specifier: ^3.5.26
         version: 3.5.26(typescript@5.9.3)
@@ -1410,6 +1413,9 @@ packages:
   chalk@5.6.2:
     resolution: {integrity: sha512-7NzBL0rN6fMUW+f7A6Io4h40qQlG+xGmtMxfbnH/K7TAtt8JQWVQK+6g0UXKMeVJoyV5EkkNsErQ8pVD3bLHbA==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+
+  change-case@5.4.4:
+    resolution: {integrity: sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w==}
 
   character-entities-html4@2.1.0:
     resolution: {integrity: sha512-1v7fgQRj6hnSwFpq1Eu0ynr/CDEw0rXo2B61qXrLNdHZmPKgb7fqS1a2JwF0rISo9q77jDI8VMEHoApn8qDoZA==}
@@ -3902,13 +3908,14 @@ snapshots:
       '@vueuse/shared': 14.1.0(vue@3.5.26(typescript@5.9.3))
       vue: 3.5.26(typescript@5.9.3)
 
-  '@vueuse/integrations@12.8.2(async-validator@4.2.5)(focus-trap@7.7.0)(typescript@5.9.3)':
+  '@vueuse/integrations@12.8.2(async-validator@4.2.5)(change-case@5.4.4)(focus-trap@7.7.0)(typescript@5.9.3)':
     dependencies:
       '@vueuse/core': 12.8.2(typescript@5.9.3)
       '@vueuse/shared': 12.8.2(typescript@5.9.3)
       vue: 3.5.26(typescript@5.9.3)
     optionalDependencies:
       async-validator: 4.2.5
+      change-case: 5.4.4
       focus-trap: 7.7.0
     transitivePeerDependencies:
       - typescript
@@ -4078,6 +4085,8 @@ snapshots:
       supports-color: 7.2.0
 
   chalk@5.6.2: {}
+
+  change-case@5.4.4: {}
 
   character-entities-html4@2.1.0: {}
 
@@ -5579,7 +5588,7 @@ snapshots:
       sass: 1.97.1
       sass-embedded: 1.97.1
 
-  vitepress@1.6.4(@algolia/client-search@5.46.1)(@types/node@18.19.130)(async-validator@4.2.5)(postcss@8.5.6)(sass-embedded@1.97.1)(sass@1.97.1)(search-insights@2.17.3)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.46.1)(@types/node@18.19.130)(async-validator@4.2.5)(change-case@5.4.4)(postcss@8.5.6)(sass-embedded@1.97.1)(sass@1.97.1)(search-insights@2.17.3)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.46.1)(search-insights@2.17.3)
@@ -5592,7 +5601,7 @@ snapshots:
       '@vue/devtools-api': 7.7.9
       '@vue/shared': 3.5.26
       '@vueuse/core': 12.8.2(typescript@5.9.3)
-      '@vueuse/integrations': 12.8.2(async-validator@4.2.5)(focus-trap@7.7.0)(typescript@5.9.3)
+      '@vueuse/integrations': 12.8.2(async-validator@4.2.5)(change-case@5.4.4)(focus-trap@7.7.0)(typescript@5.9.3)
       focus-trap: 7.7.0
       mark.js: 8.11.1
       minisearch: 7.2.0

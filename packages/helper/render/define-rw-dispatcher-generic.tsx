@@ -7,6 +7,7 @@ import {
   type ComputedRef,
   type SetupContext,
 } from "vue";
+import { camelCase, kebabCase, pascalCase } from "change-case";
 import { omitRWDispatcherState } from "../utils";
 import { Config } from "../config";
 import type {
@@ -23,7 +24,8 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
   options,
 }: DefineRWDispatcherArgs) {
   return /*#__PURE__*/ defineComponent(
-    <P, E>(props: P & E, context: SetupContext) => {
+    <P, E>(_: P & E, context: SetupContext) => {
+      const { attrs, slots } = context;
       const nsStateKey: StateKey = `${Config.namespace}State`;
       const injectState:
         | ComputedRef<RWDispatcherState>
@@ -31,15 +33,23 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
       const state = computed(() => {
         return (
           Reflect.get(
-            props as Record<string, unknown> & RWDispatcherProps,
-            nsStateKey,
-          ) || injectState?.value
+            attrs as Record<string, unknown>,
+            camelCase(nsStateKey) as string,
+          ) ||
+          Reflect.get(
+            attrs as Record<string, unknown>,
+            kebabCase(nsStateKey as string),
+          ) ||
+          Reflect.get(
+            attrs as Record<string, unknown>,
+            pascalCase(nsStateKey as string),
+          ) ||
+          injectState?.value
         );
       });
-      const otherProps = omitRWDispatcherState(
-        props as Record<string, unknown> & RWDispatcherProps,
+      const otherStates = omitRWDispatcherState(
+        attrs as Record<string, unknown> & RWDispatcherProps,
       );
-      const { slots } = context;
 
       return () => {
         if (state.value !== "read" && state.value !== "write") {
@@ -50,12 +60,12 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
         if (state.value === "read") {
           return slots[`${Config.namespace}Reader`]
             ? slots[`${Config.namespace}Reader`]?.()
-            : readerFn(otherProps as Omit<P & E, StateKey>, context);
+            : readerFn(otherStates as Omit<P & E, StateKey>, context);
         }
         if (state.value === "write") {
           return slots[`${Config.namespace}Writer`]
             ? slots[`${Config.namespace}Writer`]?.()
-            : writerFn(otherProps as Omit<P & E, StateKey>, context);
+            : writerFn(otherStates as Omit<P & E, StateKey>, context);
         }
       };
     },

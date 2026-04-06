@@ -74,6 +74,16 @@ input-dispatcher/various-size
 
 :::
 
+## Props
+
+修改 props中的 `${Config.namespace}State` 进行读写状态更改
+
+:::demo
+
+input-dispatcher/props
+
+:::
+
 ## Slots
 
 使用 `slots` 中的 `${Config.namespace}Reader`, `${Config.namespace}Writer` 覆盖读写状态渲染函数

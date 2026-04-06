@@ -19,5 +19,8 @@
   },
   "peerDependencies": {
     "vue": "^3.5.26"
+  },
+  "dependencies": {
+    "change-case": "^5.4.4"
   }
 }
