@@ -20,24 +20,24 @@ const value = ref("");
 
 const options = [
   {
-    value: "Option1",
-    label: "Option1",
+    value: "Value1",
+    label: "Label1",
   },
   {
-    value: "Option2",
-    label: "Option2",
+    value: "Value2",
+    label: "Label2",
   },
   {
-    value: "Option3",
-    label: "Option3",
+    value: "Value3",
+    label: "Label3",
   },
   {
-    value: "Option4",
-    label: "Option4",
+    value: "Value4",
+    label: "Label4",
   },
   {
-    value: "Option5",
-    label: "Option5",
+    value: "Value5",
+    label: "Label5",
   },
 ];
 </script>

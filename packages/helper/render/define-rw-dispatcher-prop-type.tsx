@@ -9,7 +9,7 @@ import {
   type ExtractPropTypes,
   type ComponentObjectPropsOptions,
 } from "vue";
-import { omitRWDispatcherState } from "../utils";
+import { attachDispatcherRef, omitRWDispatcherState } from "../utils";
 import { Config } from "../config";
 import type {
   StateKey,
@@ -47,8 +47,17 @@ export function defineRWDispatcherPropType({
       const state = computed(() => {
         return Reflect.get(props, nsStateKey) || injectState?.value;
       });
-      const otherProps = omitRWDispatcherState(props as Record<string, unknown> & RWDispatcherProps);
-      const { slots } = context;
+      const otherProps = omitRWDispatcherState(
+        props as Record<string, unknown> & RWDispatcherProps,
+      );
+      const { slots, expose } = context;
+      const reader = ref<unknown>();
+      const writer = ref<unknown>();
+
+      expose({
+        reader,
+        writer,
+      });
 
       return () => {
         if (state.value !== "read" && state.value !== "write") {
@@ -57,14 +66,20 @@ export function defineRWDispatcherPropType({
           );
         }
         if (state.value === "read") {
-          return slots[`${Config.namespace}Reader`]
-            ? slots[`${Config.namespace}Reader`]?.()
-            : readerFn(otherProps as Omit<Props, StateKey>, context);
+          return attachDispatcherRef(
+            slots[`${Config.namespace}Reader`]
+              ? slots[`${Config.namespace}Reader`]?.()
+              : readerFn(otherProps as Omit<Props, StateKey>, context),
+            reader,
+          );
         }
         if (state.value === "write") {
-          return slots[`${Config.namespace}Writer`]
-            ? slots[`${Config.namespace}Writer`]?.()
-            : writerFn(otherProps as Omit<Props, StateKey>, context);
+          return attachDispatcherRef(
+            slots[`${Config.namespace}Writer`]
+              ? slots[`${Config.namespace}Writer`]?.()
+              : writerFn(otherProps as Omit<Props, StateKey>, context),
+            writer,
+          );
         }
       };
     },

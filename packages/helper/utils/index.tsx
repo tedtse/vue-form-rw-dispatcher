@@ -1,3 +1,4 @@
+import { cloneVNode, isVNode, type Ref, type VNodeChild } from "vue";
 import { Config } from "../config";
 import type { RWDispatcherProps } from "../types";
 
@@ -27,4 +28,19 @@ export const omitRWDispatcherState = <
       return Reflect.deleteProperty(target, prop);
     },
   });
+};
+
+export const attachDispatcherRef = (
+  node: VNodeChild | undefined,
+  target: Ref<unknown>,
+) => {
+  if (Array.isArray(node)) {
+    return node.map((child, index) =>
+      index === 0 && isVNode(child)
+        ? cloneVNode(child, { ref: target }, true)
+        : child,
+    );
+  }
+
+  return isVNode(node) ? cloneVNode(node, { ref: target }, true) : node;
 };

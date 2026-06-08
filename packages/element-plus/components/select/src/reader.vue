@@ -40,7 +40,7 @@
           {{ opt.label }}
         </el-tag>
       </div>
-      <span v-else>{{ value }}</span>
+      <span v-else>{{ label }}</span>
     </div>
 
     <shadow-select
@@ -81,29 +81,31 @@ const nsTag = useNamespace("el-tag");
 const shadowSelectRef = ref<InstanceType<typeof ElSelect>>();
 const options = ref<OptionType[]>([]);
 
-const value = computed(() => {
-  const { modelValue, valueKey } = props;
+const valueKey = computed(() => props.valueKey || "value");
+
+const label = computed(() => {
+  const { modelValue } = props;
   let option;
   if (Object.prototype.toString.call(modelValue) === "[object Object]") {
     option = options.value.find(
       (opt) =>
-        opt[valueKey as string] ===
-        (modelValue as Record<string, unknown>)[valueKey as string],
+        opt[valueKey.value as string] ===
+        (modelValue as Record<string, unknown>)[valueKey.value as string],
     );
     return (modelValue as OptionType).label;
   }
-  option = options.value.find((opt) => opt[valueKey] === modelValue);
+  option = options.value.find((opt) => opt[valueKey.value] === modelValue);
   return option?.label || modelValue;
 });
 
 const selectedOptions = computed(() => {
-  const { modelValue, valueKey } = props;
+  const { modelValue } = props;
   if (Array.isArray(modelValue)) {
     return options.value.filter((opt) =>
-      modelValue.includes(opt[valueKey] as string | number),
+      modelValue.includes(opt[valueKey.value] as string | number),
     );
   } else {
-    return options.value.filter((opt) => opt[valueKey] === modelValue);
+    return options.value.filter((opt) => opt[valueKey.value] === modelValue);
   }
 });
 

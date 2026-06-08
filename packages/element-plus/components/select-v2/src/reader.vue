@@ -79,11 +79,11 @@ const label = computed(() => {
   }
   let option;
   if (Object.prototype.toString.call(modelValue) === "[object Object]") {
-    option = options?.find(
-      (opt) =>
-        Object.keys(modelValue).every(
-          (key) => opt.value[key] === (modelValue as Record<string, unknown>)[key],
-        ),
+    option = options?.find((opt) =>
+      Object.keys(modelValue).every(
+        (key) =>
+          opt.value[key] === (modelValue as Record<string, unknown>)[key],
+      ),
     );
     return (option as OptionType)[labelKey.value];
   }
@@ -106,11 +106,11 @@ const selectedOptions = computed(() => {
     return result;
   }
   if (Object.prototype.toString.call(modelValue) === "[object Object]") {
-    const option = options?.find(
-      (opt) =>
-        Object.keys(modelValue).every(
-          (key) => opt.value[key] === (modelValue as Record<string, unknown>)[key],
-        ),
+    const option = options?.find((opt) =>
+      Object.keys(modelValue).every(
+        (key) =>
+          opt.value[key] === (modelValue as Record<string, unknown>)[key],
+      ),
     );
     return (option as OptionType)[labelKey.value];
   }
