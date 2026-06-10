@@ -7,7 +7,6 @@ import {
   type ComputedRef,
   type SetupContext,
 } from "vue";
-import { camelCase, kebabCase, pascalCase } from "change-case";
 import { attachDispatcherRef, omitRWDispatcherState } from "../utils";
 import { Config } from "../config";
 import type {
@@ -17,6 +16,8 @@ import type {
   RWDispatcherProps,
 } from "../types";
 
+const nsStateKey = `${Config.namespace}State`;
+
 export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
   writerFn,
   readerFn,
@@ -24,29 +25,18 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
   options,
 }: DefineRWDispatcherArgs) {
   return /*#__PURE__*/ defineComponent(
-    <P, E>(_: P & E, context: SetupContext) => {
+    <P, E>(props: P & E, context: SetupContext) => {
       const { attrs, slots, expose } = context;
-      const nsStateKey: StateKey = `${Config.namespace}State`;
       const injectState:
         | ComputedRef<RWDispatcherState>
         | Ref<RWDispatcherState> = inject(nsStateKey, ref("write"));
       const state = computed(() => {
         return (
-          Reflect.get(
-            attrs as Record<string, unknown>,
-            camelCase(nsStateKey) as string,
-          ) ||
-          Reflect.get(
-            attrs as Record<string, unknown>,
-            kebabCase(nsStateKey as string),
-          ) ||
-          Reflect.get(
-            attrs as Record<string, unknown>,
-            pascalCase(nsStateKey as string),
-          ) ||
+          (props as Record<string, unknown> & RWDispatcherProps)[nsStateKey] ||
           injectState?.value
         );
       });
+
       const otherStates = omitRWDispatcherState(
         attrs as Record<string, unknown> & RWDispatcherProps,
       );
@@ -84,6 +74,11 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
     },
     {
       name,
+      props: {
+        [nsStateKey]: {
+          type: String,
+        },
+      },
       ...options,
     },
   );

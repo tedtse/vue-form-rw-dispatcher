@@ -4,8 +4,8 @@
       nsText.b(),
       {
         [nsText.is('disabled')]: props.disabled,
-        [nsText.m('large')]: props.size === 'large',
-        [nsText.m('small')]: props.size === 'small',
+        [nsText.m('large')]: size === 'large',
+        [nsText.m('small')]: size === 'small',
       },
     ]"
   >
@@ -30,6 +30,7 @@ import { dayjs, ElIcon, type TimePickerDefaultProps } from "element-plus";
 import { Clock } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_TIME } from "../../../constants";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 const props = defineProps<TimePickerDefaultProps>();
 defineOptions({
@@ -37,6 +38,7 @@ defineOptions({
 });
 
 const nsText = useNamespace("el-text");
+const size = useSize();
 
 const value = computed(() => {
   const { modelValue, format } = props as any;

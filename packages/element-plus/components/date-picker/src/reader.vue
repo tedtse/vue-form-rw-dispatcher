@@ -4,8 +4,8 @@
       nsText.b(),
       {
         [nsText.is('disabled')]: props.disabled,
-        [nsText.m('large')]: props.size === 'large',
-        [nsText.m('small')]: props.size === 'small',
+        [nsText.m('large')]: size === 'large',
+        [nsText.m('small')]: size === 'small',
       },
     ]"
   >
@@ -30,6 +30,7 @@ import { dayjs, ElIcon, type DatePickerProps } from "element-plus";
 import { Clock, Calendar } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_DATEPICKER } from "../../../constants";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 const props = defineProps<DatePickerProps>();
 defineOptions({
@@ -38,6 +39,7 @@ defineOptions({
 
 const nsText = useNamespace("el-text");
 const nsRange = useNamespace("el-range");
+const size = useSize();
 
 const value = computed(() => {
   const { modelValue, format, type } = props;

@@ -18,7 +18,10 @@ export const DEFAULT_FORMATS_DATEPICKER = {
 };
 
 export enum SIZE {
+  EMPTY = "",
   DEFAULT = "default",
   LARGE = "large",
   SMALL = "small",
 }
+
+export const SIZE_CONTEXT_KEY = Symbol("size");

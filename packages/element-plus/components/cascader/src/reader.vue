@@ -6,8 +6,8 @@
         nsText.b(),
         {
           [nsText.is('disabled')]: props.disabled,
-          [nsText.m('large')]: props.size === 'large',
-          [nsText.m('small')]: props.size === 'small',
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
         },
       ]"
     >
@@ -47,6 +47,7 @@ import {
   type Tag,
 } from "element-plus";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 const props = defineProps(cascaderProps);
 defineOptions({
@@ -55,13 +56,19 @@ defineOptions({
 });
 
 const { modelValue } = props;
+const size = useSize();
 const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const shadowCascaderRef = ref<InstanceType<typeof ElCascader>>();
 const tags = ref<Tag[]>([]);
 
 const getDisplayValue = computed(() => {
-  const { showAllLevels = true, showCheckedStrategy, options, props: properties } = props;
+  const {
+    showAllLevels = true,
+    showCheckedStrategy,
+    options,
+    props: properties,
+  } = props;
 
   const findLabelByValue = (val: unknown, opts: CascaderOption[] = options) => {
     if (!Array.isArray(val)) return val;

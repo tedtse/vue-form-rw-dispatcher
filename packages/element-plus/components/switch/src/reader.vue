@@ -5,8 +5,8 @@
       nsSwitch.b(),
       {
         [nsText.is('disabled')]: props.disabled,
-        [nsText.m('large')]: props.size === 'large',
-        [nsText.m('small')]: props.size === 'small',
+        [nsText.m('large')]: size === 'large',
+        [nsText.m('small')]: size === 'small',
       },
     ]"
   >
@@ -61,12 +61,14 @@ import { ElIcon, type SwitchProps } from "element-plus";
 import { computed } from "vue";
 import { Config } from "../../../config";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 const props = defineProps<SwitchProps>();
 defineOptions({ name: "SwitchReader" });
 
 const nsText = useNamespace("el-text");
 const nsSwitch = useNamespace("el-switch");
+const size = useSize();
 
 const isActive = computed(() => {
   const { modelValue, activeValue } = props;

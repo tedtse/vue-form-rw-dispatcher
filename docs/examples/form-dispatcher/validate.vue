@@ -205,8 +205,7 @@ const rules = reactive<FormRules<RuleForm>>({
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  console.log(formEl);
-  await formEl.validate((valid, fields) => {
+  await formEl.writer?.validate((valid, fields) => {
     if (valid) {
       console.log("submit!");
     } else {
@@ -218,9 +217,8 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 const resetForm = (
   formEl: InstanceType<typeof ElFormDispatcher> | undefined,
 ) => {
-  console.log(formEl);
-  // if (!formEl) return;
-  // formEl.resetFields();
+  if (!formEl) return;
+  formEl.writer?.resetFields();
 };
 
 const options = Array.from({ length: 10000 }).map((_, idx) => ({

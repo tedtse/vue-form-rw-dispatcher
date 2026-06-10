@@ -5,8 +5,8 @@
       nsInput.b(),
       {
         [nsText.is('disabled')]: props.disabled,
-        [nsText.m('large')]: props.size === 'large',
-        [nsText.m('small')]: props.size === 'small',
+        [nsText.m('large')]: size === 'large',
+        [nsText.m('small')]: size === 'small',
       },
     ]"
   >
@@ -53,7 +53,8 @@
 import { ElIcon, type InputProps, type InputType } from "element-plus";
 import { Hide, View } from "@element-plus/icons-vue";
 import { computed, ref } from "vue";
-import { useNamespace } from "../../../composables/use-namespace";
+import { useNamespace } from "@vue-form-rw-dispatcher/element-plus/composables/use-namespace";
+import { useSize } from "@vue-form-rw-dispatcher/element-plus/composables/use-size";
 
 const props = defineProps<InputProps>();
 defineOptions({
@@ -61,6 +62,7 @@ defineOptions({
 });
 
 const { prefixIcon, suffixIcon } = props;
+const size = useSize();
 const nsText = useNamespace("el-text");
 const nsInput = useNamespace("el-input");
 const passwordVisible = ref(false);

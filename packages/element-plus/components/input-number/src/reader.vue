@@ -4,8 +4,8 @@
       nsText.b(),
       {
         [nsText.is('disabled')]: props.disabled,
-        [nsText.m('large')]: props.size === 'large',
-        [nsText.m('small')]: props.size === 'small',
+        [nsText.m('large')]: size === 'large',
+        [nsText.m('small')]: size === 'small',
       },
     ]"
   >
@@ -25,6 +25,7 @@
 import { computed } from "vue";
 import { type InputNumberProps } from "element-plus";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 const props = defineProps<InputNumberProps>();
 defineOptions({
@@ -32,6 +33,7 @@ defineOptions({
 });
 
 const nsText = useNamespace("el-text");
+const size = useSize();
 
 const value = computed(() => {
   const { modelValue, precision } = props;

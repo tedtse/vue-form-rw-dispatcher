@@ -6,8 +6,8 @@
         nsText.b(),
         {
           [nsText.is('disabled')]: props.disabled,
-          [nsText.m('large')]: props.size === 'large',
-          [nsText.m('small')]: props.size === 'small',
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
         },
       ]"
     >
@@ -50,6 +50,7 @@ import { computed } from "vue";
 import { ElTag } from "element-plus";
 import type { SelectV2Props } from "element-plus/es/components/select-v2/src/defaults";
 import { useNamespace } from "../../../composables/use-namespace";
+import { useSize } from "../../../composables/use-size";
 
 type OptionType = {
   label: string;
@@ -62,6 +63,7 @@ const props = defineProps<Partial<SelectV2Props>>();
 const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const nsTag = useNamespace("el-tag");
+const size = useSize();
 
 const valueKey = computed(
   () => props.props?.value || props.valueKey || "value",

@@ -1,10 +1,30 @@
+import {
+  getCurrentInstance,
+  computed,
+  inject,
+  ref,
+  type Ref,
+  type ComputedRef,
+} from "vue";
 import { useSize as useElementPlusSize } from "element-plus";
-import { SIZE } from "../constants";
+import { SIZE_CONTEXT_KEY, SIZE } from "../constants";
 
-export const useSize = (props: Record<string, unknown>) => {
-  const size = props.size as SIZE;
+const PROPS_SIZE = "size";
 
-  return {
-    size,
-  };
+export const useSize = () => {
+  const vm = getCurrentInstance();
+
+  const elSize = useElementPlusSize();
+
+  const injectSize = inject<ComputedRef<SIZE> | Ref<SIZE>>(
+    SIZE_CONTEXT_KEY,
+    ref(SIZE.EMPTY),
+  );
+
+  return computed(
+    () =>
+      (vm?.proxy?.$props as any)?.[PROPS_SIZE] ||
+      elSize.value ||
+      injectSize.value,
+  );
 };
