@@ -31,8 +31,7 @@
 <script lang="ts" setup>
 import { computed, ref, type Ref } from "vue";
 import { ElTag, type TreeNodeData } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize } from "../../../composables";
 import type { TreeSelectProps } from "./types";
 
 const props = defineProps<TreeSelectProps>();

@@ -7,9 +7,7 @@ import {
   type ComputedRef,
 } from "vue";
 import { useSize as useElementPlusSize } from "element-plus";
-import { SIZE_CONTEXT_KEY, SIZE } from "../constants";
-
-const PROPS_SIZE = "size";
+import { SIZE_CONTEXT_KEY, SIZE, PROPS_SIZE } from "../constants";
 
 export const useSize = () => {
   const vm = getCurrentInstance();

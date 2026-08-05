@@ -61,7 +61,7 @@ import { ElIcon, type SwitchProps } from "element-plus";
 import { computed } from "vue";
 import { Config } from "../../../config";
 import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useSize } from "../../../composables";
 
 const props = defineProps<SwitchProps>();
 defineOptions({ name: "SwitchReader" });

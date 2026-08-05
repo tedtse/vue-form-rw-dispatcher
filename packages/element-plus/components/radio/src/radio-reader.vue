@@ -1,6 +1,15 @@
 <template>
   <div :class="nsText.b('container')">
-    <div :class="[nsText.b(), { [nsText.is('disabled')]: props.disabled }]">
+    <div
+      :class="[
+        nsText.b(),
+        {
+          [nsText.is('disabled')]: props.disabled,
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
+        },
+      ]"
+    >
       <template v-if="radioSlot">
         <component v-if="props.value === modelValue" :is="radioSlot" />
       </template>
@@ -13,10 +22,11 @@
 <script lang="ts" setup>
 import { computed, getCurrentInstance } from "vue";
 import { type RadioProps } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
+import { useNamespace, useSize } from "../../../composables";
 
 const props = defineProps<RadioProps>();
 
+const size = useSize();
 const nsText = useNamespace("el-text");
 const instance = getCurrentInstance();
 

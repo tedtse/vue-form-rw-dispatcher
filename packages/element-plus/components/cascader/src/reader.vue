@@ -5,7 +5,7 @@
         nsSelect.b(),
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -46,8 +46,7 @@ import {
   type CascaderNode,
   type Tag,
 } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 const props = defineProps(cascaderProps);
 defineOptions({
@@ -57,6 +56,7 @@ defineOptions({
 
 const { modelValue } = props;
 const size = useSize();
+const disabled = useDisabled();
 const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const shadowCascaderRef = ref<InstanceType<typeof ElCascader>>();

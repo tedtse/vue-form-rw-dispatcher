@@ -29,8 +29,7 @@ import { computed, h, Fragment } from "vue";
 import { dayjs, ElIcon, type TimePickerDefaultProps } from "element-plus";
 import { Clock } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_TIME } from "../../../constants";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize } from "../../../composables";
 
 const props = defineProps<TimePickerDefaultProps>();
 defineOptions({

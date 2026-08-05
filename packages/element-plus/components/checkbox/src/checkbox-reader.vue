@@ -5,7 +5,16 @@
       { [nsText.b('item')]: nsType === 'item' },
     ]"
   >
-    <div :class="[nsText.b(), { [nsText.is('disabled')]: isDisabled }]">
+    <div
+      :class="[
+        nsText.b(),
+        {
+          [nsText.is('disabled')]: disabled,
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
+        },
+      ]"
+    >
       <template v-if="isTrue">
         <template v-if="checkboxSlot">
           <component :is="checkboxSlot" />
@@ -29,9 +38,9 @@ import {
   useAttrs,
 } from "vue";
 import { checkboxProps, type CheckboxProps } from "element-plus";
-import { Config } from "@vue-form-rw-dispatcher/helper";
+import { Config } from "@vue-form-rw-dispatcher/element-plus";
 import { CHECKBOX_GROUP_KEY, type CheckboxGroupType } from "./use-reader";
-import { useNamespace } from "../../../composables/use-namespace";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 const Namespace = Config.namespace;
 
@@ -54,6 +63,8 @@ export default defineComponent({
 
     const attrs = useAttrs();
     const nsText = useNamespace("el-text");
+    const disabled = useDisabled();
+    const size = useSize();
 
     onMounted(() => {
       // Inject parent checkbox group instance
@@ -65,18 +76,18 @@ export default defineComponent({
 
     const checkboxSlot = computed(() => slots.default);
 
-    const isDisabled = computed(() => {
-      const propDisabled =
-        parentCheckboxGroup.value?.instance?.$props?.props?.disabled ??
-        "disabled";
-      if (Reflect.has(props, propDisabled)) {
-        return Reflect.get(props, propDisabled) as boolean;
-      }
-      if (Reflect.has(attrs, propDisabled)) {
-        return Reflect.get(attrs, propDisabled) as boolean;
-      }
-      return false;
-    });
+    // const isDisabled = computed(() => {
+    //   const propDisabled =
+    //     parentCheckboxGroup.value?.instance?.$props?.props?.disabled ??
+    //     "disabled";
+    //   if (Reflect.has(props, propDisabled)) {
+    //     return Reflect.get(props, propDisabled) as boolean;
+    //   }
+    //   if (Reflect.has(attrs, propDisabled)) {
+    //     return Reflect.get(attrs, propDisabled) as boolean;
+    //   }
+    //   return false;
+    // });
 
     watchEffect(() => {
       const properties =
@@ -109,8 +120,9 @@ export default defineComponent({
       Namespace,
       checkboxSlot,
       isTrue,
-      isDisabled,
+      disabled,
       text,
+      size,
       nsType,
     };
   },

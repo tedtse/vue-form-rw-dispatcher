@@ -58,8 +58,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect, type VNode } from "vue";
 import { ElSelect, ElTag, type SelectProps } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize } from "../../../composables";
 
 type RawSlots = {
   [name: string]: unknown;

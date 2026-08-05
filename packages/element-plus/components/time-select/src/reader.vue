@@ -21,8 +21,7 @@
 
 <script setup lang="ts">
 import { type TimeSelectProps } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize } from "../../../composables";
 
 const props = defineProps<TimeSelectProps>();
 const nsText = useNamespace("el-text");

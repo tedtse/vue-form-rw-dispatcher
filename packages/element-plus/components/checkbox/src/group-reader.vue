@@ -1,9 +1,17 @@
 <template>
   <div :class="nsText.b('container')">
-    <div :class="[{ [nsText.is('disabled')]: props.disabled }]">
-      <template v-if="targetCheckboxs.length">
+    <div
+      :class="[
+        {
+          [nsText.is('disabled')]: disabled,
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
+        },
+      ]"
+    >
+      <template v-if="targetCheckboxes.length">
         <checkbox-reader
-          v-for="(item, index) in targetCheckboxs"
+          v-for="(item, index) in targetCheckboxes"
           :key="index"
           v-model="targetModelValues[index]"
           v-bind="{
@@ -47,7 +55,7 @@ import {
 import checkboxReader from "./checkbox-reader.vue";
 import { Config } from "@vue-form-rw-dispatcher/helper";
 import { CHECKBOX_GROUP_KEY } from "./use-reader";
-import { useNamespace } from "../../../composables/use-namespace";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 type RawSlots = {
   [name: string]: unknown;
@@ -60,6 +68,8 @@ defineOptions({
 });
 
 const nsText = useNamespace("el-text");
+const disabled = useDisabled();
+const size = useSize();
 const elCheckboxes = ref<VNode[]>([]);
 const shadowCheckboxGroupRef = ref<InstanceType<typeof ElCheckboxGroup>>();
 
@@ -67,7 +77,7 @@ provide(CHECKBOX_GROUP_KEY, {
   instance: shadowCheckboxGroupRef,
 });
 
-const targetCheckboxs = computed(() => {
+const targetCheckboxes = computed(() => {
   const { modelValue, props: properties } = props;
   return elCheckboxes.value.filter((c) =>
     modelValue.includes(c.props?.[properties?.value ?? "value"]),
@@ -84,9 +94,9 @@ const targetOptions = computed(() => {
 const targetModelValues = computed(() => {
   const values: (string | number | boolean)[] = [];
   const { modelValue, props: properties } = props;
-  if (targetCheckboxs.value.length) {
-    targetCheckboxs.value.forEach((checkbox, index) => {
-      const item = targetCheckboxs.value.find(
+  if (targetCheckboxes.value.length) {
+    targetCheckboxes.value.forEach((checkbox, index) => {
+      const item = targetCheckboxes.value.find(
         (c) => c.props?.[properties?.value ?? "value"] === modelValue[index],
       );
       const value = item?.props?.[properties?.value ?? "value"];

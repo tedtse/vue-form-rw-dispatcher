@@ -25,12 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, h, Fragment, shallowRef } from "vue";
+import { computed, h, Fragment } from "vue";
 import { dayjs, ElIcon, type DatePickerProps } from "element-plus";
 import { Clock, Calendar } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_DATEPICKER } from "../../../constants";
 import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useSize } from "../../../composables";
 
 const props = defineProps<DatePickerProps>();
 defineOptions({

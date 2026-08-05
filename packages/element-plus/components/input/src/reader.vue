@@ -53,8 +53,10 @@
 import { ElIcon, type InputProps, type InputType } from "element-plus";
 import { Hide, View } from "@element-plus/icons-vue";
 import { computed, ref } from "vue";
-import { useNamespace } from "@vue-form-rw-dispatcher/element-plus/composables/use-namespace";
-import { useSize } from "@vue-form-rw-dispatcher/element-plus/composables/use-size";
+import {
+  useNamespace,
+  useSize,
+} from "@vue-form-rw-dispatcher/element-plus/composables";
 
 const props = defineProps<InputProps>();
 defineOptions({

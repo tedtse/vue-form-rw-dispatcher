@@ -30,8 +30,6 @@ form-dispatcher/align
 
 :::
 
-:::
-
 ## 表单校验
 
 :::demo

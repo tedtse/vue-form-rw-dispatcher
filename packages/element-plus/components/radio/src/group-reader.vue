@@ -1,6 +1,15 @@
 <template>
   <div :class="nsText.b('container')">
-    <div :class="[nsText.b(), { [nsText.is('disabled')]: props.disabled }]">
+    <div
+      :class="[
+        nsText.b(),
+        {
+          [nsText.is('disabled')]: props.disabled,
+          [nsText.m('large')]: size === 'large',
+          [nsText.m('small')]: size === 'small',
+        },
+      ]"
+    >
       <template v-if="targetRadioSlot">
         <component :is="targetRadioSlot" />
       </template>
@@ -23,7 +32,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect, type VNode } from "vue";
 import { ElRadioGroup, type RadioGroupProps } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
+import { useNamespace, useSize } from "../../../composables";
 
 type RawSlots = {
   [name: string]: unknown;
@@ -35,6 +44,7 @@ defineOptions({
   components: { ShadowRadioGroup: ElRadioGroup },
 });
 
+const size = useSize();
 const nsText = useNamespace("el-text");
 const elRadios = ref<VNode[]>([]);
 const shadowRadioGroupRef = ref<InstanceType<typeof ElRadioGroup>>();

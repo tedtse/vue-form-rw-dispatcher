@@ -49,8 +49,7 @@
 import { computed } from "vue";
 import { ElTag } from "element-plus";
 import type { SelectV2Props } from "element-plus/es/components/select-v2/src/defaults";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables/use-size";
+import { useNamespace, useSize } from "../../../composables";
 
 type OptionType = {
   label: string;

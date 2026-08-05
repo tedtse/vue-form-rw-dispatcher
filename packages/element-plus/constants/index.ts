@@ -24,4 +24,10 @@ export enum SIZE {
   SMALL = "small",
 }
 
+export const PROPS_SIZE = "size";
+
 export const SIZE_CONTEXT_KEY = Symbol("size");
+
+export const PROPS_DISABLED = "disabled";
+
+export const DISABLED_CONTEXT_KEY = Symbol("disabled");
