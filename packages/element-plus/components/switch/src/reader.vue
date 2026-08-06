@@ -59,9 +59,13 @@
 <script setup lang="ts">
 import { ElIcon, type SwitchProps } from "element-plus";
 import { computed } from "vue";
-import { Config } from "../../../config";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables";
+import {
+  useSize,
+  useNamespace,
+  useDispatcherConfig,
+} from "../../../composables";
+import { DispatcherTypeTag } from "../../../constants";
+import type { SwitchConfigType } from "../../../type.d";
 
 const props = defineProps<SwitchProps>();
 defineOptions({ name: "SwitchReader" });
@@ -69,6 +73,9 @@ defineOptions({ name: "SwitchReader" });
 const nsText = useNamespace("el-text");
 const nsSwitch = useNamespace("el-switch");
 const size = useSize();
+const switchConfig = useDispatcherConfig<SwitchConfigType>(
+  DispatcherTypeTag.Switch,
+);
 
 const isActive = computed(() => {
   const { modelValue, activeValue } = props;
@@ -78,20 +85,20 @@ const isActive = computed(() => {
 });
 
 const label = computed(() => {
-  const { modelValue, activeText, inactiveText, activeValue, inactiveValue } =
-    props;
+  const { modelValue, activeValue, inactiveValue } = props;
+  const { activeText, inactiveText } = switchConfig.value;
   if ([undefined, null, ""].includes(modelValue as string | undefined | null))
     return "";
   if (isActive.value)
     return (
-      activeText ||
+      props.activeText ||
       (activeValue !== true && activeValue) ||
-      String(Config.activeText)
+      String(activeText)
     );
   return (
-    inactiveText ||
+    props.inactiveText ||
     (inactiveValue !== false && inactiveValue) ||
-    String(Config.inactiveText)
+    String(inactiveText)
   );
 });
 </script>

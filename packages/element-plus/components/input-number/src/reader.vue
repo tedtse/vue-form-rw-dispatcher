@@ -24,8 +24,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { type InputNumberProps } from "element-plus";
-import { useNamespace } from "../../../composables/use-namespace";
-import { useSize } from "../../../composables";
+import { useSize, useNamespace } from "../../../composables";
 
 const props = defineProps<InputNumberProps>();
 defineOptions({

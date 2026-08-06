@@ -1,3 +1,5 @@
+export * from "./dispatcher-config";
+
 export const DEFAULT_FORMATS_TIME = "HH:mm:ss";
 
 export const DEFAULT_FORMATS_DATE = "YYYY-MM-DD";
@@ -25,9 +27,7 @@ export enum SIZE {
 }
 
 export const PROPS_SIZE = "size";
-
-export const SIZE_CONTEXT_KEY = Symbol("size");
-
 export const PROPS_DISABLED = "disabled";
 
-export const DISABLED_CONTEXT_KEY = Symbol("disabled");
+export const SIZE_CONTEXT_PROVIDER = Symbol("size");
+export const DISABLED_CONTEXT_PROVIDER = Symbol("disabled");

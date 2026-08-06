@@ -7,7 +7,7 @@ import {
   type ComputedRef,
 } from "vue";
 import { useDisabled as useElementPlusDisabled } from "element-plus";
-import { DISABLED_CONTEXT_KEY, PROPS_DISABLED } from "../constants";
+import { DISABLED_CONTEXT_PROVIDER, PROPS_DISABLED } from "../constants";
 
 export const useDisabled = () => {
   const vm = getCurrentInstance();
@@ -15,7 +15,7 @@ export const useDisabled = () => {
   const elDisabled = useElementPlusDisabled();
 
   const injectSize = inject<ComputedRef<boolean> | Ref<boolean>>(
-    DISABLED_CONTEXT_KEY,
+    DISABLED_CONTEXT_PROVIDER,
     ref(false),
   );
 

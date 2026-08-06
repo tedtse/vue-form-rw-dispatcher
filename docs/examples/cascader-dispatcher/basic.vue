@@ -38,7 +38,7 @@ const options = [
     children: [
       {
         value: "disciplines",
-        label: "Disciplines",
+        label: "Disciplines Label",
         children: [
           {
             value: "consistency",

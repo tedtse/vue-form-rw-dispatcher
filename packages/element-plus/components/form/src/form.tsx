@@ -7,7 +7,7 @@ import {
   type RWDispatcherState,
 } from "@vue-form-rw-dispatcher/helper";
 import {
-  SIZE_CONTEXT_KEY,
+  SIZE_CONTEXT_PROVIDER,
   SIZE,
 } from "@vue-form-rw-dispatcher/element-plus/constants";
 import { ElForm, formProps, type FormProps } from "element-plus";
@@ -28,7 +28,7 @@ const ElFormDispatcher = defineComponent(
     const size = computed(() => {
       return Reflect.get(props as FormProps, "size") || SIZE.DEFAULT;
     });
-    provide(SIZE_CONTEXT_KEY, size);
+    provide(SIZE_CONTEXT_PROVIDER, size);
 
     const reader = ref<unknown>();
     const writer = ref<unknown>();
