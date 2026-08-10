@@ -61,7 +61,6 @@ export default defineComponent({
       string | number | boolean | Record<string, any> | undefined
     >("");
 
-    const attrs = useAttrs();
     const nsText = useNamespace("el-text");
     const disabled = useDisabled();
     const size = useSize();
@@ -75,19 +74,6 @@ export default defineComponent({
     });
 
     const checkboxSlot = computed(() => slots.default);
-
-    // const isDisabled = computed(() => {
-    //   const propDisabled =
-    //     parentCheckboxGroup.value?.instance?.$props?.props?.disabled ??
-    //     "disabled";
-    //   if (Reflect.has(props, propDisabled)) {
-    //     return Reflect.get(props, propDisabled) as boolean;
-    //   }
-    //   if (Reflect.has(attrs, propDisabled)) {
-    //     return Reflect.get(attrs, propDisabled) as boolean;
-    //   }
-    //   return false;
-    // });
 
     watchEffect(() => {
       const properties =

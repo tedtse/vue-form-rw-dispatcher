@@ -27,5 +27,9 @@ export default defineConfig({
     testTransformMode: {
       web: ["*.{ts,tsx}"],
     },
+    coverage: {
+      provider: "v8",
+      include: ["components/**/*.{ts,tsx,vue}"],
+    },
   },
 });

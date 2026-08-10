@@ -1,7 +1,11 @@
 import { computed, getCurrentInstance, inject, ref, unref } from "vue";
 import type { InjectionKey, Ref } from "vue";
+import { Config } from "../config";
 
-export const defaultNamespace = "rw-dispatcher";
+const classNamespace = Config.namespace.replace(
+  /[A-Z]/g,
+  (m) => `-${m.toLowerCase()}`,
+);
 const statePrefix = "is-";
 
 const _bem = (
@@ -9,7 +13,7 @@ const _bem = (
   block: string,
   blockSuffix: string,
   element: string,
-  modifier: string
+  modifier: string,
 ) => {
   let cls = `${namespace}-${block}`;
   if (blockSuffix) {
@@ -28,22 +32,22 @@ export const namespaceContextKey: InjectionKey<Ref<string | undefined>> =
   Symbol("namespaceContextKey");
 
 export const useGetDerivedNamespace = (
-  namespaceOverrides?: Ref<string | undefined>
+  namespaceOverrides?: Ref<string | undefined>,
 ) => {
   const derivedNamespace =
     namespaceOverrides ||
     (getCurrentInstance()
-      ? inject(namespaceContextKey, ref(defaultNamespace))
-      : ref(defaultNamespace));
+      ? inject(namespaceContextKey, ref(classNamespace))
+      : ref(classNamespace));
   const namespace = computed(() => {
-    return unref(derivedNamespace) || defaultNamespace;
+    return unref(derivedNamespace) || classNamespace;
   });
   return namespace;
 };
 
 export const useNamespace = (
   block: string,
-  namespaceOverrides?: Ref<string | undefined>
+  namespaceOverrides?: Ref<string | undefined>,
 ) => {
   const namespace = useGetDerivedNamespace(namespaceOverrides);
   const b = (blockSuffix = "") =>

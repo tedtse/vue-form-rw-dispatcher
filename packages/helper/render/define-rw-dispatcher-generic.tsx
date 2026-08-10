@@ -6,6 +6,7 @@ import {
   type Ref,
   type ComputedRef,
   type SetupContext,
+  type ComponentObjectPropsOptions,
 } from "vue";
 import { attachDispatcherRef, omitRWDispatcherState } from "../utils";
 import { Config } from "../config";
@@ -18,13 +19,11 @@ import type {
 
 const nsStateKey = `${Config.namespace}State`;
 
-export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
-  writerFn,
-  readerFn,
-  name = "",
-  options,
-}: DefineRWDispatcherArgs) {
-  return /*#__PURE__*/ defineComponent(
+export function defineRWDispatcherGeneric<
+  P extends Record<string, unknown>,
+  E = RWDispatcherProps,
+>({ writerFn, readerFn, name = "", options }: DefineRWDispatcherArgs) {
+  return /*#__PURE__*/ defineComponent<Partial<P> & E>(
     <P, E>(props: P & E, context: SetupContext) => {
       const { attrs, slots, expose } = context;
       const injectState:
@@ -75,10 +74,8 @@ export function defineRWDispatcherGeneric<P, E = RWDispatcherState>({
     {
       name,
       props: {
-        [nsStateKey]: {
-          type: String,
-        },
-      },
+        [nsStateKey]: { type: String },
+      } as unknown as ComponentObjectPropsOptions<Partial<P> & E>,
       ...options,
     },
   );

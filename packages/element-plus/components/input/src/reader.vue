@@ -4,7 +4,7 @@
       nsText.b(),
       nsInput.b(),
       {
-        [nsText.is('disabled')]: props.disabled,
+        [nsText.is('disabled')]: disabled,
         [nsText.m('large')]: size === 'large',
         [nsText.m('small')]: size === 'small',
       },
@@ -56,6 +56,7 @@ import { computed, ref } from "vue";
 import {
   useNamespace,
   useSize,
+  useDisabled,
 } from "@vue-form-rw-dispatcher/element-plus/composables";
 
 const props = defineProps<InputProps>();
@@ -65,6 +66,7 @@ defineOptions({
 
 const { prefixIcon, suffixIcon } = props;
 const size = useSize();
+const disabled = useDisabled();
 const nsText = useNamespace("el-text");
 const nsInput = useNamespace("el-input");
 const passwordVisible = ref(false);
