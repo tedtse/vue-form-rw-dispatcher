@@ -1,3 +1,4 @@
 node_modules
 docs/.vitepress/cache
 docs/components.d.ts
+packages/element-plus/coverage

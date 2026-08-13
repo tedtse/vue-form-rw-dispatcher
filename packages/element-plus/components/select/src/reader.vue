@@ -5,7 +5,7 @@
         nsSelect.b(),
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -58,7 +58,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect, type VNode } from "vue";
 import { ElSelect, ElTag, type SelectProps } from "element-plus";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 type RawSlots = {
   [name: string]: unknown;
@@ -79,6 +79,7 @@ const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const nsTag = useNamespace("el-tag");
 const size = useSize();
+const disabled = useDisabled();
 const shadowSelectRef = ref<InstanceType<typeof ElSelect>>();
 const options = ref<OptionType[]>([]);
 
@@ -118,7 +119,7 @@ watchEffect(() => {
       nodes.flatMap((node) => {
         if (node.type && (node.type as any).name === "ElOption") {
           elOptions.push(node);
-        } else if ((node.children as RawSlots).default) {
+        } else if ((node.children as RawSlots)?.default) {
           traverse((node.children as { default(): VNode[] }).default());
         } else {
           traverse((node.children as VNode[]) || []);

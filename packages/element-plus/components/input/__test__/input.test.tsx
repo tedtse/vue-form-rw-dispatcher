@@ -1,7 +1,7 @@
 import { nextTick, ref } from "vue";
 import { mount, type DOMWrapper } from "@vue/test-utils";
 import { describe, test, expect } from "vitest";
-import { Calendar, Search } from "@element-plus/icons-vue";
+import { Calendar, Search, Hide, View } from "@element-plus/icons-vue";
 import { ElIcon } from "element-plus";
 import { Config } from "../../../config";
 import ElInputDispatcher from "../";
@@ -114,6 +114,9 @@ describe("InputDispatcher", () => {
         />
       ));
 
+      const HideElm = mount(Hide);
+      const ViewElm = mount(View);
+
       const inputElm = wrapper.find(
         `.${classNamespace}-el-input`,
       ) as DOMWrapper<HTMLDivElement>;
@@ -127,6 +130,16 @@ describe("InputDispatcher", () => {
         iconElm.element.classList.contains(
           `${classNamespace}-el-input__password`,
         ),
+      ).toBe(true);
+      expect(
+        iconElm.element.innerHTML.includes(HideElm.element.innerHTML),
+      ).toBe(true);
+
+      iconElm.element.click();
+      await nextTick();
+      expect(nativeInput.textContent).toMatchInlineSnapshot(`"123456"`);
+      expect(
+        iconElm.element.innerHTML.includes(ViewElm.element.innerHTML),
       ).toBe(true);
     });
   });

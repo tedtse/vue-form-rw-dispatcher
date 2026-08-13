@@ -28,11 +28,11 @@ const options = [
     label: "Popular cities",
     options: [
       {
-        value: "Shanghai",
+        value: "1",
         label: "Shanghai",
       },
       {
-        value: "Beijing",
+        value: "2",
         label: "Beijing",
       },
     ],
@@ -41,19 +41,19 @@ const options = [
     label: "City name",
     options: [
       {
-        value: "Chengdu",
+        value: "3",
         label: "Chengdu",
       },
       {
-        value: "Shenzhen",
+        value: "4",
         label: "Shenzhen",
       },
       {
-        value: "Guangzhou",
+        value: "5",
         label: "Guangzhou",
       },
       {
-        value: "Dalian",
+        value: "6",
         label: "Dalian",
       },
     ],
