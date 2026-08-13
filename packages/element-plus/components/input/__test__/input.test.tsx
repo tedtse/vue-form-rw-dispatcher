@@ -3,13 +3,10 @@ import { mount, type DOMWrapper } from "@vue/test-utils";
 import { describe, test, expect } from "vitest";
 import { Calendar, Search, Hide, View } from "@element-plus/icons-vue";
 import { ElIcon } from "element-plus";
-import { Config } from "../../../config";
+import { Config, getClassNamespace } from "../../../config";
 import ElInputDispatcher from "../";
 
-const classNamespace = Config.namespace.replace(
-  /[A-Z]/g,
-  (m) => `-${m.toLowerCase()}`,
-);
+const classNamespace = getClassNamespace();
 
 describe("InputDispatcher", () => {
   describe("props", () => {

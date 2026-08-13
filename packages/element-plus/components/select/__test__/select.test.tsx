@@ -2,13 +2,10 @@ import { nextTick, ref } from "vue";
 import { mount, type DOMWrapper } from "@vue/test-utils";
 import { describe, test, expect } from "vitest";
 import { ElOption, ElOptionGroup } from "element-plus";
-import { Config } from "../../../config";
+import { Config, getClassNamespace } from "../../../config";
 import ElSelectDispatcher from "../";
 
-const classNamespace = Config.namespace.replace(
-  /[A-Z]/g,
-  (m) => `-${m.toLowerCase()}`,
-);
+const classNamespace = getClassNamespace();
 
 type Option = { label: string; value: string };
 
@@ -285,6 +282,30 @@ describe("SelectDispatcher", () => {
         `"${OPTIONS?.[2]?.label}"`,
       );
     });
+
+    test("slot label no match", () => {
+      // $slots.label 存在 + 非多选 + modelValue 不匹配任何选项
+      // → selectedOptions 为空 → L30 v-else-if false 分支
+      const model = ref("non-existent-value");
+      const wrapper = mount(() => (
+        <ElSelectDispatcher
+          modelValue={model.value}
+          rwDispatcherState={"read"}
+          options={OPTIONS}
+          v-slots={{
+            label: (scope: { label?: string; value?: string }) => (
+              <em class="custom-label">{scope.label}</em>
+            ),
+          }}
+        />
+      ));
+      const selectElm = wrapper.find(
+        `.${classNamespace}-el-select`,
+      ) as DOMWrapper<HTMLDivElement>;
+      expect(selectElm.exists()).toBe(true);
+      // 无匹配选项时,不渲染 label slot,内容为空
+      expect(selectElm.element.textContent).toBe("");
+    });
   });
 
   describe("object value", () => {
@@ -369,7 +390,7 @@ describe("SelectDispatcher", () => {
       },
     ];
 
-    test("read mode", async () => {
+    test("slot option-group", async () => {
       const wrapper = mount(() => (
         <ElSelectDispatcher modelValue={model.value} rwDispatcherState={"read"}>
           {options.map((group) => (
@@ -387,6 +408,38 @@ describe("SelectDispatcher", () => {
                   )),
               }}
             />
+          ))}
+        </ElSelectDispatcher>
+      ));
+      await nextTick();
+      const selectElm = wrapper.find(
+        `.${classNamespace}-el-select`,
+      ) as DOMWrapper<HTMLDivElement>;
+      expect(selectElm.exists()).toBe(true);
+      let target: Option | undefined;
+      options.some((opt) => {
+        target = opt.options.find((item) => item.value === model.value);
+        return target !== undefined;
+      });
+      expect(target).toBeDefined();
+      expect(selectElm.element.textContent).toMatchInlineSnapshot(
+        `"${target?.label}"`,
+      );
+    });
+
+    test("jsx option-group", async () => {
+      const wrapper = mount(() => (
+        <ElSelectDispatcher modelValue={model.value} rwDispatcherState={"read"}>
+          {options.map((group) => (
+            <ElOptionGroup key={group.label} label={group.label}>
+              {group.options.map((item) => (
+                <ElOption
+                  key={item.value}
+                  label={item.label}
+                  value={item.value}
+                />
+              ))}
+            </ElOptionGroup>
           ))}
         </ElSelectDispatcher>
       ));

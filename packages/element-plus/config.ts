@@ -19,6 +19,9 @@ export const Config: ConfigType = {
   inactiveText: "否",
 };
 
+export const getClassNamespace = () =>
+  Config.namespace.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+
 export const getConfig = () => Config;
 
 export const setConfig = (conf: Partial<ConfigType>) => {

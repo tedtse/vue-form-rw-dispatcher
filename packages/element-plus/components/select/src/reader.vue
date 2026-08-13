@@ -121,6 +121,8 @@ watchEffect(() => {
           elOptions.push(node);
         } else if ((node.children as RawSlots)?.default) {
           traverse((node.children as { default(): VNode[] }).default());
+        } else if (Array.isArray(node)) {
+          traverse(node);
         } else {
           traverse((node.children as VNode[]) || []);
         }
