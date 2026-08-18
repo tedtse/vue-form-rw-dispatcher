@@ -4,7 +4,7 @@
       :class="[
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { computed, ref, watchEffect, type VNode } from "vue";
 import { ElRadioGroup, type RadioGroupProps } from "element-plus";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 type RawSlots = {
   [name: string]: unknown;
@@ -45,6 +45,7 @@ defineOptions({
 });
 
 const size = useSize();
+const disabled = useDisabled();
 const nsText = useNamespace("el-text");
 const elRadios = ref<VNode[]>([]);
 const shadowRadioGroupRef = ref<InstanceType<typeof ElRadioGroup>>();

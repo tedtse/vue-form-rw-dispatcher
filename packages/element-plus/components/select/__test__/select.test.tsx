@@ -1,4 +1,4 @@
-import { nextTick, ref } from "vue";
+import { h, nextTick, ref, type VNode } from "vue";
 import { mount, type DOMWrapper } from "@vue/test-utils";
 import { describe, test, expect } from "vitest";
 import { ElOption, ElOptionGroup } from "element-plus";
@@ -285,7 +285,6 @@ describe("SelectDispatcher", () => {
 
     test("slot label no match", () => {
       // $slots.label 存在 + 非多选 + modelValue 不匹配任何选项
-      // → selectedOptions 为空 → L30 v-else-if false 分支
       const model = ref("non-existent-value");
       const wrapper = mount(() => (
         <ElSelectDispatcher
@@ -349,8 +348,6 @@ describe("SelectDispatcher", () => {
         `.${classNamespace}-el-select`,
       ) as DOMWrapper<HTMLDivElement>;
       expect(selectElm.exists()).toBe(true);
-      // read 模式下用 ElOption 子组件时,reader.vue 的 watchEffect
-      // 走 shadow slot 遍历分支(L116-130)提取 options
       expect(selectElm.element.textContent).toMatchInlineSnapshot(`"双皮奶"`);
     });
   });
@@ -456,6 +453,74 @@ describe("SelectDispatcher", () => {
       expect(target).toBeDefined();
       expect(selectElm.element.textContent).toMatchInlineSnapshot(
         `"${target?.label}"`,
+      );
+    });
+  });
+
+  describe("watchEffect branch", () => {
+    test("default slot returns undefined", async () => {
+      const model = ref(OPTIONS?.[0]?.value);
+      const wrapper = mount(() => (
+        <ElSelectDispatcher
+          modelValue={model.value}
+          rwDispatcherState={"read"}
+          v-slots={{ default: () => undefined as unknown as VNode }}
+        />
+      ));
+      await nextTick();
+      const selectElm = wrapper.find(
+        `.${classNamespace}-el-select`,
+      ) as DOMWrapper<HTMLDivElement>;
+      expect(selectElm.exists()).toBe(true);
+      // 无 options 提取出来,label computed 走 find 失败后 fallback 到 modelValue
+      expect(selectElm.element.textContent).toMatchInlineSnapshot(
+        `"${OPTIONS?.[0]?.value}"`,
+      );
+    });
+
+    test("non-ElOption vnode without children", async () => {
+      const model = ref(OPTIONS?.[0]?.value);
+      const wrapper = mount(() => (
+        <ElSelectDispatcher modelValue={model.value} rwDispatcherState={"read"}>
+          {/* 自闭合 div 没有 children,触发 else 分支的 || [] fallback */}
+          <div class="empty-child" />
+          <ElOption
+            key={OPTIONS?.[0]?.value}
+            label={OPTIONS?.[0]?.label}
+            value={OPTIONS?.[0]?.value as string}
+          />
+        </ElSelectDispatcher>
+      ));
+      await nextTick();
+      const selectElm = wrapper.find(
+        `.${classNamespace}-el-select`,
+      ) as DOMWrapper<HTMLDivElement>;
+      expect(selectElm.exists()).toBe(true);
+      expect(selectElm.element.textContent).toMatchInlineSnapshot(
+        `"${OPTIONS?.[0]?.label}"`,
+      );
+    });
+
+    test("ElOption vnode without props", async () => {
+      const model = ref(OPTIONS?.[0]?.value);
+      const wrapper = mount(() => (
+        <ElSelectDispatcher modelValue={model.value} rwDispatcherState={"read"}>
+          {/* h(ElOption) 不传 props,vnode.props 为 null,触发 || {} fallback */}
+          {h(ElOption)}
+          <ElOption
+            key={OPTIONS?.[0]?.value}
+            label={OPTIONS?.[0]?.label}
+            value={OPTIONS?.[0]?.value as string}
+          />
+        </ElSelectDispatcher>
+      ));
+      await nextTick();
+      const selectElm = wrapper.find(
+        `.${classNamespace}-el-select`,
+      ) as DOMWrapper<HTMLDivElement>;
+      expect(selectElm.exists()).toBe(true);
+      expect(selectElm.element.textContent).toMatchInlineSnapshot(
+        `"${OPTIONS?.[0]?.label}"`,
       );
     });
   });

@@ -5,7 +5,7 @@
         nsSelect.b(),
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -31,7 +31,7 @@
 <script lang="ts" setup>
 import { computed, ref, type Ref } from "vue";
 import { ElTag, type TreeNodeData } from "element-plus";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 import type { TreeSelectProps } from "./types";
 
 const props = defineProps<TreeSelectProps>();
@@ -43,6 +43,7 @@ const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const nsTag = useNamespace("el-tag");
 const size = useSize();
+const disabled = useDisabled();
 
 const valueKey = computed(() => props.nodeKey ?? props.valueKey ?? "value");
 const labelKey = computed(

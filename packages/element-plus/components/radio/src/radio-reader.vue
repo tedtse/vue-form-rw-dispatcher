@@ -4,7 +4,7 @@
       :class="[
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -22,11 +22,12 @@
 <script lang="ts" setup>
 import { computed, getCurrentInstance } from "vue";
 import { type RadioProps } from "element-plus";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 const props = defineProps<RadioProps>();
 
 const size = useSize();
+const disabled = useDisabled();
 const nsText = useNamespace("el-text");
 const instance = getCurrentInstance();
 

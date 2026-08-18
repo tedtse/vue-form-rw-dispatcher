@@ -2,6 +2,7 @@ import {
   getCurrentInstance,
   computed,
   inject,
+  ref,
   type Ref,
   type ComputedRef,
 } from "vue";
@@ -15,6 +16,7 @@ export const useDispatcherConfig = <T extends DispatcherConfigType>(
   const vm = getCurrentInstance();
   const injectConfig = inject<ComputedRef<T> | Ref<T>>(
     TypeProvideMap[type].provider,
+    ref({} as Partial<T>) as Ref<T>,
   );
 
   return computed(() => {

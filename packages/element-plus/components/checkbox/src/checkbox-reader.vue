@@ -82,7 +82,7 @@ export default defineComponent({
       const _text =
         props[(properties?.value ?? "value") as keyof CheckboxProps];
       text.value =
-        _text ?? props[(properties?.label ?? "label") as keyof CheckboxProps];
+        props[(properties?.label ?? "label") as keyof CheckboxProps] ?? _text;
 
       if (typeof trueValue !== "undefined") {
         isTrue.value = modelValue === trueValue || modelValue === true;

@@ -5,7 +5,7 @@
         nsSelect.b(),
         nsText.b(),
         {
-          [nsText.is('disabled')]: props.disabled,
+          [nsText.is('disabled')]: disabled,
           [nsText.m('large')]: size === 'large',
           [nsText.m('small')]: size === 'small',
         },
@@ -46,10 +46,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, type ComputedRef } from "vue";
 import { ElTag } from "element-plus";
 import type { SelectV2Props } from "element-plus/es/components/select-v2/src/defaults";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 type OptionType = {
   label: string;
@@ -63,6 +63,7 @@ const nsText = useNamespace("el-text");
 const nsSelect = useNamespace("el-select");
 const nsTag = useNamespace("el-tag");
 const size = useSize();
+const disabled = useDisabled();
 
 const valueKey = computed(
   () => props.props?.value || props.valueKey || "value",
@@ -92,29 +93,35 @@ const label = computed(() => {
   return option?.[labelKey.value];
 });
 
-const selectedOptions = computed(() => {
-  const { modelValue, options, allowCreate } = props;
-  if (allowCreate) {
-    const result: Record<string, unknown>[] = [];
-    modelValue.forEach((val: string) => {
-      const option = options?.find((opt) => opt[valueKey.value] === val);
-      if (option) {
-        result.push(option);
-      } else {
-        result.push({ [valueKey.value]: val, [labelKey.value]: val });
-      }
-    });
-    return result;
-  }
-  if (Object.prototype.toString.call(modelValue) === "[object Object]") {
-    const option = options?.find((opt) =>
-      Object.keys(modelValue).every(
-        (key) =>
-          opt.value[key] === (modelValue as Record<string, unknown>)[key],
-      ),
+const selectedOptions: ComputedRef<OptionType[] | Record<string, unknown>[]> =
+  computed(() => {
+    const { modelValue, options, allowCreate } = props;
+    if (allowCreate) {
+      const result: Record<string, unknown>[] = [];
+      modelValue.forEach((val: string) => {
+        const option = options?.find((opt) => opt[valueKey.value] === val);
+        if (option) {
+          result.push(option);
+        } else {
+          result.push({ [valueKey.value]: val, [labelKey.value]: val });
+        }
+      });
+      return result;
+    }
+    if (Object.prototype.toString.call(modelValue) === "[object Object]") {
+      const option = options?.find((opt) =>
+        Object.keys(modelValue).every(
+          (key) =>
+            opt.value[key] === (modelValue as Record<string, unknown>)[key],
+        ),
+      );
+      return (option as OptionType)[labelKey.value] as Record<
+        string,
+        unknown
+      >[];
+    }
+    return (
+      options?.filter((opt) => modelValue.includes(opt[valueKey.value])) || []
     );
-    return (option as OptionType)[labelKey.value];
-  }
-  return options?.filter((opt) => modelValue.includes(opt[valueKey.value]));
-});
+  });
 </script>

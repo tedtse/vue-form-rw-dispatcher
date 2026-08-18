@@ -24,13 +24,19 @@ export function defineRWDispatcherPropType({
   name = "",
   props,
   options,
-}: DefineRWDispatcherArgs) {
+}: Omit<DefineRWDispatcherArgs, "props"> & {
+  props: any;
+}) {
   let _props: ComponentObjectPropsOptions<
     Record<string, unknown> & RWDispatcherProps
   > = {};
   if (Array.isArray(props)) {
     props.forEach((name) => {
-      _props[name] = { type: String, required: true };
+      _props[
+        name as keyof ComponentObjectPropsOptions<
+          Record<string, unknown> & RWDispatcherProps
+        >
+      ] = { type: String, required: true };
     });
   } else {
     _props = props!;
