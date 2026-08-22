@@ -49,3 +49,11 @@ form-dispatcher/validate
 form-dispatcher/size
 
 :::
+
+## 禁用表单
+
+:::demo
+
+form-dispatcher/disabled
+
+:::

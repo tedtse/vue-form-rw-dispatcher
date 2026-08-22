@@ -17,11 +17,12 @@ import {
   SIZE,
   PROPS_SIZE,
   PROPS_DISABLED,
+  DISABLED_CONTEXT_PROVIDER,
   TypeProvideMap,
   DispatcherTypeTag,
 } from "@vue-form-rw-dispatcher/element-plus/constants";
 import { type EPRWDispatcherProps } from "@vue-form-rw-dispatcher/element-plus/type";
-import { Config } from "@vue-form-rw-dispatcher/element-plus";
+import { Config } from "@vue-form-rw-dispatcher/element-plus/config";
 
 const nsStateKey = `${Config.namespace}State`;
 
@@ -47,7 +48,7 @@ const ElFormDispatcher = defineComponent(
     const disabled = computed(() => {
       return Reflect.get(props as FormProps, PROPS_DISABLED) || false;
     });
-    provide(PROPS_DISABLED, disabled);
+    provide(DISABLED_CONTEXT_PROVIDER, disabled);
     provide(
       TypeProvideMap[DispatcherTypeTag.Switch].provider,
       computed(() => ({

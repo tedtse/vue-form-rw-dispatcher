@@ -18,7 +18,14 @@
             ...(item.props as CheckboxProps),
             [`${Config.namespace}Type`]: 'item',
           }"
-        />
+        >
+          <template #default>
+            <component
+              v-if="getItemDefaultSlot(item)"
+              :is="getItemDefaultSlot(item)"
+            />
+          </template>
+        </checkbox-reader>
       </template>
       <template v-if="targetOptions?.length">
         <checkbox-reader
@@ -76,6 +83,15 @@ const shadowCheckboxGroupRef = ref<InstanceType<typeof ElCheckboxGroup>>();
 provide(CHECKBOX_GROUP_KEY, {
   instance: shadowCheckboxGroupRef,
 });
+
+const getItemDefaultSlot = (item: VNode): (() => VNode[]) | undefined => {
+  const children = item.children;
+  if (children && typeof children === "object" && !Array.isArray(children)) {
+    const slot = (children as RawSlots).default;
+    return typeof slot === "function" ? (slot as () => VNode[]) : undefined;
+  }
+  return undefined;
+};
 
 const targetCheckboxes = computed(() => {
   const { modelValue, props: properties } = props;

@@ -38,7 +38,7 @@ import {
   useAttrs,
 } from "vue";
 import { checkboxProps, type CheckboxProps } from "element-plus";
-import { Config } from "@vue-form-rw-dispatcher/element-plus";
+import { Config } from "../../../config";
 import { CHECKBOX_GROUP_KEY, type CheckboxGroupType } from "./use-reader";
 import { useNamespace, useSize, useDisabled } from "../../../composables";
 

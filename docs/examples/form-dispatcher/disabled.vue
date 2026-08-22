@@ -2,6 +2,7 @@
   <div>
     <el-form-dispatcher
       :model="form"
+      disabled
       label-width="auto"
       :rw-dispatcher-state="rwState"
       style="max-width: 600px"
@@ -44,23 +45,23 @@
       <el-form-item label="Activity type">
         <el-checkbox-group-dispatcher v-model="form.type">
           <el-checkbox value="Online activities" name="type">
-            Online activities
+            Online activities text
           </el-checkbox>
           <el-checkbox value="Promotion activities" name="type">
-            Promotion activities
+            Promotion activities text
           </el-checkbox>
           <el-checkbox value="Offline activities" name="type">
-            Offline activities
+            Offline activities text
           </el-checkbox>
           <el-checkbox value="Simple brand exposure" name="type">
-            Simple brand exposure
+            Simple brand exposure text
           </el-checkbox>
         </el-checkbox-group-dispatcher>
       </el-form-item>
       <el-form-item label="Resources">
         <el-radio-group-dispatcher v-model="form.resource">
-          <el-radio value="Sponsor">Sponsor</el-radio>
-          <el-radio value="Venue">Venue</el-radio>
+          <el-radio value="Sponsor">Sponsor text</el-radio>
+          <el-radio value="Venue">Venue text</el-radio>
         </el-radio-group-dispatcher>
       </el-form-item>
       <el-form-item label="Activity form">
@@ -92,21 +93,17 @@ const rwState = ref<RWDispatcherState>("write");
 
 // do not use same name with ref
 const form = reactive({
-  name: "",
-  region: "",
-  date1: "",
-  date2: "",
+  name: "张三",
+  region: "shanghai",
   delivery: false,
-  type: [],
-  resource: "",
-  desc: "",
+  desc: "xxxxxxxxxx",
+  date1: "2026-08-24",
+  date2: "2026-08-24 20:21:15",
+  resource: "Venue",
+  type: ["Online activities", "Promotion activities"],
 });
 
 const handleStateToggle = () => {
   console.log(`Current stage: ${rwState.value}`);
-};
-
-const onSubmit = () => {
-  console.log("submit!", form);
 };
 </script>

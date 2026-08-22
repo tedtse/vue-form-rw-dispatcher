@@ -5,7 +5,7 @@ import {
   type ComponentObjectPropsOptions,
 } from "vue";
 import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
-import { Config } from "@vue-form-rw-dispatcher/element-plus";
+import { Config } from "@vue-form-rw-dispatcher/element-plus/config";
 import { type EPRWDispatcherProps } from "@vue-form-rw-dispatcher/element-plus/type";
 import {
   SIZE_CONTEXT_PROVIDER,
