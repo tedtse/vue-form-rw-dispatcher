@@ -2,8 +2,10 @@ import {
   defineComponent,
   computed,
   provide,
+  reactive,
   type ComponentObjectPropsOptions,
 } from "vue";
+import { formContextKey, type FormContext } from "element-plus";
 import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
 import { Config } from "@vue-form-rw-dispatcher/element-plus/config";
 import { type EPRWDispatcherProps } from "@vue-form-rw-dispatcher/element-plus/type";
@@ -42,6 +44,13 @@ const ElDispatcherProvider = defineComponent(
         activeText: props.activeText,
         inactiveText: props.inactiveText,
       })),
+    );
+    provide(
+      formContextKey,
+      reactive({
+        size,
+        disabled,
+      }) as unknown as FormContext,
     );
 
     return () => {
