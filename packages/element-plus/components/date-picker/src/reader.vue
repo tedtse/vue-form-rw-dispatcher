@@ -3,7 +3,7 @@
     :class="[
       nsText.b(),
       {
-        [nsText.is('disabled')]: props.disabled,
+        [nsText.is('disabled')]: disabled,
         [nsText.m('large')]: size === 'large',
         [nsText.m('small')]: size === 'small',
       },
@@ -29,7 +29,7 @@ import { computed, h, Fragment } from "vue";
 import { dayjs, ElIcon, type DatePickerProps } from "element-plus";
 import { Clock, Calendar } from "@element-plus/icons-vue";
 import { DEFAULT_FORMATS_DATEPICKER } from "../../../constants";
-import { useSize, useNamespace } from "../../../composables";
+import { useSize, useNamespace, useDisabled } from "../../../composables";
 
 const props = defineProps<DatePickerProps>();
 defineOptions({
@@ -39,6 +39,7 @@ defineOptions({
 const nsText = useNamespace("el-text");
 const nsRange = useNamespace("el-range");
 const size = useSize();
+const disabled = useDisabled();
 
 const value = computed(() => {
   const { modelValue, format, type } = props;

@@ -42,6 +42,10 @@ export default defineConfig({
           { text: "TimeSelect", link: "/element-plus/time-select-dispatcher" },
           { text: "Switch", link: "/element-plus/switch-dispatcher" },
           { text: "Form", link: "/element-plus/form-dispatcher" },
+          {
+            text: "DispatcherProvider",
+            link: "/element-plus/dispatcher-provider",
+          },
         ],
       },
     ],

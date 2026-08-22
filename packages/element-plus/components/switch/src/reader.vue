@@ -4,7 +4,7 @@
       nsText.b(),
       nsSwitch.b(),
       {
-        [nsText.is('disabled')]: props.disabled,
+        [nsText.is('disabled')]: disabled,
         [nsText.m('large')]: size === 'large',
         [nsText.m('small')]: size === 'small',
       },
@@ -62,6 +62,7 @@ import { computed } from "vue";
 import {
   useSize,
   useNamespace,
+  useDisabled,
   useDispatcherConfig,
 } from "../../../composables";
 import { DispatcherTypeTag } from "../../../constants";
@@ -73,6 +74,7 @@ defineOptions({ name: "SwitchReader" });
 const nsText = useNamespace("el-text");
 const nsSwitch = useNamespace("el-switch");
 const size = useSize();
+const disabled = useDisabled();
 const switchConfig = useDispatcherConfig<SwitchConfigType>(
   DispatcherTypeTag.Switch,
 );

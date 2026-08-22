@@ -11,6 +11,7 @@ import { ElTimePickerDispatcher } from "./time-picker";
 import ElCascaderDispatcher from "./cascader";
 import ElTreeSelectDispatcher from "./tree-select";
 import ElFormDispatcher from "./form";
+import { ElDispatcherProvider } from "./provider";
 
 export {
   ElInputDispatcher,
@@ -28,4 +29,5 @@ export {
   ElCascaderDispatcher,
   ElTreeSelectDispatcher,
   ElFormDispatcher,
+  ElDispatcherProvider,
 };

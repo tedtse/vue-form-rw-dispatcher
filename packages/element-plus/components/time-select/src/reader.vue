@@ -3,7 +3,7 @@
     :class="[
       nsText.b(),
       {
-        [nsText.is('disabled')]: props.disabled,
+        [nsText.is('disabled')]: disabled,
         [nsText.m('large')]: size === 'large',
         [nsText.m('small')]: size === 'small',
       },
@@ -21,10 +21,12 @@
 
 <script setup lang="ts">
 import { type TimeSelectProps } from "element-plus";
-import { useNamespace, useSize } from "../../../composables";
+import { useNamespace, useSize, useDisabled } from "../../../composables";
 
 const props = defineProps<TimeSelectProps>();
 const nsText = useNamespace("el-text");
 const size = useSize();
+const disabled = useDisabled();
+
 const { prefixIcon } = props;
 </script>
