@@ -24,7 +24,10 @@ const decoded = computed(() => {
 </template>
 
 <style scoped lang="scss">
-:deep(.language-vue) {
+:deep(.language-vue),
+:deep(.language-tsx),
+:deep(.language-ts),
+:deep(.language-scss) {
   margin: 0 !important;
   border-radius: 0 !important;
 }

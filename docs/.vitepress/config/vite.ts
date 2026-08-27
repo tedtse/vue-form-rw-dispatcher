@@ -26,5 +26,9 @@ export const getViteConfig = () => {
       }),
       markdownTransform(),
     ],
+    optimizeDeps: {
+      // mermaid 间接依赖 dayjs（CJS），需要 Vite 预构建以正确转 ESM default export
+      include: ["dayjs", "mermaid"],
+    },
   };
 };

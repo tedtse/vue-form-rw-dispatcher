@@ -7,6 +7,17 @@
   max-width: 728px;
 }
 
+// mermaid 流程图居中显示
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.mermaid svg {
+  max-width: 100%;
+}
+
 .m-0 {
   margin: 0;
 }

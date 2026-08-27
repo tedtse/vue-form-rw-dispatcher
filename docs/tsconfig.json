@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "strict": true,
+    "skipLibCheck": true,
+    "types": ["vitepress/client"]
+  },
+  "include": [
+    ".vitepress/**/*.mts",
+    ".vitepress/**/*.ts",
+    ".vitepress/**/*.vue",
+    "examples/**/*.vue",
+    "**/*.md"
+  ],
+  "exclude": ["node_modules", ".vitepress/cache"]
+}
