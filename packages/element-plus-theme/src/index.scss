@@ -4,6 +4,7 @@
 @use "./components/switch.scss";
 
 @use "./var.scss" as *;
+@use "./json-vars.scss";
 @use "./mixins/mixin.scss" as *;
 
 @include elComponentCss("range") {

@@ -1,0 +1,103 @@
+// 将 var.scss 中 :root / html.dark 枚举的全部 CSS 变量
+// 以 key-value 形式序列化为 JSON 字符串，注入到 :root 的自定义属性上：
+//   --rw-dispatcher-css-vars-light / --rw-dispatcher-css-vars-dark
+// 运行时读取方式：
+//   const raw = getComputedStyle(document.documentElement)
+//     .getPropertyValue("--rw-dispatcher-css-vars-light");
+//   const vars = JSON.parse(raw);
+@use "sass:map";
+@use "./common/var.scss" as common;
+@use "./common/maps.scss" as maps;
+@use "./mixins/function.scss" as *;
+@use "./light/var.scss" as light;
+@use "./dark/var.scss" as dark;
+
+/// 收集尺寸类变量（key 为 default 时省略后缀，与 setCssVar 规则一致）
+@function collectSizeVars($name, $variables, $store) {
+  @each $attribute, $value in $variables {
+    @if $attribute == "default" {
+      $store: map.set($store, "#{getCssVarName($name)}", "#{$value}");
+    } @else {
+      $store: map.set(
+        $store,
+        "#{getCssVarName($name, $attribute)}",
+        "#{$value}"
+      );
+    }
+  }
+  @return $store;
+}
+
+@function collectTextColorVars($text-color-map, $store) {
+  @each $key, $value in $text-color-map {
+    $store: map.set(
+      $store,
+      "#{getCssVarName('text-color', $key)}",
+      "#{$value}"
+    );
+  }
+  @return $store;
+}
+
+/// 与 mixins/var.scss 的 setColorVars 保持一致的键集合
+@function collectColorVars($colors-map, $store) {
+  @each $type in common.$types {
+    $base: map.get($colors-map, $type, "base");
+    $dark-2: map.get($colors-map, $type, "dark-2");
+
+    $store: map.set(
+      $store,
+      "#{getCssVarName('color', $type)}",
+      "#{$base}"
+    );
+
+    @each $i in (3, 5, 7, 8, 9) {
+      $mixed: map.get($colors-map, $type, "light-#{$i}");
+      $store: map.set(
+        $store,
+        "#{getCssVarName('color', $type, 'light', $i)}",
+        "#{$mixed}"
+      );
+    }
+
+    $store: map.set(
+      $store,
+      "#{getCssVarName('color', $type, 'dark-2')}",
+      "#{$dark-2}"
+    );
+  }
+  @return $store;
+}
+
+@function buildVarsMap($text-color-map, $colors-map) {
+  $store: ();
+  $store: collectSizeVars("font-size", maps.$font-size, $store);
+  $store: collectSizeVars("input-height", maps.$input-height, $store);
+  $store: collectTextColorVars($text-color-map, $store);
+  $store: collectColorVars($colors-map, $store);
+  @return $store;
+}
+
+/// Sass map -> JSON 对象字符串（key/value 均为字符串）
+@function jsonStringify($vars) {
+  $result: "{";
+  $first: true;
+
+  @each $key, $value in $vars {
+    @if not $first {
+      $result: $result + ",";
+    }
+    $first: false;
+    $result: $result + "\"" + $key + "\":\"" + $value + "\"";
+  }
+
+  @return $result + "}";
+}
+
+$light-vars: buildVarsMap(light.$text-color, light.$colors);
+$dark-vars: buildVarsMap(dark.$text-color, dark.$colors);
+
+:root {
+  #{getCssVarName("css-vars-light")}: #{jsonStringify($light-vars)};
+  #{getCssVarName("css-vars-dark")}: #{jsonStringify($dark-vars)};
+}

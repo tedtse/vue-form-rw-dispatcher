@@ -23,7 +23,10 @@ export default withMermaid(
       sidebar: [
         {
           text: "指南",
-          items: [{ text: "快速开始", link: "/guide/getting-started" }],
+          items: [
+            { text: "快速开始", link: "/guide/getting-started" },
+            { text: "CSS 变量", link: "/guide/css-vars" },
+          ],
         },
         {
           text: "组件",

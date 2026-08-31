@@ -30,10 +30,6 @@
     cursor: not-allowed;
   }
 
-  @include when(null) {
-    padding: 0;
-  }
-
   &--large {
     font-size: var(#{getCssVarName("font-size", "base")});
     line-height: var(#{getCssVarName("input-height", "large")});

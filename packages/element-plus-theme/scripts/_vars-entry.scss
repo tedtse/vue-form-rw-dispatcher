@@ -1,0 +1,11 @@
+// 构建期专用：供 scripts/build-vars-json.mjs 编译，
+// 通过 dart-sass JS 自定义函数 js-sink 把序列化结果直接回传给 Node
+// （返回值为 null，声明与选择器均不会输出到 CSS）
+@use "../src/json-vars.scss" as *;
+
+.__theme-vars-sink__ {
+  sink: js-sink(
+    jsonStringify($light-vars),
+    jsonStringify($dark-vars)
+  );
+}
