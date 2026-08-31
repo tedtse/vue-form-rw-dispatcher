@@ -2,7 +2,7 @@
 
 现实开发过程中，我们可能会遇到一些场景，常规的表单分发器不能满足实际需求，需要自定义分发器。
 
-## api
+## 快速开始
 
 ```ts
 import { defineRWDispatcher } from "@vue-form-rw-dispatcher/helper";

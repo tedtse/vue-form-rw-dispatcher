@@ -76,6 +76,10 @@ export default withMermaid(
               text: "分发器原理",
               link: "/element-plus/principle-dispatcher",
             },
+            {
+              text: "分发器助手",
+              link: "/element-plus/helper",
+            },
           ],
         },
       ],
