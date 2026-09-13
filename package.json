@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "cd docs && npm run docs:dev",
-    "scss:build": "cd packages/element-plus-theme && npm run build",
-    "test": "vitest --coverage"
+    "docs:dev": "pnpm run -C docs dev",
+    "docs:build": "pnpm run -C docs build",
+    "docs:preview": "pnpm run -C docs preview",
+    "scss:build": "pnpm run -C packages/element-plus-theme build",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
     "@vue-form-rw-dispatcher/element-plus": "workspace:*",
@@ -29,6 +32,7 @@
     "@vitest/coverage-v8": "^4.1.10",
     "@vue/runtime-dom": "^3.5.26",
     "@vue/test-utils": "^2.4.11",
+    "@vue/tsconfig": "^0.8.1",
     "jsdom": "^30.0.1",
     "typescript": "^5.9.3",
     "unplugin-vue-macros": "^2.14.5",

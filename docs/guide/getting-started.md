@@ -44,4 +44,4 @@ export default {
 
 ## 下一步
 
-查看[配置指南](/config/)了解更多配置选项。
+查看[CSS 变量](/guide/css-vars)了解更多配置选项。

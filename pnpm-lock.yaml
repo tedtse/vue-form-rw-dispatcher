@@ -36,6 +36,9 @@ importers:
       '@vue/test-utils':
         specifier: ^2.4.11
         version: 2.4.11(@vue/compiler-dom@3.5.26)(@vue/server-renderer@3.5.26(vue@3.5.26(typescript@5.9.3)))(vue@3.5.26(typescript@5.9.3))
+      '@vue/tsconfig':
+        specifier: ^0.8.1
+        version: 0.8.1(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
       jsdom:
         specifier: ^30.0.1
         version: 30.0.1
@@ -133,13 +136,6 @@ importers:
       vue:
         specifier: ^3.5.26
         version: 3.5.26(typescript@5.9.3)
-    devDependencies:
-      '@vue/tsconfig':
-        specifier: ^0.8.1
-        version: 0.8.1(typescript@5.9.3)(vue@3.5.26(typescript@5.9.3))
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
 
   packages/element-plus-theme:
     devDependencies:

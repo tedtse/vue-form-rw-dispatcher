@@ -1,8 +1,8 @@
 # 自定义分发器
 
-现实开发过程中，我们可能会遇到一些场景，常规的表单分发器不能满足实际需求，需要自定义分发器。
+现实开发过程中，我们可能会遇到一些场景，常规的表单分发器不能满足实际需求，需要自定义分发器�?
 
-## 快速开始
+## 快速开�?
 
 ```ts
 import { defineRWDispatcher } from "@vue-form-rw-dispatcher/helper";
@@ -14,7 +14,7 @@ defineRWDispatcher<Props>({
 });
 ```
 
-## 自定义 color-picker-dispatcher
+## 自定�?color-picker-dispatcher
 
 ::: demo
 
@@ -22,7 +22,7 @@ custom-dispatcher/color-picker-dispatcher
 
 :::
 
-## 自定义 slider-dispatcher
+## 自定�?slider-dispatcher
 
 ::: demo
 

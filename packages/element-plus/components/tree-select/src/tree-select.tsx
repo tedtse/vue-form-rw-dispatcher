@@ -15,7 +15,11 @@ export const ElTreeSelectDispatcher = defineRWDispatcher<TreeSelectProps>({
       context,
     ),
   readerFn: (props, { attrs, slots }) => (
-    <TreeSelectReader {...attrs} {...(props as TreeSelectProps)} v-slots={slots} />
+    <TreeSelectReader
+      {...attrs}
+      {...(props as TreeSelectProps)}
+      v-slots={slots}
+    />
   ),
   options: {
     inheritAttrs: false,

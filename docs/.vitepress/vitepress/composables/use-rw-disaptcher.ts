@@ -1,5 +1,8 @@
 import { ref, provide } from "vue";
-import { Config, type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import {
+  Config,
+  type RWDispatcherState,
+} from "@vue-form-rw-dispatcher/helper";
 
 export const useRWDispatcher = () => {
   const rwDispatcherState = ref<RWDispatcherState>("write");

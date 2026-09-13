@@ -1,12 +1,12 @@
-# 分发器助手
+# 分发器助�?
 
-分发器助手是一个工具库，用于定义分发器的行为。 不仅仅是 `Element Plus`，我们也可以为 `Ant Design Vue`、 `Naive UI`、 `Vant` 等主流组件库定义分发器，覆盖机械的增删查改页面，减少后续的维护成本。
+分发器助手是一个工具库，用于定义分发器的行为�?不仅仅是 `Element Plus`，我们也可以�?`Ant Design Vue`�?`Naive UI`�?`Vant` 等主流组件库定义分发器，覆盖机械的增删查改页面，减少后续的维护成本�?
 
-主要方法有
+主要方法�?
 
 ## defineRWDispatcherPropType
 
-通过 `ArrayPropsOptions` 或 `ObjectPropsOptions` 定义分发器的 props 类型, 并返回一个函数，用于定义分发器的行为。
+通过 `ArrayPropsOptions` �?`ObjectPropsOptions` 定义分发器的 props 类型, 并返回一个函数，用于定义分发器的行为�?
 
 - 示例
 
@@ -36,17 +36,17 @@ defineRWDispatcherPropType({
 - 参数
   - name: 可选，分发器的名称
 
-  - props: 可选，分发器的 props 类型，透传到读组件和写组件的 `props`, 必须是 Vue3 的 props 类型定义类型 `ArrayPropsOptions` 或 `ObjectPropsOptions`
+  - props: 可选，分发器的 props 类型，透传到读组件和写组件�?`props`, 必须�?Vue3 �?props 类型定义类型 `ArrayPropsOptions` �?`ObjectPropsOptions`
 
-  - writerFn: 必填，写组件的渲染函数
+  - writerFn: 必填，写组件的渲染函�?
 
-  - readerFn: 必填，读组件的渲染函数
+  - readerFn: 必填，读组件的渲染函�?
 
-  - options: 可选，同 `defineComponentOptions`, 透传到读组件和写组件的 `options` 中
+  - options: 可选，�?`defineComponentOptions`, 透传到读组件和写组件�?`options` �?
 
 ## define-rw-dispatcher-generic
 
-通过typescript 泛型的概念，定义分发器的 props 类型，同时定义分发器的行为。
+通过typescript 泛型的概念，定义分发器的 props 类型，同时定义分发器的行为�?
 
 - 示例
 
@@ -65,13 +65,13 @@ defineRWDispatcherGeneric<Props>({
 
 - 参数
   - name: 可选，分发器的名称
-  - writerFn: 必填，写组件的渲染函数
-  - readerFn: 必填，读组件的渲染函数
-  - options: 可选，同 `defineComponentOptions`, 透传到读组件和写组件的 `options` 中
+  - writerFn: 必填，写组件的渲染函�?
+  - readerFn: 必填，读组件的渲染函�?
+  - options: 可选，�?`defineComponentOptions`, 透传到读组件和写组件�?`options` �?
 
 ## extendComponentJSX
 
-通过 JSX 透传`props` `attrs` `slots` 到分发器的读组件和写组件中。
+通过 JSX 透传`props` `attrs` `slots` 到分发器的读组件和写组件中�?
 
 - 示例
 
@@ -85,7 +85,7 @@ const WriterFn = (props, context) => {
 
 ## extendComponentRender
 
-通过 `render` 函数透传`props` `attrs` `slots` 到分发器的读组件和写组件中。
+通过 `render` 函数透传`props` `attrs` `slots` 到分发器的读组件和写组件中�?
 
 - 示例
 
@@ -100,11 +100,11 @@ const WriterFn = (props, context) => {
 ## Type
 
 - RWDispatcherState
-  - 定义分发器的状态类型，'reader' 或 'writer'。
+  - 定义分发器的状态类型，'reader' �?'writer'�?
 
 - rwDispatcherProps
 
-  分发器的固定 props 类型，这些 props 不需要透传到读组件和写组件的。代码实现如下：
+  分发器的固定 props 类型，这�?props 不需要透传到读组件和写组件的。代码实现如下：
 
 ```ts
   [`${Config.namespace}State`]: {

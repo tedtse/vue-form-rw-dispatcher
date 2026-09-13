@@ -2,8 +2,15 @@
   "name": "@vue-form-rw-dispatcher/helper",
   "version": "1.0.0",
   "description": "",
-  "main": "index.tsx",
-  "types": "index.tsx",
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": {
+      "types": "./index.ts",
+      "import": "./index.ts",
+      "require": "./index.ts"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
