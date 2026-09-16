@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <SliderDispatcher v-model="value" />
 </template>
 
@@ -8,7 +8,7 @@ import { ElSlider, sliderProps, type SliderProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 
 const SliderReader = defineComponent<SliderProps>({
   name: "SliderReader",

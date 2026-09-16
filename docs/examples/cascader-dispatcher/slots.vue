@@ -6,21 +6,17 @@
     clearable
   >
     <template #[`${Config.namespace}Reader`]>
-      <span style="color: green" key="reader">
-        reader: {{ value }}
-      </span>
+      <span style="color: green" key="reader"> reader: {{ value }} </span>
     </template>
     <template #[`${Config.namespace}Writer`]>
-      <span style="color: red" key="writer">
-        writer: {{ value }}
-      </span>
+      <span style="color: red" key="writer"> writer: {{ value }} </span>
     </template>
   </el-cascader-dispatcher>
 </template>
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Config } from "@vue-form-rw-dispatcher/element-plus";
+import { Config } from "element-plus-form-dispatcher";
 
 const value = ref<(string | number)[]>([]);
 
@@ -69,4 +65,3 @@ const options = [
   },
 ];
 </script>
-

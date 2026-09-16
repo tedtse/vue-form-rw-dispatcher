@@ -16,6 +16,6 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { Config } from "@vue-form-rw-dispatcher/element-plus";
+import { Config } from "element-plus-form-dispatcher";
 const checked = ref(true);
 </script>

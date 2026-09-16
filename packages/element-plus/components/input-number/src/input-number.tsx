@@ -2,7 +2,7 @@ import { ElInputNumber, type InputNumberProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import InputNumberReader from "./reader.vue";
 
 export const ElInputNumberDispatcher = defineRWDispatcher<InputNumberProps>({

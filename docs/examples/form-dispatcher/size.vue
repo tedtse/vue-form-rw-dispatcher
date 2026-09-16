@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="flex items-center">
     <el-radio-group v-model="size" aria-label="size control">
       <el-radio-button value="large">large</el-radio-button>
@@ -88,7 +88,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import type { ComponentSize, FormProps } from "element-plus";
-import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import { type RWDispatcherState } from "element-plus-form-dispatcher/helper";
 
 const size = ref<ComponentSize>("default");
 const labelPosition = ref<FormProps["labelPosition"]>("right");

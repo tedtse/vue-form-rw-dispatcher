@@ -2,7 +2,7 @@ import { ElSwitch, type SwitchProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import SwitchReader from "./reader.vue";
 
 export const ElSwitchDispatcher = defineRWDispatcher<SwitchProps>({

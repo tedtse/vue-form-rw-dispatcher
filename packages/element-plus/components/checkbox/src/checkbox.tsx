@@ -2,7 +2,7 @@ import { ElCheckbox, type CheckboxProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import CheckboxReader from "./checkbox-reader.vue";
 
 export const ElCheckboxDispatcher = defineRWDispatcher<CheckboxProps>({

@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <el-dispatcher-provider
       disabled
@@ -81,7 +81,7 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import { type RWDispatcherState } from "element-plus-form-dispatcher/helper";
 
 const rwState = ref<RWDispatcherState>("write");
 

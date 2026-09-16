@@ -2,7 +2,7 @@ import { ElTimeSelect, type TimeSelectProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import TimeSelectReader from "./reader.vue";
 
 export const ElTimeSelectDispatcher = defineRWDispatcher<TimeSelectProps>({

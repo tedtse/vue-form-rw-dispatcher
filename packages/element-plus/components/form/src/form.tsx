@@ -11,7 +11,7 @@ import {
   attachDispatcherRef,
   type RWDispatcherProps,
   type RWDispatcherState,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import {
   SIZE_CONTEXT_PROVIDER,
   SIZE,
@@ -20,9 +20,9 @@ import {
   DISABLED_CONTEXT_PROVIDER,
   TypeProvideMap,
   DispatcherTypeTag,
-} from "@vue-form-rw-dispatcher/element-plus/constants";
-import { type EPRWDispatcherProps } from "@vue-form-rw-dispatcher/element-plus/type";
-import { Config } from "@vue-form-rw-dispatcher/element-plus/config";
+} from "element-plus-form-dispatcher/constants";
+import { type EPRWDispatcherProps } from "element-plus-form-dispatcher/type";
+import { Config } from "element-plus-form-dispatcher/config";
 
 const nsStateKey = `${Config.namespace}State`;
 

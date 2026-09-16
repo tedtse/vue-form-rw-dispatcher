@@ -4,7 +4,7 @@ import {
   defineRWDispatcherPropType,
   extendComponent,
   rwDispatcherProps,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import CascaderReader from "./reader.vue";
 
 type CascaderProps = ExtractPropTypes<typeof cascaderProps>;

@@ -1,12 +1,12 @@
-import {
+﻿import {
   DEFAULT_NAMESPACE,
   configKeys as helperConfigKeys,
   setConfig as setHelperConfig,
   type ConfigType as HelperConfigType,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import type { SwitchConfigType } from "./type";
 
-export { DEFAULT_NAMESPACE } from "@vue-form-rw-dispatcher/helper";
+export { DEFAULT_NAMESPACE } from "element-plus-form-dispatcher/helper";
 
 export type ConfigType = HelperConfigType &
   SwitchConfigType & {

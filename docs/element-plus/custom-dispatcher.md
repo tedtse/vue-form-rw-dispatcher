@@ -1,11 +1,11 @@
-# 自定义分发器
+﻿# 自定义分发器
 
 现实开发过程中，我们可能会遇到一些场景，常规的表单分发器不能满足实际需求，需要自定义分发器。
 
 ## 快速开始
 
 ```ts
-import { defineRWDispatcher } from "@vue-form-rw-dispatcher/helper";
+import { defineRWDispatcher } from "element-plus-form-dispatcher/helper";
 
 defineRWDispatcher<Props>({
   name: "CustomDispatcher",

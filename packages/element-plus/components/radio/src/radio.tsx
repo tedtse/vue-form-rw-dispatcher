@@ -2,7 +2,7 @@ import { ElRadio, type RadioProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import RadioReader from "./radio-reader.vue";
 
 export const ElRadioDispatcher = defineRWDispatcher<RadioProps>({

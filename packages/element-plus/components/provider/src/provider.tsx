@@ -6,9 +6,9 @@ import {
   type ComponentObjectPropsOptions,
 } from "vue";
 import { formContextKey, type FormContext } from "element-plus";
-import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
-import { Config } from "@vue-form-rw-dispatcher/element-plus/config";
-import { type EPRWDispatcherProps } from "@vue-form-rw-dispatcher/element-plus/type";
+import { type RWDispatcherState } from "element-plus-form-dispatcher/helper";
+import { Config } from "element-plus-form-dispatcher/config";
+import { type EPRWDispatcherProps } from "element-plus-form-dispatcher/type";
 import {
   SIZE_CONTEXT_PROVIDER,
   SIZE,
@@ -17,7 +17,7 @@ import {
   DISABLED_CONTEXT_PROVIDER,
   TypeProvideMap,
   DispatcherTypeTag,
-} from "@vue-form-rw-dispatcher/element-plus/constants";
+} from "element-plus-form-dispatcher/constants";
 
 const nsStateKey = `${Config.namespace}State`;
 

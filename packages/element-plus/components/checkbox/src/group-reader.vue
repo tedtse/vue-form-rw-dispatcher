@@ -60,7 +60,7 @@ import {
   type CheckboxProps,
 } from "element-plus";
 import checkboxReader from "./checkbox-reader.vue";
-import { Config } from "@vue-form-rw-dispatcher/helper";
+import { Config } from "element-plus-form-dispatcher/helper";
 import { CHECKBOX_GROUP_KEY } from "./use-reader";
 import { useNamespace, useSize, useDisabled } from "../../../composables";
 

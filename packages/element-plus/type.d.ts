@@ -1,4 +1,4 @@
-import { type RWDispatcherProps } from "@vue-form-rw-dispatcher/helper";
+import { type RWDispatcherProps } from "element-plus-form-dispatcher/helper";
 
 export type SwitchConfigType = {
   activeText?: string;

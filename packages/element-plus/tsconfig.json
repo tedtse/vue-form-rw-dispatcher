@@ -1,4 +1,10 @@
 {
   "include": ["components/**/*", "composables/**/*", "themes/**/*", "index.ts"],
-  "extends": "@vue/tsconfig/tsconfig.dom.json"
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "paths": {
+      "element-plus-form-dispatcher/helper": ["../helper"],
+      "element-plus-form-dispatcher/*": ["./*"]
+    }
+  }
 }

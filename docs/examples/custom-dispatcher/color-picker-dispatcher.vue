@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <ColorPickerDispatcher v-model="color" />
 </template>
 
@@ -8,7 +8,7 @@ import { ElColorPicker, type ColorPickerProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 
 const ColorPickerDispatcher = defineRWDispatcher<ColorPickerProps>({
   name: "ColorPickerDispatcher",

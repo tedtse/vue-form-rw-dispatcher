@@ -3,3 +3,4 @@ docs/.vitepress/cache
 docs/.vitepress/dist
 docs/components.d.ts
 packages/element-plus/coverage
+dist/

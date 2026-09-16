@@ -2,7 +2,7 @@ import { ElSelect, type SelectProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import SelectReader from "./reader.vue";
 
 export const ElSelectDispatcher = defineRWDispatcher<SelectProps>({

@@ -2,7 +2,7 @@ import { ElRadioGroup, type RadioGroupProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import RadioGroupReader from "./group-reader.vue";
 
 export const ElRadioGroupDispatcher = defineRWDispatcher<RadioGroupProps>({

@@ -8,7 +8,12 @@
     "jsxImportSource": "vue",
     "strict": true,
     "skipLibCheck": true,
-    "types": ["vitepress/client"]
+    "types": ["vitepress/client"],
+    "paths": {
+      "element-plus-form-dispatcher": ["../packages/element-plus"],
+      "element-plus-form-dispatcher/helper": ["../packages/helper"],
+      "element-plus-form-dispatcher/theme": ["../packages/element-plus-theme"]
+    }
   },
   "include": [
     ".vitepress/**/*.mts",

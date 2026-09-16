@@ -7,7 +7,9 @@
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs preview",
-    "scss:build": "pnpm run -C packages/element-plus-theme build",
+    "build": "pnpm run -C scripts/build build",
+    "build:element-plus": "pnpm run -C scripts/build build:element-plus",
+    "build:theme": "pnpm run -C scripts/build build:theme",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
   },

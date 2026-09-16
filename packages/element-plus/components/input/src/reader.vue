@@ -57,7 +57,7 @@ import {
   useNamespace,
   useSize,
   useDisabled,
-} from "@vue-form-rw-dispatcher/element-plus/composables";
+} from "element-plus-form-dispatcher/composables";
 
 const props = defineProps<InputProps>();
 defineOptions({

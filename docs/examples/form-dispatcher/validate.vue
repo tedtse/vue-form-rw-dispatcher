@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <el-form-dispatcher
       ref="ruleFormRef"
@@ -106,9 +106,9 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import { ElFormDispatcher } from "@vue-form-rw-dispatcher/element-plus";
+import { ElFormDispatcher } from "element-plus-form-dispatcher";
 import type { FormInstance, FormRules } from "element-plus";
-import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import { type RWDispatcherState } from "element-plus-form-dispatcher/helper";
 
 const rwState = ref<RWDispatcherState>("write");
 

@@ -1,4 +1,4 @@
-# 分发器助手
+﻿# 分发器助手
 
 分发器助手是一个工具库，用于定义分发器的行为。不仅仅是 `Element Plus`，我们也可以为`Ant Design Vue`、`Naive UI`、`Vant` 等主流组件库定义分发器，覆盖机械的增删查改页面，减少后续的维护成本。
 
@@ -11,7 +11,7 @@
 - 示例
 
 ```ts
-import { defineRWDispatcherPropType } from "@vue-form-rw-dispatcher/helper";
+import { defineRWDispatcherPropType } from "element-plus-form-dispatcher/helper";
 
 defineRWDispatcherPropType({
   name: "CustomDispatcher",
@@ -51,7 +51,7 @@ defineRWDispatcherPropType({
 - 示例
 
 ```ts
-import { defineRWDispatcherGeneric } from "@vue-form-rw-dispatcher/helper";
+import { defineRWDispatcherGeneric } from "element-plus-form-dispatcher/helper";
 
 type Props = Record<string, unknown>;
 
@@ -78,7 +78,7 @@ defineRWDispatcherGeneric<Props>({
 - 示例
 
 ```ts
-import { extendComponentJSX } from "@vue-form-rw-dispatcher/helper";
+import { extendComponentJSX } from "element-plus-form-dispatcher/helper";
 
 const WriterFn = (props, context) => {
   return extendComponentJSX("el-input", props, context);
@@ -92,7 +92,7 @@ const WriterFn = (props, context) => {
 - 示例
 
 ```ts
-import { extendComponentRender } from "@vue-form-rw-dispatcher/helper";
+import { extendComponentRender } from "element-plus-form-dispatcher/helper";
 
 const WriterFn = (props, context) => {
   return extendComponentRender("el-input", props, context);

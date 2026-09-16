@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div>
     <el-input-dispatcher
       v-model="input"
@@ -23,7 +23,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { type RWDispatcherState } from "@vue-form-rw-dispatcher/helper";
+import { type RWDispatcherState } from "element-plus-form-dispatcher/helper";
 
 const input = ref("abc");
 const rwState = ref<RWDispatcherState>("write");

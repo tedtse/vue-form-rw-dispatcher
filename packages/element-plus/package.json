@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.ts",
   "types": "index.ts",
+  "scripts": {
+    "build": "pnpm run -C ../../scripts/build build:element-plus"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

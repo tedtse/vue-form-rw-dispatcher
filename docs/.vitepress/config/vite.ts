@@ -1,4 +1,4 @@
-import Components from "unplugin-vue-components/vite";
+﻿import Components from "unplugin-vue-components/vite";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import vueJsx from "@vitejs/plugin-vue-jsx";
@@ -6,6 +6,15 @@ import { markdownTransform } from "../plugins/markdown-transform";
 
 export const getViteConfig = () => {
   return {
+    resolve: {
+      alias: {
+        // TypeScript paths 别名在 Vite 中不生效，需要显式映射到实际 workspace 包
+        "element-plus-form-dispatcher/theme":
+          "@vue-form-rw-dispatcher/element-plus-theme",
+        "element-plus-form-dispatcher/helper": "@vue-form-rw-dispatcher/helper",
+        "element-plus-form-dispatcher": "@vue-form-rw-dispatcher/element-plus",
+      },
+    },
     plugins: [
       vueJsx(),
       Components({

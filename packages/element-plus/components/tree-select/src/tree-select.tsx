@@ -2,7 +2,7 @@ import { ElTreeSelect } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import TreeSelectReader from "./reader.vue";
 import type { TreeSelectProps } from "./types";
 

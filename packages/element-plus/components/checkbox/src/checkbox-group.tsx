@@ -2,7 +2,7 @@ import { ElCheckboxGroup, type CheckboxGroupProps } from "element-plus";
 import {
   defineRWDispatcher,
   extendComponent,
-} from "@vue-form-rw-dispatcher/helper";
+} from "element-plus-form-dispatcher/helper";
 import CheckboxGroupReader from "./group-reader.vue";
 
 export const ElCheckboxGroupDispatcher = defineRWDispatcher<CheckboxGroupProps>(
