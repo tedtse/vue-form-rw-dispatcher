@@ -10,6 +10,7 @@
     "build": "pnpm run -C scripts/build build",
     "build:element-plus": "pnpm run -C scripts/build build:element-plus",
     "build:theme": "pnpm run -C scripts/build build:theme",
+    "build:pkg-json": "pnpm run -C scripts/build build:pkg-json",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
   },

@@ -5,6 +5,7 @@ import consola from "consola";
 import { buildPackage } from "./build.mjs";
 import { generateTypes } from "./generate-types.mjs";
 import { buildTheme } from "./copy-theme.mjs";
+import { copyPkgJson } from "./copy-pkg-json.mjs";
 import { elementPlusConfig } from "./configs/element-plus.mjs";
 import { logError, logDone } from "./utils.mjs";
 
@@ -16,6 +17,7 @@ const REGISTRY = {
 // Copy / asset-only tasks that don't go through rolldown.
 const TASKS = {
   theme: buildTheme,
+  "pkg-json": copyPkgJson,
 };
 
 const ALL = [...Object.keys(REGISTRY), ...Object.keys(TASKS)];
