@@ -1,0 +1,43 @@
+{
+  "name": "element-plus-form-dispatcher",
+  "main": "ems/index.mjs",
+  "module": "ems/index.mjs",
+  "types": "ems/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./global": {
+      "types": "./global.d.ts"
+    },
+    "./es": {
+      "types": "./es/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./lib": {
+      "types": "./lib/index.d.ts",
+      "require": "./lib/index.js"
+    },
+    "./es/*.mjs": {
+      "types": "./es/*.d.ts",
+      "import": "./es/*.mjs"
+    },
+    "./es/*": {
+      "types": ["./es/*.d.ts", "./es/*/index.d.ts"],
+      "import": "./es/*.mjs"
+    },
+    "./lib/*.js": {
+      "types": "./lib/*.d.ts",
+      "require": "./lib/*.js"
+    },
+    "./lib/*": {
+      "types": ["./lib/*.d.ts", "./lib/*/index.d.ts"],
+      "require": "./lib/*.js"
+    },
+    "./*": "./*"
+  },
+  "unpkg": "umd/index.full.js",
+  "style": "theme/index.css"
+}

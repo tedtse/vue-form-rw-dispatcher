@@ -2,36 +2,12 @@
   "name": "@vue-form-rw-dispatcher/element-plus",
   "version": "1.0.0",
   "description": "form rw dispatcher for element-plus",
-  "main": "ems/index.mjs",
+  "main": "index.ts",
   "types": "index.ts",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.21.0",
-  "exports": {
-    ".": {
-      "types": "./ems/index.d.ts",
-      "import": "./ems/index.mjs",
-      "require": "./cjs/index.js"
-    },
-    "./ems": {
-      "types": "./ems/index.d.ts",
-      "import": "./ems/index.mjs"
-    },
-    "./ems/*.mjs": {
-      "types": "./ems/*.d.ts",
-      "import": "./ems/*.mjs"
-    },
-    "./cjs": {
-      "types": "./cjs/index.d.ts",
-      "import": "./cjs/index.js"
-    },
-    "./cjs/*.js": {
-      "types": "./cjs/*.d.ts",
-      "import": "./cjs/*.js"
-    },
-    "./*": "./*"
-  },
   "peerDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "element-plus": "^2.13.0",

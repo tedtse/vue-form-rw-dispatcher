@@ -101,7 +101,6 @@ export default defineComponent({
     );
 
     return {
-      props,
       nsText,
       Namespace,
       checkboxSlot,

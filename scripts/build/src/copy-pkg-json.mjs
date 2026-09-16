@@ -10,17 +10,17 @@ import {
 import { elementPlusConfig } from "./configs/element-plus.mjs";
 
 /**
- * Public package name for the built artifact shipped under `dist/`.
- * The workspace source package keeps its scoped name
- * (`@vue-form-rw-dispatcher/element-plus`), but the distributed folder is
- * consumed/published as `element-plus-form-dispatcher`.
+ * Distribution overrides for the built artifact. Lives next to this module so
+ * the shipped `package.json` can be tuned (name, entry fields, exports, unpkg,
+ * style, ...) without touching the workspace source package. Top-level keys
+ * here win over the source `package.json`; keys absent here are inherited from
+ * the source (shallow merge).
  */
-const DIST_NAME = "element-plus-form-dispatcher";
+const EXTEND_FILE = path.join(import.meta.dirname, "pkg-extend.json");
 
 /**
  * Copy `packages/element-plus/package.json` into the element-plus dist folder,
- * rewriting the `name` field to `element-plus-form-dispatcher` while keeping
- * every other field identical to the source.
+ * shallow-merging `pkg-extend.json` over it (extend wins on top-level keys).
  *
  * Must run after the rolldown build (which cleans the outDir), so it is
  * registered as a task that executes later in the pipeline.
@@ -33,15 +33,19 @@ export async function copyPkgJson() {
     if (!fs.existsSync(srcFile)) {
         throw new Error(`[pkg-json] ${srcFile} not found`);
     }
+    if (!fs.existsSync(EXTEND_FILE)) {
+        throw new Error(`[pkg-json] ${EXTEND_FILE} not found`);
+    }
 
     logStep(`[pkg-json] copying package.json -> ${elementPlusConfig.outDir}/`);
     ensureDir(absOut);
 
     const pkg = JSON.parse(fs.readFileSync(srcFile, "utf8"));
-    pkg.name = DIST_NAME;
+    const extend = JSON.parse(fs.readFileSync(EXTEND_FILE, "utf8"));
+    const merged = { ...pkg, ...extend };
 
-    fs.writeFileSync(destFile, `${JSON.stringify(pkg, null, 2)}\n`, "utf8");
+    fs.writeFileSync(destFile, `${JSON.stringify(merged, null, 2)}\n`, "utf8");
     logDone(
-        `[pkg-json] ${elementPlusConfig.outDir}/package.json ready (name: ${DIST_NAME})`,
+        `[pkg-json] ${elementPlusConfig.outDir}/package.json ready (name: ${merged.name})`,
     );
 }
