@@ -106,4 +106,8 @@ const form = reactive({
 const handleStateToggle = () => {
   console.log(`Current stage: ${rwState.value}`);
 };
+
+const onSubmit = () => {
+  console.log("submit!");
+};
 </script>
