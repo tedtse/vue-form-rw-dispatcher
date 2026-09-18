@@ -68,14 +68,7 @@ export async function generateTypes(config) {
     );
 
     // 3. Copy declarations into both esm/ and cjs/
-    // vue-tsc may infer rootDir as `packages/` (due to helper cross-ref),
-    // putting output under `<typesOut>/element-plus/...`. Detect and strip.
-    const nested = path.join(typesOut, name);
-    const typesSrc = fs.existsSync(nested) && fs.statSync(nested).isDirectory()
-      ? nested
-      : typesOut;
-    copyDeclarations(typesSrc, path.join(absOut, "esm"));
-    copyDeclarations(typesSrc, path.join(absOut, "cjs"));
+    copyEmittedDeclarations(name, typesOut, absOut);
 
     logDone(`[${name}] .d.ts generated and copied to esm/ + cjs/`);
   } catch (err) {
@@ -83,12 +76,7 @@ export async function generateTypes(config) {
     const stdout = err.stdout?.toString() ?? "";
     if (fs.existsSync(typesOut) && fs.readdirSync(typesOut).length > 0) {
       // Declarations were still emitted despite errors
-      const nested = path.join(typesOut, name);
-      const typesSrc = fs.existsSync(nested) && fs.statSync(nested).isDirectory()
-        ? nested
-        : typesOut;
-      copyDeclarations(typesSrc, path.join(absOut, "esm"));
-      copyDeclarations(typesSrc, path.join(absOut, "cjs"));
+      copyEmittedDeclarations(name, typesOut, absOut);
       logDone(`[${name}] .d.ts emitted (with warnings)`);
       if (stdout) console.warn(stdout.slice(0, 2000));
     } else {
@@ -99,6 +87,43 @@ export async function generateTypes(config) {
     // Always drop the temp tsconfig and the intermediate _types/ dir.
     fs.rmSync(tmpTsconfig, { force: true });
     fs.rmSync(typesOut, { recursive: true, force: true });
+  }
+}
+
+/**
+ * Copy emitted declarations from the vue-tsc `typesOut` tree into the target's
+ * `esm/` and `cjs/` directories.
+ *
+ * Because the element-plus package self-references the sibling `helper` package
+ * via the `element-plus-form-dispatcher/helper` alias, vue-tsc infers a common
+ * rootDir of `packages/`, so it emits TWO sibling trees under `typesOut`:
+ *   <typesOut>/element-plus/...   (this package -> esm/, cjs/)
+ *   <typesOut>/helper/...         (sibling    -> esm/helper/, cjs/helper/)
+ * The helper tree MUST be copied too, otherwise the published
+ * `exports["./helper"].types` (`esm/helper/index.d.ts`) is missing and consumers
+ * get TS7016 ("implicitly has an 'any' type").
+ */
+function copyEmittedDeclarations(name, typesOut, absOut) {
+  const esmDir = path.join(absOut, "esm");
+  const cjsDir = path.join(absOut, "cjs");
+  const pkgDecls = path.join(typesOut, name);
+
+  // rootDir inferred to `packages/` (nested per-package folders).
+  if (fs.existsSync(pkgDecls) && fs.statSync(pkgDecls).isDirectory()) {
+    copyDeclarations(pkgDecls, esmDir);
+    copyDeclarations(pkgDecls, cjsDir);
+    // Any OTHER top-level folder is a cross-package dep (e.g. `helper`); mirror
+    // it under the same-named subdir so self-referenced specifiers resolve.
+    for (const entry of fs.readdirSync(typesOut, { withFileTypes: true })) {
+      if (!entry.isDirectory() || entry.name === name) continue;
+      const src = path.join(typesOut, entry.name);
+      copyDeclarations(src, path.join(esmDir, entry.name));
+      copyDeclarations(src, path.join(cjsDir, entry.name));
+    }
+  } else {
+    // rootDir stayed at the package root: a flat tree.
+    copyDeclarations(typesOut, esmDir);
+    copyDeclarations(typesOut, cjsDir);
   }
 }
 

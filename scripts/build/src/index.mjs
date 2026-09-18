@@ -6,6 +6,7 @@ import { buildPackage } from "./build.mjs";
 import { generateTypes } from "./generate-types.mjs";
 import { buildTheme } from "./copy-theme.mjs";
 import { copyPkgJson } from "./copy-pkg-json.mjs";
+import { copyReadme } from "./copy-readme.mjs";
 import { elementPlusConfig } from "./configs/element-plus.mjs";
 import { logError, logDone } from "./utils.mjs";
 
@@ -18,6 +19,7 @@ const REGISTRY = {
 const TASKS = {
   theme: buildTheme,
   "pkg-json": copyPkgJson,
+  readme: copyReadme,
 };
 
 const ALL = [...Object.keys(REGISTRY), ...Object.keys(TASKS)];

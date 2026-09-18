@@ -12,7 +12,8 @@
     "build": "node src/index.mjs",
     "build:element-plus": "node src/index.mjs element-plus",
     "build:theme": "node src/index.mjs theme",
-    "build:pkg-json": "node src/index.mjs pkg-json"
+    "build:pkg-json": "node src/index.mjs pkg-json",
+    "build:readme": "node src/index.mjs readme"
   },
   "keywords": [
     "rolldown",

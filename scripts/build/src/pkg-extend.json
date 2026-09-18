@@ -1,40 +1,82 @@
 {
   "name": "element-plus-form-dispatcher",
-  "main": "ems/index.mjs",
-  "module": "ems/index.mjs",
-  "types": "ems/index.d.ts",
+  "main": "cjs/index.js",
+  "module": "esm/index.mjs",
+  "types": "esm/index.d.ts",
   "exports": {
     ".": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs",
-      "require": "./lib/index.js"
+      "types": "./esm/index.d.ts",
+      "import": "./esm/index.mjs",
+      "require": "./cjs/index.js"
     },
-    "./global": {
-      "types": "./global.d.ts"
+    "./config": {
+      "types": "./esm/config.d.ts",
+      "import": "./esm/config.mjs",
+      "require": "./cjs/config.js"
     },
-    "./es": {
-      "types": "./es/index.d.ts",
-      "import": "./es/index.mjs"
+    "./helper": {
+      "types": "./esm/helper/index.d.ts",
+      "import": "./esm/helper/index.mjs",
+      "require": "./cjs/helper/index.js"
     },
-    "./lib": {
-      "types": "./lib/index.d.ts",
-      "require": "./lib/index.js"
+    "./helper/*": {
+      "types": ["./esm/helper/*.d.ts", "./esm/helper/*/index.d.ts"],
+      "import": ["./esm/helper/*.mjs", "./esm/helper/*/index.mjs"],
+      "require": ["./cjs/helper/*.js", "./cjs/helper/*/index.js"]
     },
-    "./es/*.mjs": {
-      "types": "./es/*.d.ts",
-      "import": "./es/*.mjs"
+    "./components": {
+      "types": "./esm/components/index.d.ts",
+      "import": "./esm/components/index.mjs",
+      "require": "./cjs/components/index.js"
     },
-    "./es/*": {
-      "types": ["./es/*.d.ts", "./es/*/index.d.ts"],
-      "import": "./es/*.mjs"
+    "./components/*": {
+      "types": ["./esm/components/*.d.ts", "./esm/components/*/index.d.ts"],
+      "import": ["./esm/components/*.mjs", "./esm/components/*/index.mjs"],
+      "require": ["./cjs/components/*.js", "./cjs/components/*/index.js"]
     },
-    "./lib/*.js": {
-      "types": "./lib/*.d.ts",
-      "require": "./lib/*.js"
+    "./composables": {
+      "types": "./esm/composables/index.d.ts",
+      "import": "./esm/composables/index.mjs",
+      "require": "./cjs/composables/index.js"
     },
-    "./lib/*": {
-      "types": ["./lib/*.d.ts", "./lib/*/index.d.ts"],
-      "require": "./lib/*.js"
+    "./composables/*": {
+      "types": ["./esm/composables/*.d.ts", "./esm/composables/*/index.d.ts"],
+      "import": ["./esm/composables/*.mjs", "./esm/composables/*/index.mjs"],
+      "require": ["./cjs/composables/*.js", "./cjs/composables/*/index.js"]
+    },
+    "./constants": {
+      "types": "./esm/constants/index.d.ts",
+      "import": "./esm/constants/index.mjs",
+      "require": "./cjs/constants/index.js"
+    },
+    "./constants/*": {
+      "types": ["./esm/constants/*.d.ts", "./esm/constants/*/index.d.ts"],
+      "import": ["./esm/constants/*.mjs", "./esm/constants/*/index.mjs"],
+      "require": ["./cjs/constants/*.js", "./cjs/constants/*/index.js"]
+    },
+    "./esm": {
+      "types": "./esm/index.d.ts",
+      "import": "./esm/index.mjs"
+    },
+    "./esm/*.mjs": {
+      "types": "./esm/*.d.ts",
+      "import": "./esm/*.mjs"
+    },
+    "./esm/*": {
+      "types": ["./esm/*.d.ts", "./esm/*/index.d.ts"],
+      "import": "./esm/*.mjs"
+    },
+    "./cjs": {
+      "types": "./cjs/index.d.ts",
+      "require": "./cjs/index.js"
+    },
+    "./cjs/*.js": {
+      "types": "./cjs/*.d.ts",
+      "require": "./cjs/*.js"
+    },
+    "./cjs/*": {
+      "types": ["./cjs/*.d.ts", "./cjs/*/index.d.ts"],
+      "require": "./cjs/*.js"
     },
     "./*": "./*"
   },
