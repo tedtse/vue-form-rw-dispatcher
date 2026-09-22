@@ -16,6 +16,8 @@ export const DispatcherPlugin = (
   let _options: DispatcherPluginOptions = {};
   if (typeof options === "string") {
     _options = { namespace: options };
+  } else if (options) {
+    _options = options;
   }
   const {
     namespace = DEFAULT_NAMESPACE,

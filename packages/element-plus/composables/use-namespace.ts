@@ -2,10 +2,11 @@ import { computed, getCurrentInstance, inject, ref, unref } from "vue";
 import type { InjectionKey, Ref } from "vue";
 import { Config } from "../config";
 
-const classNamespace = Config.namespace.replace(
-  /[A-Z]/g,
-  (m) => `-${m.toLowerCase()}`,
-);
+const toClassNamespace = (ns: string) =>
+  ns.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`);
+// Resolved lazily (not at module load) so a runtime `setConfig({ namespace })`
+// performed by `DispatcherPlugin` is reflected in the generated CSS classes.
+const getClassNamespace = () => toClassNamespace(Config.namespace);
 const statePrefix = "is-";
 
 const _bem = (
@@ -37,10 +38,10 @@ export const useGetDerivedNamespace = (
   const derivedNamespace =
     namespaceOverrides ||
     (getCurrentInstance()
-      ? inject(namespaceContextKey, ref(classNamespace))
-      : ref(classNamespace));
+      ? inject(namespaceContextKey, ref(getClassNamespace()))
+      : ref(getClassNamespace()));
   const namespace = computed(() => {
-    return unref(derivedNamespace) || classNamespace;
+    return unref(derivedNamespace) || getClassNamespace();
   });
   return namespace;
 };

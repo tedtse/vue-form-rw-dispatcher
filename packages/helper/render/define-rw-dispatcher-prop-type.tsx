@@ -51,11 +51,24 @@ export function defineRWDispatcherPropType({
         | ComputedRef<RWDispatcherState>
         | Ref<RWDispatcherState> = inject(nsStateKey, ref("write"));
       const state = computed(() => {
-        return Reflect.get(props, nsStateKey) || injectState?.value;
+        return (
+          Reflect.get(props, nsStateKey) ||
+          Reflect.get(context.attrs, nsStateKey) ||
+          injectState?.value
+        );
       });
       const otherProps = omitRWDispatcherState(
         props as Record<string, unknown> & RWDispatcherProps,
       );
+      // Hand the writer/reader fns attrs with the (namespaced) state key
+      // stripped, so it never leaks onto the rendered DOM under a custom
+      // namespace where it can't be a declared prop.
+      const renderContext = {
+        ...context,
+        attrs: omitRWDispatcherState(
+          context.attrs as Record<string, unknown> & RWDispatcherProps,
+        ),
+      } as unknown as SetupContext;
       const { slots, expose } = context;
       const reader = ref<unknown>();
       const writer = ref<unknown>();
@@ -75,7 +88,7 @@ export function defineRWDispatcherPropType({
           return attachDispatcherRef(
             slots[`${Config.namespace}Reader`]
               ? slots[`${Config.namespace}Reader`]?.()
-              : readerFn(otherProps as Omit<Props, StateKey>, context),
+              : readerFn(otherProps as Omit<Props, StateKey>, renderContext),
             reader,
           );
         }
@@ -83,7 +96,7 @@ export function defineRWDispatcherPropType({
           return attachDispatcherRef(
             slots[`${Config.namespace}Writer`]
               ? slots[`${Config.namespace}Writer`]?.()
-              : writerFn(otherProps as Omit<Props, StateKey>, context),
+              : writerFn(otherProps as Omit<Props, StateKey>, renderContext),
             writer,
           );
         }

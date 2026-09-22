@@ -23,13 +23,18 @@ const nsStateKey = `${Config.namespace}State`;
 
 const ElDispatcherProvider = defineComponent(
   (props, { attrs, slots }) => {
+    // Resolve the state key at setup time so a runtime `setConfig({ namespace })`
+    // from `DispatcherPlugin` is honoured; provide under the same dynamic key so
+    // descendant dispatchers (which inject the setup-time key) stay in sync.
+    const stateKey = `${Config.namespace}State`;
     const state = computed(() => {
       return (
-        (Reflect.get(props, nsStateKey) as unknown as RWDispatcherState) ||
+        (Reflect.get(props, stateKey) as unknown as RWDispatcherState) ||
+        (Reflect.get(attrs, stateKey) as unknown as RWDispatcherState) ||
         "write"
       );
     });
-    provide(nsStateKey, state);
+    provide(stateKey, state);
     const size = computed(() => {
       return Reflect.get(props, PROPS_SIZE) || SIZE.DEFAULT;
     });

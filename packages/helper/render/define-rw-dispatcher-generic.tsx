@@ -26,12 +26,17 @@ export function defineRWDispatcherGeneric<
   return /*#__PURE__*/ defineComponent<Partial<P> & E>(
     <P, E>(props: P & E, context: SetupContext) => {
       const { attrs, slots, expose } = context;
+      // Resolve the state key at setup time (not module load) so a runtime
+      // `setConfig({ namespace })` performed by `DispatcherPlugin` is honoured
+      // by components that were already imported.
+      const stateKey = `${Config.namespace}State`;
       const injectState:
         | ComputedRef<RWDispatcherState>
-        | Ref<RWDispatcherState> = inject(nsStateKey, ref("write"));
+        | Ref<RWDispatcherState> = inject(stateKey, ref("write"));
       const state = computed(() => {
         return (
-          (props as Record<string, unknown> & RWDispatcherProps)[nsStateKey] ||
+          (props as Record<string, unknown> & RWDispatcherProps)[stateKey] ||
+          (attrs as Record<string, unknown> & RWDispatcherProps)[stateKey] ||
           injectState?.value
         );
       });
@@ -39,6 +44,13 @@ export function defineRWDispatcherGeneric<
       const otherStates = omitRWDispatcherState(
         attrs as Record<string, unknown> & RWDispatcherProps,
       );
+      // Hand the writer/reader fns attrs with the (namespaced) state key
+      // stripped, so it never leaks onto the rendered DOM under a custom
+      // namespace where it can't be a declared prop.
+      const renderContext = {
+        ...context,
+        attrs: otherStates,
+      } as unknown as SetupContext;
       const reader = ref<unknown>();
       const writer = ref<unknown>();
 
@@ -57,7 +69,7 @@ export function defineRWDispatcherGeneric<
           return attachDispatcherRef(
             slots[`${Config.namespace}Reader`]
               ? slots[`${Config.namespace}Reader`]?.()
-              : readerFn(otherStates as Omit<P & E, StateKey>, context),
+              : readerFn(otherStates as Omit<P & E, StateKey>, renderContext),
             reader,
           );
         }
@@ -65,7 +77,7 @@ export function defineRWDispatcherGeneric<
           return attachDispatcherRef(
             slots[`${Config.namespace}Writer`]
               ? slots[`${Config.namespace}Writer`]?.()
-              : writerFn(otherStates as Omit<P & E, StateKey>, context),
+              : writerFn(otherStates as Omit<P & E, StateKey>, renderContext),
             writer,
           );
         }

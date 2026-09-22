@@ -28,19 +28,27 @@ const nsStateKey = `${Config.namespace}State`;
 
 const ElFormDispatcher = defineComponent(
   (props, context) => {
+    // Resolve the state key at setup time so a runtime `setConfig({ namespace })`
+    // is honoured; provide under the same dynamic key for descendant dispatchers.
+    const stateKey = `${Config.namespace}State`;
     const state = computed(() => {
       return (
         (Reflect.get(
-          props as FormProps & {
-            [nsStateKey]: RWDispatcherProps;
-            activeText: string;
-            inactiveText: string;
-          },
-          nsStateKey,
-        ) as unknown as RWDispatcherState) || "write"
+          props as FormProps &
+            RWDispatcherProps & {
+              activeText: string;
+              inactiveText: string;
+            },
+          stateKey,
+        ) as unknown as RWDispatcherState) ||
+        (Reflect.get(
+          context.attrs as Record<string, unknown>,
+          stateKey,
+        ) as unknown as RWDispatcherState) ||
+        "write"
       );
     });
-    provide(nsStateKey, state);
+    provide(stateKey, state);
     const size = computed(() => {
       return Reflect.get(props as FormProps, PROPS_SIZE) || SIZE.DEFAULT;
     });

@@ -64,6 +64,7 @@ export default defineComponent({
     const nsText = useNamespace("el-text");
     const disabled = useDisabled();
     const size = useSize();
+    const attrs = useAttrs();
 
     onMounted(() => {
       // Inject parent checkbox group instance
@@ -96,9 +97,16 @@ export default defineComponent({
       isTrue.value = modelValue === true;
     });
 
-    const nsType = computed(
-      () => (props as Record<string, unknown>)[`${Namespace}Type`],
-    );
+    const nsType = computed(() => {
+      // Read the (namespaced) type key dynamically so a runtime namespace set
+      // by `DispatcherPlugin` still resolves (custom namespace lands in attrs
+      // rather than the module-declared prop).
+      const key = `${Config.namespace}Type`;
+      return (
+        (props as Record<string, unknown>)[key] ??
+        (attrs as Record<string, unknown>)[key]
+      );
+    });
 
     return {
       nsText,
