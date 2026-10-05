@@ -74,18 +74,26 @@ export function defineRWDispatcherGeneric<
             `[RWDispatcher] rwDispatcherState is defined incorrect, please provide rwDispatcherState via props or context injection.`,
           );
         }
+        const readerSlotKey = `${Config.namespace}Reader`;
+        const writerSlotKey = `${Config.namespace}Writer`;
         if (state.value === "read") {
+          // Vue 3 keeps template slot names as-is (e.g. `#ns-reader`),
+          // so also probe the hyphenated spelling.
+          const readerSlot =
+            slots[readerSlotKey] || slots[hyphenate(readerSlotKey)];
           return attachDispatcherRef(
-            slots[`${Config.namespace}Reader`]
-              ? slots[`${Config.namespace}Reader`]?.()
+            readerSlot
+              ? readerSlot()
               : readerFn(otherStates as Omit<P & E, StateKey>, renderContext),
             reader,
           );
         }
         if (state.value === "write") {
+          const writerSlot =
+            slots[writerSlotKey] || slots[hyphenate(writerSlotKey)];
           return attachDispatcherRef(
-            slots[`${Config.namespace}Writer`]
-              ? slots[`${Config.namespace}Writer`]?.()
+            writerSlot
+              ? writerSlot()
               : writerFn(otherStates as Omit<P & E, StateKey>, renderContext),
             writer,
           );

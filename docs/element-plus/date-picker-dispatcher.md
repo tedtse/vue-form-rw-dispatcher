@@ -51,3 +51,7 @@ date-picker-dispatcher/custom-prefix-icon
 date-picker-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-date-picker` 的 `props` `attrs` `slots` 完全一致

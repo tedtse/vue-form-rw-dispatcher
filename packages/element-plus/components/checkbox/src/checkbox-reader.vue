@@ -1,5 +1,6 @@
 <template>
   <div
+    v-show="isTrue"
     :class="[
       { [nsText.b('container')]: nsType === 'container' },
       { [nsText.b('item')]: nsType === 'item' },

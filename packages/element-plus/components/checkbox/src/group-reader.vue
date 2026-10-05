@@ -19,11 +19,8 @@
             [`${Config.namespace}Type`]: 'item',
           }"
         >
-          <template #default>
-            <component
-              v-if="getItemDefaultSlot(item)"
-              :is="getItemDefaultSlot(item)"
-            />
+          <template v-if="getItemDefaultSlot(item)" #default>
+            <component :is="getItemDefaultSlot(item)" />
           </template>
         </checkbox-reader>
       </template>

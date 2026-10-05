@@ -6,6 +6,26 @@
     <el-form-item label="Instant delivery">
       <el-switch-dispatcher v-model="form.delivery" :ns-state="rwState" />
     </el-form-item>
+    <el-form-item label="Activity zone">
+      <el-checkbox-dispatcher
+        v-model="form.checked"
+        :ns-state="rwState"
+        label="Option 1"
+        size="large"
+        disabled
+      >
+        <template #ns-reader>
+          <span style="color: green" key="reader"
+            >reader: {{ form.checked }}</span
+          >
+        </template>
+        <template #nsWriter>
+          <span style="color: red" key="writer"
+            >writer: {{ form.checked }}</span
+          >
+        </template>
+      </el-checkbox-dispatcher>
+    </el-form-item>
     <el-switch
       v-model="rwState"
       active-value="write"
@@ -29,7 +49,7 @@ const rwState = ref<RWDispatcherState>("read");
 const form = reactive({
   name: "",
   region: "",
-  date1: "",
+  checked: false,
   date2: "",
   delivery: false,
   type: [],

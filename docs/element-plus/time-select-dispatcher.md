@@ -29,3 +29,7 @@ time-select-dispatcher/time-formats
 time-select-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-time-select` 的 `props` `attrs` `slots` 完全一致

@@ -101,3 +101,7 @@ input-dispatcher/slots
 如示例中 #${Config.namespace}Reader 加上了 key="reader", #${Config.namespace}Writer 加上了 key="writer"
 
 :::
+
+### API
+
+与 `el-input` 的 `props` `attrs` `slots` 完全一致

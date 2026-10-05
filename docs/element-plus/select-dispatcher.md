@@ -95,3 +95,7 @@ select-dispatcher/custom-label
 select-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-select` 的 `props` `attrs` `slots` 完全一致

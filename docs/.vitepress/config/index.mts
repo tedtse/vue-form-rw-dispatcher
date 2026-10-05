@@ -5,7 +5,8 @@ import { mdPlugin } from "./markdown";
 
 export default withMermaid(
   defineConfig({
-    base: "/",
+    base: "/vue-form-rw-dispatcher/",
+    outDir: ".vitepress/dist/vue-form-rw-dispatcher",
     server: {
       port: 5173,
       strictPort: true,
@@ -88,6 +89,10 @@ export default withMermaid(
     vite: getViteConfig(),
     markdown: {
       config: (md) => mdPlugin(md),
+    },
+    buildEnd() {
+      // mermaid 和 unplugin-icons 可能保持事件循环活跃，构建完成后强制退出
+      process.exit(0);
     },
   }),
 );

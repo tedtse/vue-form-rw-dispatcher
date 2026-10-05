@@ -4,6 +4,8 @@ import IconsResolver from "unplugin-icons/resolver";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { markdownTransform } from "../plugins/markdown-transform";
 
+const isBuild = process.argv.includes("build");
+
 export const getViteConfig = () => {
   return {
     resolve: {
@@ -31,7 +33,7 @@ export const getViteConfig = () => {
       }),
       // https://github.com/antfu/unplugin-icons
       Icons({
-        autoInstall: true,
+        autoInstall: !isBuild,
       }),
       markdownTransform(),
     ],

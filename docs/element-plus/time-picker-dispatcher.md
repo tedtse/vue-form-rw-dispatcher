@@ -47,3 +47,7 @@ time-picker-dispatcher/range
 time-picker-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-time-picker` 的 `props` `attrs` `slots` 完全一致

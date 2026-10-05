@@ -43,3 +43,7 @@ radio-dispatcher/button-fill-textcolor
 radio-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-radio` / `el-radio-group` 的 `props` `attrs` `slots` 完全一致

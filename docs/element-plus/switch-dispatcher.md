@@ -65,3 +65,7 @@ switch-dispatcher/disabled
 switch-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-switch` 的 `props` `attrs` `slots` 完全一致

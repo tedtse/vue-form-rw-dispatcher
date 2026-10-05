@@ -57,3 +57,7 @@ form-dispatcher/size
 form-dispatcher/disabled
 
 :::
+
+### API
+
+与 `el-form` 的 `props` `attrs` `slots` 完全一致

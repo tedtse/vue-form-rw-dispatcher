@@ -45,3 +45,7 @@ checkbox-dispatcher/options
 checkbox-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-checkbox` / `el-checkbox-group` 的 `props` `attrs` `slots` 完全一致

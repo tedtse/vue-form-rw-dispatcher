@@ -12,6 +12,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    ElCheckboxDispatcher: typeof import('element-plus-form-dispatcher')['ElCheckboxDispatcher']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElInputDispatcher: typeof import('element-plus-form-dispatcher')['ElInputDispatcher']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
@@ -22,6 +23,7 @@ declare module 'vue' {
 
 // For TSX support
 declare global {
+  const ElCheckboxDispatcher: typeof import('element-plus-form-dispatcher')['ElCheckboxDispatcher']
   const ElFormItem: typeof import('element-plus/es')['ElFormItem']
   const ElInputDispatcher: typeof import('element-plus-form-dispatcher')['ElInputDispatcher']
   const ElSwitch: typeof import('element-plus/es')['ElSwitch']

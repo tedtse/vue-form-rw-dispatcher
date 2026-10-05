@@ -25,6 +25,7 @@ cascader-dispatcher/last-level
 :::
 
 ## 多选
+
 ​
 在标签中添加 :props="props" 并设置 props = { multiple: true } 来开启多选模式。
 
@@ -69,6 +70,7 @@ cascader-dispatcher/custom-tag
 :::
 
 ## 已勾选项显示策略
+
 ​
 控制在多选模式下已选值的显示方式。
 
@@ -89,3 +91,7 @@ cascader-dispatcher/show-checked-strategy
 cascader-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-cascader` 的 `props` `attrs` `slots` 完全一致

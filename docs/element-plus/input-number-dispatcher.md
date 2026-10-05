@@ -60,3 +60,7 @@ input-number-dispatcher/with-prefix-suffix
 input-number-dispatcher/slots
 
 :::
+
+### API
+
+与 `el-input-number` 的 `props` `attrs` `slots` 完全一致
