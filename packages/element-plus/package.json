@@ -5,9 +5,17 @@
   "main": "index.ts",
   "types": "index.ts",
   "keywords": [],
-  "author": "tedtse",
+  "author": "xiepeng1985",
   "license": "ISC",
   "packageManager": "pnpm@10.21.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tedtse/vue-form-rw-dispatcher.git"
+  },
+  "homepage": "https://tedtse.github.io/vue-form-rw-dispatcher/",
+  "bugs": {
+    "url": "https://github.com/tedtse/vue-form-rw-dispatcher/issues"
+  },
   "peerDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "element-plus": "^2.13.0",
