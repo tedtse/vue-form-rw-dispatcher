@@ -102,4 +102,49 @@ describe("DispatcherPlugin namespace", () => {
     app.unmount();
     host.remove();
   });
+
+  /**
+   * Regression for the kebab/camel attrs mismatch.
+   *
+   * A template binding `:ns-state` is NOT a declared prop under a custom
+   * namespace (props are frozen at module-load time with the default ns), so
+   * Vue stores it in `attrs` under the original kebab key `ns-state`. The
+   * state resolver must probe the hyphenated spelling too, otherwise it falls
+   * back to the default "write" and renders the writer instead of the reader.
+   * The render-function tests above pass the camel key and therefore never
+   * covered this path.
+   */
+  test("template kebab binding :ns-state='read' renders the reader", async () => {
+    const host = document.createElement("div");
+    document.body.appendChild(host);
+
+    const app = createApp({
+      render() {
+        const ElInputDispatcher = resolveComponent("ElInputDispatcher");
+        // Mirrors the compiled output of `<el-input-dispatcher :ns-state=...>`:
+        // the vnode prop key stays kebab-case.
+        return h(ElInputDispatcher as any, {
+          "ns-state": "read",
+          modelValue: "hello",
+        });
+      },
+    });
+
+    app.use(DispatcherPlugin, { namespace: "ns" });
+    app.mount(host);
+    await nextTick();
+
+    expect(Config.namespace).toBe("ns");
+    // Read mode: no native input, reader root present.
+    expect(host.querySelector("input")).toBeNull();
+    const reader = host.querySelector(".ns-el-input");
+    expect(reader).not.toBeNull();
+    expect(reader!.textContent).toContain("hello");
+    // The state attr must not leak onto the rendered reader DOM.
+    expect(reader!.getAttribute("ns-state")).toBeNull();
+    expect(reader!.getAttribute("nsstate")).toBeNull();
+
+    app.unmount();
+    host.remove();
+  });
 });

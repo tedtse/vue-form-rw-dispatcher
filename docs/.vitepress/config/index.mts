@@ -26,6 +26,7 @@ export default withMermaid(
           items: [
             { text: "快速开始", link: "/guide/getting-started" },
             { text: "CSS 变量", link: "/guide/css-vars" },
+            { text: "自动导入集成", link: "/guide/auto-import" },
           ],
         },
         {

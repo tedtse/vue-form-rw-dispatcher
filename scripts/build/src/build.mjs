@@ -25,7 +25,12 @@ import {
  *
  * @param {object} config
  * @param {string} config.name                - package folder name under `packages/`
- * @param {string} config.entry               - entry file, relative to package root
+ * @param {string|string[]} config.entry      - entry file(s), relative to package root.
+ *                                              The FIRST entry is treated as the main
+ *                                              entry (used for the single-file UMD
+ *                                              bundle); additional entries (e.g.
+ *                                              `resolver.ts`) are emitted as standalone
+ *                                              module files for their own export subpaths.
  * @param {string} config.outDir              - output dir, relative to the MONOREPO ROOT
  *                                              (e.g. `dist/element-plus`)
  * @param {Array<{match:string,target:string}>} [config.alias]
@@ -41,7 +46,11 @@ export async function buildPackage(config) {
   } = config;
 
   const pkgRoot = pkgPath(name);
-  const absEntry = path.resolve(pkgRoot, entry);
+  // Support one or many entry points. The main (first) entry drives the UMD
+  // bundle; the full set feeds the module-tree (esm/cjs) passes.
+  const entries = Array.isArray(entry) ? entry : [entry];
+  const absEntries = entries.map((e) => path.resolve(pkgRoot, e));
+  const absMainEntry = absEntries[0];
   const absOut = rootPath(outDir);
   const external = createExternal(name);
   const isExternal = (id) =>
@@ -49,9 +58,10 @@ export async function buildPackage(config) {
     extraExternals.some((p) => (typeof p === "string" ? id === p : p.test(id)));
 
   // Shared rolldown input options. `externalFn` lets the UMD pass use a
-  // different (narrower) external set than the module-tree passes.
-  const makeInputOptions = (externalFn) => ({
-    input: absEntry,
+  // different (narrower) external set than the module-tree passes, and `input`
+  // lets the UMD pass use only the main entry while module passes use all.
+  const makeInputOptions = (externalFn, input = absEntries) => ({
+    input,
     cwd: pkgRoot,
     platform: "browser",
     plugins: [
@@ -115,8 +125,9 @@ export async function buildPackage(config) {
   }
 
   // Optional UMD "full" build: single self-contained bundle (no preserveModules).
+  // Restricted to the main entry so the UMD stays a single output file.
   if (config.umd) {
-    await buildUmd(name, config, outDir, absOut, makeInputOptions);
+    await buildUmd(name, config, outDir, absOut, makeInputOptions, absMainEntry);
   }
 
   return { dir: absOut, formats };
@@ -132,8 +143,9 @@ export async function buildPackage(config) {
  * @param {string} outDir            relative out dir (for logs)
  * @param {string} absOut            absolute out dir
  * @param {(externalFn:(id:string)=>boolean)=>object} makeInputOptions
+ * @param {string} mainEntry                  - absolute path of the primary entry
  */
-async function buildUmd(name, config, outDir, absOut, makeInputOptions) {
+async function buildUmd(name, config, outDir, absOut, makeInputOptions, mainEntry) {
   const umd = config.umd;
   const globals = umd.externals || {};
   // Only the listed packages stay external; everything else is bundled in.
@@ -146,7 +158,7 @@ async function buildUmd(name, config, outDir, absOut, makeInputOptions) {
   const base = umd.fileName || "index.full";
 
   logStep(`[${name}] bundling umd -> ${outDir}/umd/`);
-  const bundle = await rolldown(makeInputOptions(isUmdExternal));
+  const bundle = await rolldown(makeInputOptions(isUmdExternal, mainEntry));
 
   const common = {
     format: "umd",

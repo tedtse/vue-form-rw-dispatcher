@@ -8,7 +8,11 @@ import {
   type SetupContext,
   type ComponentObjectPropsOptions,
 } from "vue";
-import { attachDispatcherRef, omitRWDispatcherState } from "../utils";
+import {
+  attachDispatcherRef,
+  omitRWDispatcherState,
+  hyphenate,
+} from "../utils";
 import { Config } from "../config";
 import type {
   StateKey,
@@ -17,12 +21,12 @@ import type {
   RWDispatcherProps,
 } from "../types";
 
-const nsStateKey = `${Config.namespace}State`;
-
 export function defineRWDispatcherGeneric<
   P extends Record<string, unknown>,
   E = RWDispatcherProps,
 >({ writerFn, readerFn, name = "", options }: DefineRWDispatcherArgs) {
+  const nsStateKey = `${Config.namespace}State`;
+
   return /*#__PURE__*/ defineComponent<Partial<P> & E>(
     <P, E>(props: P & E, context: SetupContext) => {
       const { attrs, slots, expose } = context;
@@ -37,6 +41,11 @@ export function defineRWDispatcherGeneric<
         return (
           (props as Record<string, unknown> & RWDispatcherProps)[stateKey] ||
           (attrs as Record<string, unknown> & RWDispatcherProps)[stateKey] ||
+          // Template bindings like `:ns-state` are kept in attrs under the
+          // original kebab key, so also probe the hyphenated spelling.
+          (attrs as Record<string, unknown> & RWDispatcherProps)[
+            hyphenate(stateKey)
+          ] ||
           injectState?.value
         );
       });

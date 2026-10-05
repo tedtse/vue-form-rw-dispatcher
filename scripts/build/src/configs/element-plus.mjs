@@ -20,7 +20,11 @@ const helperPkgRoot = pkgPath("helper");
 
 export const elementPlusConfig = {
   name: "element-plus",
-  entry: "index.ts",
+  // Main entry (index.ts) drives the runtime + UMD bundle. `resolver.ts` is a
+  // separate, dependency-free entry emitted for the `./resolver` export
+  // subpath (unplugin-vue-components integration); it is intentionally NOT
+  // re-exported from index so importing the resolver never pulls the runtime.
+  entry: ["index.ts", "resolver.ts"],
   outDir: "dist/element-plus-form-dispatcher",
   alias: [
     {

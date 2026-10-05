@@ -9,7 +9,11 @@ import {
   type ExtractPropTypes,
   type ComponentObjectPropsOptions,
 } from "vue";
-import { attachDispatcherRef, omitRWDispatcherState } from "../utils";
+import {
+  attachDispatcherRef,
+  omitRWDispatcherState,
+  hyphenate,
+} from "../utils";
 import { Config } from "../config";
 import type {
   StateKey,
@@ -54,6 +58,9 @@ export function defineRWDispatcherPropType({
         return (
           Reflect.get(props, nsStateKey) ||
           Reflect.get(context.attrs, nsStateKey) ||
+          // Template bindings like `:ns-state` are kept in attrs under the
+          // original kebab key, so also probe the hyphenated spelling.
+          Reflect.get(context.attrs, hyphenate(nsStateKey)) ||
           injectState?.value
         );
       });

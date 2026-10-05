@@ -14,6 +14,11 @@
       "import": "./esm/config.mjs",
       "require": "./cjs/config.js"
     },
+    "./resolver": {
+      "types": "./esm/resolver.d.ts",
+      "import": "./esm/resolver.mjs",
+      "require": "./cjs/resolver.js"
+    },
     "./helper": {
       "types": "./esm/helper/index.d.ts",
       "import": "./esm/helper/index.mjs",

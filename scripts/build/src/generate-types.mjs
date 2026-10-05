@@ -32,6 +32,7 @@ export async function generateTypes(config) {
     include: [
       "index.ts",
       "config.ts",
+      "resolver.ts",
       "type.d.ts",
       "components/**/*.ts",
       "components/**/*.tsx",

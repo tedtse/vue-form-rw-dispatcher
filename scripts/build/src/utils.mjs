@@ -51,9 +51,32 @@ function getBareImport(id) {
     : parts[0];
 }
 
-/** Remove a directory tree synchronously (safe if missing). */
+/** Blocking sleep (ms) without busy-waiting; used to ride out transient locks. */
+function sleepSync(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+}
+
+/**
+ * Remove a directory tree synchronously (safe if missing).
+ *
+ * On Windows a freshly written tree (hundreds of small files) is often held
+ * briefly by antivirus / Search indexer / a lingering handle, which surfaces
+ * as `EBUSY`/`EPERM`/`ENOTEMPTY` on `rmSync`. Those locks release within a
+ * moment, so retry a few times with a short backoff before giving up.
+ */
 export function cleanDir(dir) {
-  fs.rmSync(dir, { recursive: true, force: true });
+  const maxAttempts = 5;
+  for (let attempt = 1; ; attempt++) {
+    try {
+      fs.rmSync(dir, { recursive: true, force: true });
+      return;
+    } catch (err) {
+      const retriable =
+        err && ["EBUSY", "EPERM", "ENOTEMPTY"].includes(err.code);
+      if (!retriable || attempt >= maxAttempts) throw err;
+      sleepSync(200 * attempt);
+    }
+  }
 }
 
 /** Ensure directory exists. */
